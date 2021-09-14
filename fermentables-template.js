@@ -16,9 +16,10 @@ export const fermsTemplate = [
         age: 0,
         successMessage: 'wow gj :^)',
         maxXP: 20,
-        mistakes: 0,
+        mistakePoints: 0,
         actions: [
             {
+                id: 1234,
                 action: 'prep',
                 required: true,
                 startDay: 0,
