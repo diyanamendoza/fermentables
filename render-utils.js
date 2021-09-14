@@ -1,4 +1,4 @@
-import { fermsTemplate } from './fermentables-template.js';
+
 
 const containerDiv = document.getElementById('container');
 
