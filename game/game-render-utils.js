@@ -1,4 +1,4 @@
-import { fastForwardGame } from '../local-storage-utils.js';
+import { fastForwardGame, getActiveFerms } from '../local-storage-utils.js';
 import { getAllActionNames } from '../utils.js';
 
 export function renderActionButtons() {
@@ -41,4 +41,27 @@ export function renderFFOneWeekButton() {
         fastForwardGame(7);
     });
     return button;
+}
+
+
+export function renderActiveFermentables() {
+    const activeFerms = getActiveFerms();
+
+    const fermDiv = document.createElement('div');
+
+    for (let ferm of activeFerms){
+        const fermLabel = document.createElement('label');
+        const fermImg = document.createElement('img');
+        const fermInput = document.createElement('input'); 
+
+        // Will need to include a function here that determines which img to retrieve from the ferm
+        fermImg.src = `../assets/${ferm.images.babyHappy}`;
+        fermImg.value = ferm.id;
+        fermImg.className = 'ferm-img';
+
+        fermLabel.append(fermImg, fermInput);
+        fermDiv.append(fermLabel);
+    }
+    
+    return fermDiv;
 }

@@ -67,3 +67,9 @@ test('renderFFOneWeekButton renders a fast forward one day button', assert => {
     const actual = renderFFOneWeekButton().outerHTML;
     assert.equal(actual, expected);
 });
+
+// test('renderActiveFermentables renders a ', assert => {
+//     const expected = '<button id="ff-one-week-button" class="ff-button">Fast Forward One Week</button>';
+//     const actual = renderFFOneWeekButton().outerHTML;
+//     assert.equal(actual, expected);
+// });
