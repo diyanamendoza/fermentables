@@ -1,8 +1,13 @@
 
-import { renderActionButtons } from './game-render-utils.js';
+import { renderActionButtons, renderFFOneDayButton, renderFFOneWeekButton } from './game-render-utils.js';
 
 const actionsDiv = renderActionButtons();
-const main = document.querySelector('main');
+const dayButton = renderFFOneDayButton();
+const weekButton = renderFFOneWeekButton();
+const actionsBarEl = document.getElementById('actions-bar');
+const timeButtonsEl = document.getElementById('time-buttons');
 
-main.append(actionsDiv);
+actionsBarEl.append(actionsDiv);
+timeButtonsEl.append(dayButton, weekButton);
+
 
