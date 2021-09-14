@@ -18,29 +18,33 @@ export function renderFerms(fermsTemplate) {
         imageEl.src = `./assets/${ferm.images.babyHappy}`;
         imageEl.classList.add('ferm-image');
 
-        const instructionsP = document.createElement('p');
+        const instructionsP = document.createElement('div');
         instructionsP.textContent = `${ferm.instructions}`;
         instructionsP.className = 'instructions';
         
-        instructionsP.style.display = 'none';
+        // instructionsP.style.display = 'none';
         
-        inputEl.addEventListener('click', () => {
-            instructionsP.style.display = 'block'; 
-            welcomeDiv.style.display = 'none';
-        });
+        // inputEl.addEventListener('click', () => {
+        //     instructionsP.style.display = 'block';
+            
+            // instructionsP.classList.remove('instructions');
+            // instructionsP.classList.add('after');
+            // instructionsP.style.display = 'block'; 
+            // welcomeDiv.style.display = 'none';
+        // });
 
-        labelEl.append(inputEl, imageEl);
-        containerDiv.append(labelEl, instructionsP);
+        labelEl.append(inputEl, imageEl, instructionsP);
+        containerDiv.append(labelEl);
     }
 }
 
 export function renderWelcome() {
-    const titleEl = document.createElement('h1');
+    const titleEl = document.createElement('h3');
     const firstP = document.createElement('p');
     const secondP = document.createElement('p');
     titleEl.textContent = 'Welcome!';
-    firstP.textContent = `survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum`;
-    secondP.textContent = `survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum`;
+    firstP.textContent = `Ready to ferment?`;
+    secondP.textContent = `Select a fermentable below and click play.`;
 
     welcomeDiv.append(titleEl, firstP, secondP);
 }
