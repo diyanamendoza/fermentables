@@ -1,6 +1,7 @@
 html {
     margin: 0;
-    padding: 0;
+    padding-left: 30px;
+    padding-right: 30px;
     width: 100%;
 }
 * {
@@ -13,4 +14,44 @@ header {
 
 body {
     font-family: 'Anonymous Pro', monospace;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr;
+    gap: 30px;
+}
+
+button {
+    border: 1px solid black;
+    font-family: 'Anonymous Pro', monospace;
+    background-color: white;
+    padding: 5px;
+}
+
+button:active, button:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+
+#action-buttons-div, #time-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#chat-box {
+    border: 1px solid black;
+}
+
+#time-and-chat {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    justify-content: flex-end;
+}
+
+#ferm-gallery {
+    border: 1px dotted black;
 }
