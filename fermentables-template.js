@@ -207,7 +207,7 @@ export const fermsTemplate = [
                 required: true,
                 startDay: 90,
                 endDay: 95,
-        // points: -5,
+                points: -5,
                 completed: false
             },
             {
@@ -216,7 +216,7 @@ export const fermsTemplate = [
                 required: true,
                 startDay: 120,
                 endDay: 125,
-        // points: -5,
+                points: -5,
                 completed: false
             },
             {
@@ -225,7 +225,7 @@ export const fermsTemplate = [
                 required: true,
                 startDay: 150,
                 endDay: 155,
-        // points: -5,
+                points: -5,
                 completed: false
             },
             {
@@ -234,7 +234,7 @@ export const fermsTemplate = [
                 required: true,
                 startDay: 180,
                 endDay: 185,
-        // points: -5,
+                points: -5,
                 completed: false
             },
         ]
@@ -353,6 +353,88 @@ export const fermsTemplate = [
                 startDay: 8,
                 endDay: 9,
                 completed: false
+            }
+        ]
+    },
+    {
+        id: 3,
+        baby: 'Hops',
+        adult: 'Ale',
+        images: {
+            babySad: 'hop-baby-sad.png',
+            babyNeutral: 'hop-baby-neutral.png',
+            babyHappy: 'hop-baby-happy.png',
+            adultSad: 'beer-adult-sad.png',
+            adultNeutral: 'beer-adult-neutral.png',
+            adultHappy: 'beer-adult-happy.png'
+        },
+        instructions: `Prepare the ingredients, sanitize your equipment, brew your ingredients, and store in a dark, cool place, all on the first day.`,
+        endDay: 30,
+        age: 0,
+        successMessage: `That's a tasty brew! You should consider opening a microbrewery.`,
+        maxXP: 20,
+        mistakePoints: 0,
+        actions: [
+            {
+                id: 1,
+                action: 'prep',
+                required: true,
+                startDay: 0,
+                endDay: 1,
+                points: 0,
+                completed: false
+            },
+            {
+                id: 2,
+                action: 'sanitize',
+                required: true,
+                startDay: 0,
+                endDay: 1,
+                points: 0,
+                completed: false
+            },
+            {
+                id: 3,
+                action: 'brew',
+                required: true,
+                startDay: 0,
+                endDay: 1,
+                points: 0,
+                completed: false
+            },
+            {
+                id: 4,
+                action: 'store in dark cool place',
+                required: true,
+                startDay: 0,
+                endDay: 1,
+                points: 0,
+                completed: false
+            },
+            {
+                id: 5,
+                action: 'add priming sugar',
+                required: true,
+                startDay: 12,
+                endDay: 17,
+                points: 0,
+                completed: false
+            },
+            {
+                id: 6,
+                action: 'bottle that shit',
+                required: true,
+                startDay: 12,
+                endDay: 17,
+                points: 0,
+                completed: false
+            },
+            {
+                id: 7,
+                action: 'check for taste',
+                required: false,
+                startDay: 12,
+                endDay: 30
             }
         ]
     }
