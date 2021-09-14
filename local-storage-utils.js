@@ -1,4 +1,3 @@
-
 export const GAMEDATA = 'GAMEDATA';
 
 export function getGameData() {
@@ -41,13 +40,13 @@ export function deactivateFerm(fermID) {
     fermsArray.splice(fermIndex, 1);
 
     setActiveFerms(fermsArray);
-
+    addToCompletedFerms(fermToRemove);
     return fermToRemove;
 }
 
-export function updateCompletedFerms(ferm) {
+export function addToCompletedFerms(ferm) {
     const currentGameData = getGameData();
-    const completedFerms = [...currentGameData, ferm];
+    const completedFerms = [...currentGameData.completedFerms, ferm];
     currentGameData.completedFerms = completedFerms;
     setGameData(currentGameData);
 }
