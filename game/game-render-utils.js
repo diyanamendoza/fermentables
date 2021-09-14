@@ -55,7 +55,7 @@ export function renderActiveFerms() {
 
         // Will need to include a function here that determines which img to retrieve from the ferm
         fermImg.src = `../assets/${ferm.images.babyHappy}`;
-        fermImg.value = ferm.id;
+        fermImg.setAttribute('value', `${ferm.id}`);
         fermImg.className = 'ferm-img';
         fermInput.type = 'radio';
 
