@@ -151,7 +151,7 @@ export const fermsTemplate = [
                         required: false,
                         startDay: 2,
                         endDay: 2,
-                // points: 0,
+                        points: -1,
                         completed: false
                     },
                     {
@@ -160,7 +160,7 @@ export const fermsTemplate = [
                         required: false,
                         startDay: 3,
                         endDay: 3,
-                // points: 0,
+                        points: -1,
                         completed: false
                     },
                     {
@@ -169,7 +169,7 @@ export const fermsTemplate = [
                         required: false,
                         startDay: 3,
                         endDay: 3,
-                // points: 0,
+                        points: -1,
                         completed: false
                     },
                     {
@@ -178,7 +178,7 @@ export const fermsTemplate = [
                         required: false,
                         startDay: 5,
                         endDay: 5,
-                // points: 0,
+                        points: -1,
                         completed: false
                     },
                     {
@@ -187,7 +187,7 @@ export const fermsTemplate = [
                         required: false,
                         startDay: 7,
                         endDay: 7,
-                // points: 0,
+                        points: -1,
                         completed: false
                     },
                     {
@@ -196,7 +196,7 @@ export const fermsTemplate = [
                         required: false,
                         startDay: 14,
                         endDay: 21,
-                // points: 0,
+                        points: -1,
                         completed: false
                     },
                     {
