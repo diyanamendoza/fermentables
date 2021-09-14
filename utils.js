@@ -1,4 +1,5 @@
-import { addToMistakePoints, getActionsForFermID, getActiveFerms, updateAction } from './local-storage-utils.js';
+import { fermsTemplate } from './fermentables-template.js';
+import { addToMistakePoints, getActionsForFermID, updateAction } from './local-storage-utils.js';
 
 
 export function createFerm(baby, fermsTemplate) {
@@ -37,12 +38,26 @@ export function checkAction(action, time, fermID) {
     }
 }
 
+let fermData;
+
+//this is just a wrapper to make testing easier.
+export function getAllActionNames() {
+    if (!fermData) {
+        fermData = fermsTemplate;
+    }
+    return getAllActionNamesForFerms(fermData);
+}
+
+//hacky way to inject different data for testing
+export function setDataForGetAllActionNames(data) {
+    fermData = data;
+}
+
 //Returns an array of all action names with no duplicates.
 //Currently it only pulls actions from activeFerms.
-export function getAllActionNames() {
-    const ferms = getActiveFerms();
+export function getAllActionNamesForFerms(arrayOfFerms) {
     let actionNames = [];
-    for (const ferm of ferms) {
+    for (const ferm of arrayOfFerms) {
         for (const action of ferm.actions) {
             const existingEntry = actionNames.find(name => name === action.action);
             if (!existingEntry) {

@@ -1,5 +1,4 @@
-import { setGameData } from '../local-storage-utils.js';
-import { getAllActionNames } from '../utils.js';
+import { getAllActionNames, setDataForGetAllActionNames } from '../utils.js';
 
 const test = QUnit.test;
 
@@ -20,9 +19,9 @@ test('checkAction should add 5 mistake points if the action was already complete
 });
 */
 
-test('getAllActionNames should return an array containing all possibles actions for the current activeFerms', assert => {
-    const testData = {
-        activeFerms: [{
+test('getAllActionNamesForFerms should return an array containing all possibles actions for the current activeFerms', assert => {
+    const testData = [
+        {
             id: 1,
             actions: [
                 {
@@ -55,17 +54,17 @@ test('getAllActionNames should return an array containing all possibles actions 
                     action: 'qwer4'
                 }
             ]
-        }]
-    };
+        }
+    ];
     const expected = ['asdf1', 'asdf2', 'asdf3', 'asdf4', 'qwer1', 'qwer2', 'qwer3', 'qwer4'];
-    setGameData(testData);
+    setDataForGetAllActionNames(testData);
     const actual = getAllActionNames();
     assert.deepEqual(actual, expected);
 });
 
 test('getAllActionNames should not return duplicates', assert => {
-    const testData = {
-        activeFerms: [{
+    const testData = [
+        {
             id: 1,
             actions: [
                 {
@@ -98,10 +97,10 @@ test('getAllActionNames should not return duplicates', assert => {
                     action: 'qwer4'
                 }
             ]
-        }]
-    };
+        }
+    ];
     const expected = ['asdf1', 'qwer1', 'qwer2', 'qwer3', 'qwer4'];
-    setGameData(testData);
+    setDataForGetAllActionNames(testData);
     const actual = getAllActionNames();
     assert.deepEqual(actual, expected);
 });
