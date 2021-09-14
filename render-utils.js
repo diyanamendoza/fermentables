@@ -45,6 +45,6 @@ export function renderPlayButton() {
     const playButton = document.createElement('button');
     playButton.classList = 'play-button';
     playButton.addEventListener('click', () => {
-        // const fermName = 
+        const selectedFirm = 
     });
 }
