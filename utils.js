@@ -1,4 +1,4 @@
-import { addToMistakePoints, getActionsForFermID } from './local-storage-utils.js';
+import { addToMistakePoints, getActionsForFermID, updateAction } from './local-storage-utils.js';
 
 
 export function createFerm(baby, fermsTemplate) {
@@ -25,6 +25,7 @@ export function checkAction(action, time, fermID) {
                 }
                 else {
                     entry.completed = true;
+                    updateAction(fermID, entry);
                 }
             }
         }
