@@ -32,6 +32,7 @@ export function renderFFOneDayButton() {
 }
 
 export function renderFFOneWeekButton() {
+    //pointless change to make ci/cd run
     const button = document.createElement('button');
     button.id = 'ff-one-week-button';
     button.className = 'ff-button';
