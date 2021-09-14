@@ -18,8 +18,10 @@ export function checkAction(action, time, fermID) {
         addToMistakePoints(fermID, 10);
     } else {
         const correctActions = actions.filter(entry => entry.action === action);
+        let anyCorrectTimes = false;
         for (let entry of correctActions) {
             if (time >= entry.startDay && time < entry.endDay) {
+                anyCorrectTimes = true;
                 if (entry.completed) {
                     addToMistakePoints(fermID, 5);
                 }
@@ -29,10 +31,8 @@ export function checkAction(action, time, fermID) {
                 }
             }
         }
+        if (!anyCorrectTimes) {
+            addToMistakePoints(fermID, 5);
+        }
     }
-    // if not, lose points, return; if so, move on to check time
-
-    // if time is correct 
-
-    // 
 }
