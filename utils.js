@@ -1,4 +1,4 @@
-import { addToMistakePoints, getActionsForFermID, updateAction } from './local-storage-utils.js';
+import { addToMistakePoints, getActionsForFermID, getActiveFerms, updateAction } from './local-storage-utils.js';
 
 
 export function createFerm(baby, fermsTemplate) {
@@ -35,4 +35,20 @@ export function checkAction(action, time, fermID) {
             addToMistakePoints(fermID, 5);
         }
     }
+}
+
+//Returns an array of all action names with no duplicates.
+//Currently it only pulls actions from activeFerms.
+export function getAllActionNames() {
+    const ferms = getActiveFerms();
+    let actionNames = [];
+    for (const ferm of ferms) {
+        for (const action of ferm.actions) {
+            const existingEntry = actionNames.find(name => name === action.action);
+            if (!existingEntry) {
+                actionNames.push(action.action);
+            }
+        }
+    }
+    return actionNames;
 }
