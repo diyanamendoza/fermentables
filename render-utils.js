@@ -1,7 +1,10 @@
-
+import { addToActiveFerms } from './local-storage-utils.js';
+import { createFerm } from './utils.js';
+import { fermsTemplate } from './fermentables-template.js';
 
 const containerDiv = document.getElementById('container');
 const welcomeDiv = document.getElementById('welcome');
+
 
 export function renderFerms(fermsTemplate) {
     for (let ferm of fermsTemplate) {
@@ -42,10 +45,27 @@ export function renderWelcome() {
     welcomeDiv.append(titleEl, firstP, secondP);
 }
 
+
+
+
 export function renderPlayButton() {
+
+    const mainEl = document.getElementById('main');
+
+  
+
+
     const playButton = document.createElement('button');
-    playButton.classList = 'play-button';
+    playButton.className = 'play-button';
+    playButton.textContent = 'Play';
     playButton.addEventListener('click', () => {
-        // const fermName = 
+
+        const selectedFerm = document.querySelector('input:checked');
+        const selectedFermName = selectedFerm.value;
+
+        const fermObject = createFerm(selectedFermName, fermsTemplate);
+        addToActiveFerms(fermObject);
+        window.location = './game';
     });
+    mainEl.append(playButton);
 }

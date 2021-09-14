@@ -131,7 +131,7 @@ test('addToActiveFerms should add a fermenation to the active fermentations in g
     assert.deepEqual(actual, expected);
 });
 
-test('deactiveFerm should move the specified active fermentation to completedFerms', assert => {
+test('deactivateFerm should move the specified active fermentation to completedFerms', assert => {
     const testData = {
         xp: 1,
         unlockedFerms: 2,

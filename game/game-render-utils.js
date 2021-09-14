@@ -1,4 +1,4 @@
-import { fastForwardGame, getActiveFerms } from '../local-storage-utils.js';
+import { fastForwardGame, getActiveFermById, getActiveFerms } from '../local-storage-utils.js';
 import { getAllActionNames } from '../utils.js';
 
 export function renderActionButtons() {
@@ -32,7 +32,6 @@ export function renderFFOneDayButton() {
 }
 
 export function renderFFOneWeekButton() {
-    //pointless change to make ci/cd run
     const button = document.createElement('button');
     button.id = 'ff-one-week-button';
     button.className = 'ff-button';
@@ -44,7 +43,7 @@ export function renderFFOneWeekButton() {
 }
 
 
-export function renderActiveFermentables() {
+export function renderActiveFerms() {
     const activeFerms = getActiveFerms();
 
     const fermDiv = document.createElement('div');
@@ -58,10 +57,44 @@ export function renderActiveFermentables() {
         fermImg.src = `../assets/${ferm.images.babyHappy}`;
         fermImg.value = ferm.id;
         fermImg.className = 'ferm-img';
+        fermInput.type = 'radio';
 
         fermLabel.append(fermImg, fermInput);
         fermDiv.append(fermLabel);
     }
     
     return fermDiv;
+}
+
+
+export function renderFermInfo(fermId) {
+    const ferm = getActiveFermById(fermId);
+    let name = ferm.baby;
+    if (ferm.age >= ferm.endDay) {
+        name = ferm.adult;
+    }
+    const qualityPercentage = Math.round((1 - (ferm.mistakePoints / 20) * 100));
+    const qualityString = `Quality: ${qualityPercentage}%`;
+    const tempString = '70&176;';
+    const ageString = `${ferm.age} days old`;
+
+    const infoDiv = document.createElement('div');
+    const nameHeading = document.createElement('h2');
+    const qualitySpan = document.createElement('span');
+    const tempSpan = document.createElement('span');
+    const ageSpan = document.createElement('span');
+
+    infoDiv.id = 'info-div';
+    nameHeading.id = 'info-name';
+    qualitySpan.id = 'info-quality';
+    tempSpan.id = 'info-temp';
+    ageSpan.id = 'info-age';
+
+    nameHeading.textContent = name;
+    qualitySpan.textContent = qualityString;
+    tempSpan.textContent = tempString;
+    ageSpan.textContent = ageString;
+
+    infoDiv.append(nameHeading, qualitySpan, tempSpan, ageSpan);
+    return infoDiv;
 }
