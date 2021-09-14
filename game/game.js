@@ -1,8 +1,8 @@
-// import functions and grab DOM elements
 
-// initialize global state
+import { renderActionButtons } from './game-render-utils.js';
 
-// set event listeners 
-  // get user input
-  // use user input to update state 
-  // update DOM to reflect the new state
+const actionsDiv = renderActionButtons();
+const main = document.querySelector('main');
+
+main.append(actionsDiv);
+
