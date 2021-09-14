@@ -60,7 +60,7 @@ export function renderActiveFerms() {
         fermInput.type = 'radio';
         fermInput.name = 'ferm';
 
-        fermLabel.append(fermImg, fermInput);
+        fermLabel.append(fermInput, fermImg);
         fermDiv.append(fermLabel);
     }
     
