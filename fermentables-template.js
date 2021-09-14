@@ -7,21 +7,12 @@ export const fermsTemplate = [
             babySad: 'cabbage-baby-sad.png',
             babyNeutral: 'cabbage-baby-neutral.png',
             babyHappy: 'cabbage-baby-happy.png',
-<<<<<<< HEAD
-            adultSad: 'kimchi-adult-sad.png'
-        },
-        instructions: `
-        Wash and cut Napa cabbage. Soak and rinse cabbage in salt water multiple times. Mix in kimchi seasonings. Pack down in jar and remove excess air. Leave at room temperature at least one day. Let ferment in fridge at least two weeks. While fermenting, check if it needs to be packed down, burp the container every few days.
-        `,
-        endDay: 14,
-=======
             adultSad: 'kimchi-adult-sad.png',
             adultNeutral: 'kimchi-adult-neutral.png',
             adultHappy: 'kimchi-adult-happy.png'
         },
         instructions: `To prep, wash and cut Napa cabbage, then soak in salt water for an hour and rinse thoroughly. Mix in kimchi seasonings. Pack down in jar and remove excess air. Leave at room temperature at least one day - look for bubbles. Ferment in fridge at least two weeks. While fermenting, check if it needs to be packed down, burp the container every few days, check for taste.`,
         endDay: 20,
->>>>>>> 0d58826a49858c8fa72816b150bc14c086214ae0
         age: 0,
         successMessage: 'Woohoo! You successfully fermented your baby Napa Cabbage. Check out that happy Kimchi.',
         maxXP: 20,
