@@ -1,5 +1,5 @@
 import { renderActionButtons, renderActiveFerms, renderFFOneDayButton, renderFFOneWeekButton } from '../game/game-render-utils.js';
-import { getGameData, setActiveFerms, setGameData } from '../local-storage-utils.js';
+import { setActiveFerms, setGameData } from '../local-storage-utils.js';
 import { setDataForGetAllActionNames } from '../utils.js';
 
 const test = QUnit.test;
