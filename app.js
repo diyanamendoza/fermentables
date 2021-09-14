@@ -1,8 +1,6 @@
-// import functions and grab DOM elements
+import { renderFerms } from './render-utils.js';
+import { renderWelcome } from './render-utils.js';
 
-// initialize global state
+renderFerms();
 
-// set event listeners 
-  // get user input
-  // use user input to update state 
-  // update DOM to reflect the new state
+renderWelcome();
