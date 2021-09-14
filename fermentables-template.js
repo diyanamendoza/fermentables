@@ -99,6 +99,144 @@ export const fermsTemplate = [
                 points: -5,
                 completed: false
             },
+            {
+                id: 2,
+                baby: 'Honey',
+                adult: 'Mead',
+                images: {
+                    babySad: 'honey-baby-sad.png',
+                    babyNeutral: 'honey-baby-neutral.png',
+                    babyHappy: 'honey-baby-happy.png',
+                    adultSad: 'mead-adult-sad.png',
+                    adultNeutral: 'mead-adult-neutral.png',
+                    adultHappy: 'mead-adult-happy.png'
+                },
+                instructions: `To prep Wort, sanitize all of your equipment, add honey and water. Soak yeast and nutrients in warm water for 20 minutes before adding to Wort. Mix until homogenous. Add nutrients on day 2 and 3. Stir/Mix every two days for the first week. Leave at room temperature out of direct sunlight. Check for taste on 3rd, 4th, 5th, and 6th month.`,
+                endDay: 20,
+                age: 0,
+                successMessage: 'Woohoo! You successfully fermented your baby Wort. Check out that happy Mead.',
+                maxXP: 20,
+                mistakePoints: 0,
+                actions: [
+                    {
+                        id: 1,
+                        action: 'prep',
+                        required: true,
+                        startDay: 0,
+                        endDay: 0,
+                // points: 0,
+                        completed: false
+                    },
+                    {
+                        id: 2,
+                        action: 'add yeast and nutrients',
+                        required: true,
+                        startDay: 0,
+                        endDay: 0,
+                // points: 0,
+                        completed: false
+                    },
+                    {
+                        id: 3,
+                        action: 'mix',
+                        required: true,
+                        startDay: 0,
+                        endDay: 0,
+                // points: 0,
+                        completed: false
+                    },
+                    {
+                        id: 4,
+                        action: 'add nutrients',
+                        required: false,
+                        startDay: 2,
+                        endDay: 2,
+                        points: -1,
+                        completed: false
+                    },
+                    {
+                        id: 5,
+                        action: 'add nutrients',
+                        required: false,
+                        startDay: 3,
+                        endDay: 3,
+                        points: -1,
+                        completed: false
+                    },
+                    {
+                        id: 6,
+                        action: 'mix',
+                        required: false,
+                        startDay: 3,
+                        endDay: 3,
+                        points: -1,
+                        completed: false
+                    },
+                    {
+                        id: 7,
+                        action: 'mix',
+                        required: false,
+                        startDay: 5,
+                        endDay: 5,
+                        points: -1,
+                        completed: false
+                    },
+                    {
+                        id: 7,
+                        action: 'mix',
+                        required: false,
+                        startDay: 7,
+                        endDay: 7,
+                        points: -1,
+                        completed: false
+                    },
+                    {
+                        id: 8,
+                        action: 'switch containers',
+                        required: false,
+                        startDay: 14,
+                        endDay: 21,
+                        points: -1,
+                        completed: false
+                    },
+                    {
+                        id: 9, 
+                        action: 'check for taste',
+                        required: true,
+                        startDay: 90,
+                        endDay: 95,
+                // points: -5,
+                        completed: false
+                    },
+                    {
+                        id: 10, 
+                        action: 'check for taste',
+                        required: true,
+                        startDay: 120,
+                        endDay: 125,
+                // points: -5,
+                        completed: false
+                    },
+                    {
+                        id: 11, 
+                        action: 'check for taste',
+                        required: true,
+                        startDay: 150,
+                        endDay: 155,
+                // points: -5,
+                        completed: false
+                    },
+                    {
+                        id: 12, 
+                        action: 'check for taste',
+                        required: true,
+                        startDay: 180,
+                        endDay: 185,
+                // points: -5,
+                        completed: false
+                    },
+                ]
+            }
         ]
     }
 ];

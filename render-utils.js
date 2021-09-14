@@ -9,14 +9,15 @@ export function renderFerms(fermsTemplate) {
         const inputEl = document.createElement('input');
         const imageEl = document.createElement('img');
         labelEl.classList.add('ferm-label');
-        inputEl.setAttribute('type', 'radio-button');
+        inputEl.setAttribute('type', 'radio');
         inputEl.setAttribute('name', 'ferm');
         inputEl.setAttribute('value', `${ferm.baby}`);
         imageEl.src = `./assets/${ferm.images.babyHappy}`;
         imageEl.classList.add('ferm-image');
 
         const instructionsP = document.createElement('p');
-        instructionsP.classList = 'instructions';
+        instructionsP.textContent = `${ferm.instructions}`;
+        instructionsP.className = 'instructions';
         
         instructionsP.style.display = 'none';
         
