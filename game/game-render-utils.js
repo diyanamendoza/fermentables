@@ -8,7 +8,7 @@ export function renderActionButtons() {
     for (const actionName of actionNames) {
         const newButton = document.createElement('button');
         newButton.value = actionName;
-        newButton.innerText = actionName;
+        newButton.textContent = actionName;
         newButton.className = 'action-button';
         // eslint-disable-next-line no-unused-vars
         newButton.addEventListener('click', (e) => {
