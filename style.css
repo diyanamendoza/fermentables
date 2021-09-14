@@ -18,3 +18,16 @@ body {
 img {
     width: 400px;
 }
+
+button {
+    border: 1px solid black;
+    font-family: 'Anonymous Pro', monospace;
+    background-color: white;
+    padding: 5px;
+}
+
+button:active, button:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
