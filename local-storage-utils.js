@@ -85,3 +85,11 @@ export function updateAction(fermID, completedAction) {
     actions[actionIndex] = completedAction;
     updateActiveFerm(ferm);
 }
+
+export function fastForwardGame(daysToAdd) {
+    const ferms = getActiveFerms();
+    for (const ferm of ferms) {
+        ferm.age += daysToAdd;
+    }
+    setActiveFerms(ferms);
+}
