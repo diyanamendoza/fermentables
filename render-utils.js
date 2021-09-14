@@ -38,13 +38,13 @@ export function renderWelcome() {
     firstP.textContent = `survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum`;
     secondP.textContent = `survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum`;
 
-    welcomdDiv.append(titleEl, firstP, secondP);
+    welcomeDiv.append(titleEl, firstP, secondP);
 }
 
 export function renderPlayButton() {
     const playButton = document.createElement('button');
     playButton.classList = 'play-button';
     playButton.addEventListener('click', () => {
-        const fermName = 
-    })
+        // const fermName = 
+    });
 }
