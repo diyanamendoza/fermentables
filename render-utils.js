@@ -52,9 +52,6 @@ export function renderPlayButton() {
 
     const mainEl = document.getElementById('main');
 
-  
-
-
     const playButton = document.createElement('button');
     playButton.className = 'play-button';
     playButton.textContent = 'Play';
