@@ -1,7 +1,7 @@
 // IMPORT MODULES under test here:
 // import { example } from '../example.js';
 
-import { addToActiveFerms, addToCompletedFerms, deactivateFerm, GAMEDATA, getActiveFerms, getGameData, setActiveFerms, setGameData } from '../local-storage-utils.js';
+import { addToActiveFerms, addToCompletedFerms, deactivateFerm, fastForwardGame, GAMEDATA, getActiveFerms, getGameData, setActiveFerms, setGameData } from '../local-storage-utils.js';
 
 const test = QUnit.test;
 
@@ -197,6 +197,51 @@ test('addToCompletedFerms should add the fermenation to completedFerms', assert 
         id: 1,
         test: 'test'
     });
+    const actual = getGameData();
+    assert.deepEqual(actual, expected);
+});
+
+test('fastForwardGame increments the age of all active ferms by the amount specified', assert => {
+    const testData = {
+        xp: 1,
+        unlockedFerms: 2,
+        activeFerms: [{
+            id: 1,
+            age: 1,
+            test: 'test'
+        },
+        {
+            id: 2,
+            age: 4,
+            test: 'test3'
+        }],
+        completedFerms: [{
+            id: 2,
+            age: 2,
+            test2: 'test2'
+        }]
+    };
+    const expected = {
+        xp: 1,
+        unlockedFerms: 2,
+        activeFerms: [{
+            id: 1,
+            age: 2,
+            test: 'test'
+        },
+        {
+            id: 2,
+            age: 5,
+            test: 'test3'
+        }],
+        completedFerms: [{
+            id: 2,
+            age: 2,
+            test2: 'test2'
+        }]
+    };
+    setGameData(testData);
+    fastForwardGame(1);
     const actual = getGameData();
     assert.deepEqual(actual, expected);
 });
