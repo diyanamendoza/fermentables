@@ -58,6 +58,7 @@ export function renderActiveFerms() {
         fermImg.setAttribute('value', `${ferm.id}`);
         fermImg.className = 'ferm-img';
         fermInput.type = 'radio';
+        fermInput.name = 'ferm';
 
         fermLabel.append(fermImg, fermInput);
         fermDiv.append(fermLabel);

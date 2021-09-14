@@ -1,5 +1,5 @@
 import { renderActionButtons, renderActiveFerms, renderFFOneDayButton, renderFFOneWeekButton } from '../game/game-render-utils.js';
-import { setActiveFerms, setGameData } from '../local-storage-utils.js';
+import { GAMEDATA, setActiveFerms, setGameData } from '../local-storage-utils.js';
 import { setDataForGetAllActionNames } from '../utils.js';
 
 const test = QUnit.test;
@@ -70,7 +70,8 @@ test('renderFFOneWeekButton renders a fast forward one day button', assert => {
     assert.equal(actual, expected);
 });
 
-test('renderActiveFermentables renders a ', assert => {
+test('renderActiveFermentables renders a div containing label, img, and input elements', assert => {
+    localStorage.removeItem(GAMEDATA);
     const activeFerms = [
         {
             'id': 436,
@@ -89,7 +90,7 @@ test('renderActiveFermentables renders a ', assert => {
 
     setActiveFerms(activeFerms);
 
-    const expected = '<div><label><img src="../assets/cabbage-baby-happy.png" class="ferm-img"><input type="radio"></label></div>';
+    const expected = '<div><label><img src="../assets/cabbage-baby-happy.png" value="436" class="ferm-img"><input type="radio" name="ferm"></label></div>';
     const actual = renderActiveFerms().outerHTML;
     assert.equal(actual, expected);
 });
