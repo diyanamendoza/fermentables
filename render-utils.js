@@ -1,6 +1,7 @@
 
 
 const containerDiv = document.getElementById('container');
+const welcomeDiv = document.getElementById('welcome');
 
 export function renderFerms(fermsTemplate) {
     for (let ferm of fermsTemplate) {
@@ -14,10 +15,18 @@ export function renderFerms(fermsTemplate) {
         imageEl.src = `./assets/${ferm.images.babyHappy}`;
         imageEl.classList.add('ferm-image');
 
-        inputEl.addEventListener;
+        const instructionsP = document.createElement('p');
+        instructionsP.classList = 'instructions';
+        
+        instructionsP.style.display = 'none';
+        
+        inputEl.addEventListener('click', () => {
+            instructionsP.style.display = 'block'; 
+            welcomeDiv.style.display = 'none';
+        });
 
         labelEl.append(inputEl, imageEl);
-        containerDiv.append(labelEl);
+        containerDiv.append(labelEl, instructionsP);
     }
 }
 
@@ -29,4 +38,13 @@ export function renderWelcome() {
     firstP.textContent = `survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum`;
     secondP.textContent = `survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum`;
 
+    welcomeDiv.append(titleEl, firstP, secondP);
+}
+
+export function renderPlayButton() {
+    const playButton = document.createElement('button');
+    playButton.classList = 'play-button';
+    playButton.addEventListener('click', () => {
+        // const fermName = 
+    });
 }
