@@ -13,5 +13,8 @@ actionsBarEl.append(actionsDiv);
 timeButtonsEl.append(dayButton, weekButton);
 fermGalleryEl.append(activeFermsDiv);
 
+//TODO add event listener to toilet that clears the dead
+// const toiletDiv = document.getElementById('toilet');
+// toiletDiv.addEventListener
 
 

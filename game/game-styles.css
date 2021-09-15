@@ -74,8 +74,8 @@ input[type="radio"]:checked + img {
 
 #chat-box {
     border: 1px solid black;
-    min-height: 50px;
-    max-height: 200px;
+    min-height: 200px;
+    max-height: 400px;
     overflow: auto;
 }
 
@@ -103,4 +103,12 @@ input[type="radio"]:checked + img {
       -o-filter: grayscale(100%);
      -ms-filter: grayscale(100%);
          filter: grayscale(100%);
+}
+
+#toilet {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: .8em;
 }
