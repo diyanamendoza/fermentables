@@ -1,5 +1,5 @@
 import { fermsTemplate } from './fermentables-template.js';
-import { addToMistakePoints, getActionsForFermID, updateAction } from './local-storage-utils.js';
+import { addToMistakePoints, getActiveFermById, updateAction } from './local-storage-utils.js';
 
 
 export function createFerm(baby, fermsTemplate) {
@@ -10,9 +10,10 @@ export function createFerm(baby, fermsTemplate) {
     return newFerm;
 }
 
-export function checkAction(action, time, fermID) {
+export function checkAction(action, fermID) {
     // get the actions for the ferm
-    const actions = getActionsForFermID(fermID);
+    const ferm = getActiveFermById(fermID);
+    const actions = ferm.actions;
     // see if the action is in the list
     const doesActionExist = actions.find(entry => entry.action === action);
     if (!doesActionExist) {
@@ -21,7 +22,7 @@ export function checkAction(action, time, fermID) {
         const correctActions = actions.filter(entry => entry.action === action);
         let anyCorrectTimes = false;
         for (let entry of correctActions) {
-            if (time >= entry.startDay && time < entry.endDay) {
+            if (ferm.age >= entry.startDay && ferm.age < entry.endDay) {
                 anyCorrectTimes = true;
                 if (entry.completed) {
                     addToMistakePoints(fermID, 5);
