@@ -1,4 +1,4 @@
-import { fastForwardGame, getActiveFerms } from '../local-storage-utils.js';
+import { fastForwardGame, getActiveFermById, getActiveFerms, getRemainingActionsCount } from '../local-storage-utils.js';
 import { getImageForFerm } from '../render-utils.js';
 import { checkAction, getAllActionNames, updateState } from '../utils.js';
 
@@ -78,39 +78,46 @@ export function renderActiveFerms() {
     return fermDiv;
 }
 
+//Renders a div containing info about the ferm.
+//if fermId is undefined, only nameHeading will be
+//be rendered, with "Select a Fermentable" as the text.
+export function renderFermInfo(fermId) {
+    const ferm = getActiveFermById(fermId);
+    let nameString = '';
+    let ageString = '';
+    let daysLeftString = '';
+    let stepsLeftString = '';
+    if (ferm) {
+        nameString = ferm.baby;
+        if (ferm.isAdult) {
+            nameString = ferm.adult;
+        }
+        ageString = `${ferm.age} days old.`;
+        daysLeftString = `${(ferm.endDay - ferm.age)} days left.`;
+        stepsLeftString = `${(getRemainingActionsCount(fermId))} steps remaining`;
+    } else {
+        nameString = 'Select a Fermentable';
+    }
 
-// export function renderFermInfo(fermId) {
-    // const ferm = getActiveFermById(fermId);
-    // let name = ferm.baby;
-    // if (ferm.age >= ferm.endDay) {
-    //     name = ferm.adult;
-    // }
-    // need function to determine quality and temp.
-    // const qualityPercentage = Math.round((1 - (ferm.mistakePoints / 20) * 100));
-    // const qualityString = `Quality: ${qualityPercentage}%`;
-    // const tempString = '70&176;';
-    // const ageString = `${ferm.age} days old`;
+    const infoDiv = document.createElement('div');
+    const nameHeading = document.createElement('h2');
+    const ageSpan = document.createElement('span');
+    const daysLeftSpan = document.createElement('span');
+    const stepsLeftSpan = document.createElement('span');
 
-    // const infoDiv = document.createElement('div');
-    // const nameHeading = document.createElement('h2');
-    // const qualitySpan = document.createElement('span');
-    // const tempSpan = document.createElement('span');
-    // const ageSpan = document.createElement('span');
+    infoDiv.id = 'info-div';
+    nameHeading.id = 'info-name';
+    ageSpan.id = 'info-age';
+    daysLeftSpan.id = 'info-quality';
+    stepsLeftSpan.id = 'info-temp';
 
-    // infoDiv.id = 'info-div';
-    // nameHeading.id = 'info-name';
-    // qualitySpan.id = 'info-quality';
-    // tempSpan.id = 'info-temp';
-    // ageSpan.id = 'info-age';
-
-    // nameHeading.textContent = name;
-    // // qualitySpan.textContent = qualityString;
-    // // tempSpan.textContent = tempString;
-    // ageSpan.textContent = ageString;
-    // // readd temp and quality
-    // infoDiv.append(nameHeading, ageSpan);
-    // return infoDiv;
-// }
+    ageSpan.textContent = ageString;
+    nameHeading.textContent = nameString;
+    daysLeftSpan.textContent = daysLeftString;
+    stepsLeftSpan.textContent = stepsLeftString;
+    infoDiv.append(nameHeading, ageSpan, daysLeftSpan, stepsLeftSpan);
+    return infoDiv;
+}
 
 
 // Update once renderFermInfo() is functioning again
