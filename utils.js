@@ -1,5 +1,5 @@
 import { fermsTemplate } from './fermentables-template.js';
-import { addToMistakePoints, getActiveFermById, getActiveFerms, updateAction, updateActiveFerm } from './local-storage-utils.js';
+import { addToMistakePoints, getActiveFermById, getActiveFerms, setActiveFerms, updateAction, updateActiveFerm } from './local-storage-utils.js';
 
 
 export function createFerm(baby, fermsTemplate) {
@@ -44,6 +44,7 @@ export function updateState() {
                 if (action.required) {
                     //kill
                     ferm.isDead = true;
+                    ferm.mood = 'sad';
                 } else {
                     //dock points
                     ferm.mistakePoints += action.mistakePoints;
@@ -55,6 +56,8 @@ export function updateState() {
         //update mood
         evaluateMistakePoints(ferm.id);
     }
+    // save
+    setActiveFerms(ferms);
 }
 
 //update isAdult
