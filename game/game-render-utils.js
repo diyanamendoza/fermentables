@@ -83,6 +83,7 @@ export function renderActiveFerms() {
             const selectedFerm = document.querySelector('input:checked');
             const fermId = Number(selectedFerm.value);
             const fermInfoEl = document.getElementById('ferm-info');
+            fermInfoEl.textContent = '';
             const activeFermsInfo = renderFermInfo(fermId);
 
             fermInfoEl.append(activeFermsInfo);
