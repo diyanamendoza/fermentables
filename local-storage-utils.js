@@ -93,3 +93,8 @@ export function fastForwardGame(daysToAdd) {
     }
     setActiveFerms(ferms);
 }
+
+export function getFermNameById(fermId){
+    const ferm = getActiveFermById(fermId);
+    return ferm.isAdult ? ferm.adult : ferm.baby;
+}
