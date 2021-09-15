@@ -79,7 +79,7 @@ export function renderActiveFerms() {
 }
 
 
-export function renderFermInfo(fermId) {
+// export function renderFermInfo(fermId) {
     // const ferm = getActiveFermById(fermId);
     // let name = ferm.baby;
     // if (ferm.age >= ferm.endDay) {
@@ -110,7 +110,7 @@ export function renderFermInfo(fermId) {
     // // readd temp and quality
     // infoDiv.append(nameHeading, ageSpan);
     // return infoDiv;
-}
+// }
 
 
 export function reRenderGamePage(){
