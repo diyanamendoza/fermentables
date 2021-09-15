@@ -88,6 +88,7 @@ export function renderActiveFerms() {
             const fermIndex = getActiveFermIndex(fermId);
             setSelectedFermIndex(fermIndex);
             const fermInfoEl = document.getElementById('ferm-info');
+            fermInfoEl.textContent = '';
             const activeFermsInfo = renderFermInfo(fermId);
 
             fermInfoEl.append(activeFermsInfo);
