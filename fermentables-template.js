@@ -465,7 +465,7 @@ export const fermsTemplate = [
             adultNeutral: 'beer-adult-neutral.png',
             adultHappy: 'beer-adult-happy.png'
         },
-        instructions: `Prepare the ingredients, sanitize your equipment, brew your ingredients, and store in a dark, cool place, all on the first day.`,
+        instructions: `Prepare the ingredients, sanitize your equipment, brew your ingredients, and store in a dark, cool place, all on the first day. Wait roughly two weeks, then add priming sugar and bottle that shit. After this you can check for taste if you want.`,
         endDay: 30,
         age: 0,
         mood: 'happy',
