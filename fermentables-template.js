@@ -17,6 +17,7 @@ export const fermsTemplate = [
         successMessage: 'Woohoo! You successfully fermented your baby Napa Cabbage. Check out that happy Kimchi.',
         maxXP: 20,
         mistakePoints: 0,
+        isDead: false,
         actions: [
             {
                 id: 1,
@@ -119,6 +120,7 @@ export const fermsTemplate = [
         successMessage: 'Woohoo! You successfully fermented your baby Wort. Check out that happy Mead.',
         maxXP: 20,
         mistakePoints: 0,
+        isDead: false,
         actions: [
             {
                 id: 1,
@@ -257,6 +259,7 @@ export const fermsTemplate = [
         successMessage: 'Kak krasivo comrade! Your Beet Kvass is excellent!',
         maxXP: 20,
         mistakePoints: 0,
+        isDead: false,
         actions: [
             {
                 id: 1,
@@ -296,7 +299,19 @@ export const fermsTemplate = [
                 required: false,
                 startDay: 1,
                 endDay: 2,
-                completed: false
+                completed: false,
+                carePoints: 0,
+                mistakePoints: 1
+            },
+            {
+                id: 52,
+                action: 'give a loving kiss',
+                required: false,
+                startDay: 1,
+                endDay: 2,
+                completed: false,
+                carePoints: 2,
+                mistakePoints: 0
             },
             {
                 id: 6,
@@ -374,6 +389,7 @@ export const fermsTemplate = [
         successMessage: `That's a tasty brew! You should consider opening a microbrewery.`,
         maxXP: 20,
         mistakePoints: 0,
+        isDead: false,
         actions: [
             {
                 id: 1,
