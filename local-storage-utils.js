@@ -94,6 +94,15 @@ export function fastForwardGame(daysToAdd) {
     setActiveFerms(ferms);
 }
 
+export function getRemainingActionsCount(fermId) {
+    const ferm = getActiveFermById(fermId);
+    return ferm.actions.reduce((acc, curr) => {
+        if (!curr.completed && !curr.missed) {
+            acc++;
+        }
+    }, 0);
+}
+
 export function getFermNameById(fermId){
     const ferm = getActiveFermById(fermId);
     return ferm.isAdult ? ferm.adult : ferm.baby;

@@ -310,7 +310,10 @@ export const fermsTemplate = [
                 required: true,
                 startDay: 0,
                 endDay: 1,
-                completed: false
+                completed: false,
+                missed: false,
+                carePoints: 0,
+                mistakePoints: 0
             },
             {
                 id: 2,
@@ -318,7 +321,10 @@ export const fermsTemplate = [
                 required: true,
                 startDay: 0,
                 endDay: 1,
-                completed: false
+                completed: false,
+                missed: false,
+                carePoints: 0,
+                mistakePoints: 0
             },
             {
                 id: 3,
@@ -326,7 +332,10 @@ export const fermsTemplate = [
                 required: true,
                 startDay: 0,
                 endDay: 1,
-                completed: false
+                completed: false,
+                missed: false,
+                carePoints: 0,
+                mistakePoints: 0
             },
             {
                 id: 4,
@@ -334,7 +343,10 @@ export const fermsTemplate = [
                 required: true,
                 startDay: 0,
                 endDay: 1,
-                completed: false
+                completed: false,
+                missed: false,
+                carePoints: 0,
+                mistakePoints: 0
             },
             {
                 id: 5,
@@ -343,6 +355,7 @@ export const fermsTemplate = [
                 startDay: 1,
                 endDay: 2,
                 completed: false,
+                missed: false,
                 carePoints: 0,
                 mistakePoints: 1
             },
@@ -352,7 +365,7 @@ export const fermsTemplate = [
                 action: 'give a loving kiss',
                 required: false,
                 startDay: 1,
-                endDay: 2,
+                endDay: 9,
                 completed: false,
                 missed: false,
                 carePoints: -2, //negative is good
@@ -364,7 +377,10 @@ export const fermsTemplate = [
                 required: false,
                 startDay: 2,
                 endDay: 3,
-                completed: false
+                completed: false,
+                missed: false,
+                carePoints: 0,
+                mistakePoints: 5
             },
             {
                 id: 7,
@@ -372,7 +388,10 @@ export const fermsTemplate = [
                 required: false,
                 startDay: 3,
                 endDay: 4,
-                completed: false
+                completed: false,
+                missed: false,
+                carePoints: 0,
+                mistakePoints: 5
             },
             {
                 id: 8,
@@ -380,7 +399,10 @@ export const fermsTemplate = [
                 required: false,
                 startDay: 4,
                 endDay: 5,
-                completed: false
+                completed: false,
+                missed: false,
+                carePoints: 0,
+                mistakePoints: 5
             },
             {
                 id: 9,
@@ -388,7 +410,10 @@ export const fermsTemplate = [
                 required: false,
                 startDay: 5,
                 endDay: 6,
-                completed: false
+                completed: false,
+                missed: false,
+                carePoints: 0,
+                mistakePoints: 5
             },
             {
                 id: 10,
@@ -396,7 +421,10 @@ export const fermsTemplate = [
                 required: false,
                 startDay: 6,
                 endDay: 7,
-                completed: false
+                completed: false,
+                missed: false,
+                carePoints: 0,
+                mistakePoints: 5
             },
             {
                 id: 11,
@@ -405,6 +433,9 @@ export const fermsTemplate = [
                 startDay: 7,
                 endDay: 8,
                 completed: false,
+                missed: false,
+                carePoints: 0,
+                mistakePoints: 5
             },
             {
                 id: 12,
@@ -413,7 +444,10 @@ export const fermsTemplate = [
                 startDay: 8,
                 endDay: 9,
                 completed: false,
-                makesAdult: true
+                makesAdult: true,
+                missed: false,
+                carePoints: 0,
+                mistakePoints: 0
             }
         ]
     },
