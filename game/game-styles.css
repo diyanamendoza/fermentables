@@ -89,6 +89,10 @@ input[type="radio"]:checked + img {
 
 #ferm-gallery {
     border: 1px dotted black;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .dead {
