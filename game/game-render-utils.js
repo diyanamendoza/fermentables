@@ -1,5 +1,5 @@
 import { fastForwardGame, getActiveFermById, getActiveFerms } from '../local-storage-utils.js';
-import { getAllActionNames } from '../utils.js';
+import { getAllActionNames, updateState } from '../utils.js';
 
 export function renderActionButtons() {
     const actionsDiv = document.createElement('div');
@@ -27,6 +27,7 @@ export function renderFFOneDayButton() {
     button.textContent = 'Fast Forward One Day';
     button.addEventListener('click', () => {
         fastForwardGame(1);
+        updateState();
     });
     return button;
 }
@@ -38,6 +39,7 @@ export function renderFFOneWeekButton() {
     button.textContent = 'Fast Forward One Week';
     button.addEventListener('click', () => {
         fastForwardGame(7);
+        updateState();
     });
     return button;
 }

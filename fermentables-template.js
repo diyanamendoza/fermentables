@@ -17,6 +17,7 @@ export const fermsTemplate = [
         successMessage: 'Woohoo! You successfully fermented your baby Napa Cabbage. Check out that happy Kimchi.',
         maxXP: 20,
         mistakePoints: 0,
+        isDead: false,
         actions: [
             {
                 id: 1,
@@ -119,6 +120,7 @@ export const fermsTemplate = [
         successMessage: 'Woohoo! You successfully fermented your baby Wort. Check out that happy Mead.',
         maxXP: 20,
         mistakePoints: 0,
+        isDead: false,
         actions: [
             {
                 id: 1,
@@ -251,12 +253,15 @@ export const fermsTemplate = [
             adultNeutral: 'kvass-adult-neutral.png',
             adultHappy: 'kvass-adult-happy.png'
         },
+        isAdult: false,
+        mood: 'happy',
         instructions: `Prep the beets. Add the beets, salt and water to a jar. Let the jar ferment for 7 days. Open the jar every day and skim any scum that has formed. On the eighth day, strain the beets from your delicious salty beet water.`,
         endDay: 8,
         age: 0,
         successMessage: 'Kak krasivo comrade! Your Beet Kvass is excellent!',
         maxXP: 20,
         mistakePoints: 0,
+        isDead: false,
         actions: [
             {
                 id: 1,
@@ -296,7 +301,21 @@ export const fermsTemplate = [
                 required: false,
                 startDay: 1,
                 endDay: 2,
-                completed: false
+                completed: false,
+                carePoints: 0,
+                mistakePoints: 1
+            },
+            {
+                //fully updated example
+                id: 52,
+                action: 'give a loving kiss',
+                required: false,
+                startDay: 1,
+                endDay: 2,
+                completed: false,
+                missed: false,
+                carePoints: -2, //negative is good
+                mistakePoints: 0
             },
             {
                 id: 6,
@@ -352,7 +371,8 @@ export const fermsTemplate = [
                 required: true,
                 startDay: 8,
                 endDay: 9,
-                completed: false
+                completed: false,
+                makesAdult: true
             }
         ]
     },
@@ -374,6 +394,7 @@ export const fermsTemplate = [
         successMessage: `That's a tasty brew! You should consider opening a microbrewery.`,
         maxXP: 20,
         mistakePoints: 0,
+        isDead: false,
         actions: [
             {
                 id: 1,
