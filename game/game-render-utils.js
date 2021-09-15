@@ -107,29 +107,42 @@ export function renderFermInfo(fermId) {
             nameString = ferm.adult;
         }
         ageString = `${ferm.age} days old.`;
-        daysLeftString = `${(ferm.endDay - ferm.age)} days left.`;
-        stepsLeftString = `${(getRemainingActionsCount(fermId))} steps remaining`;
+        if (ferm.age === 1) {
+            ageString = `1 day old.`;
+        }
+
+        const daysLeft = ferm.endDay - ferm.age;
+        daysLeftString = `${daysLeft} days remaining.`;
+        if (daysLeft === 1) {
+            daysLeftString = '1 day remaining.';
+        }
+
+        const stepsLeft = getRemainingActionsCount(fermId);
+        stepsLeftString = `${stepsLeft} steps remaining`;
+        if (daysLeft === 1) {
+            stepsLeftString = '1 step remainins';
+        }
     } else {
         nameString = 'Select a Fermentable';
     }
 
     const infoDiv = document.createElement('div');
     const nameHeading = document.createElement('h2');
-    const ageSpan = document.createElement('span');
-    const daysLeftSpan = document.createElement('span');
-    const stepsLeftSpan = document.createElement('span');
+    const ageP = document.createElement('p');
+    const daysLeftP = document.createElement('p');
+    const stepsLeftP = document.createElement('p');
 
     infoDiv.id = 'info-div';
     nameHeading.id = 'info-name';
-    ageSpan.id = 'info-age';
-    daysLeftSpan.id = 'info-quality';
-    stepsLeftSpan.id = 'info-temp';
+    ageP.id = 'info-age';
+    daysLeftP.id = 'info-quality';
+    stepsLeftP.id = 'info-temp';
 
-    ageSpan.textContent = ageString;
+    ageP.textContent = ageString;
     nameHeading.textContent = nameString;
-    daysLeftSpan.textContent = daysLeftString;
-    stepsLeftSpan.textContent = stepsLeftString;
-    infoDiv.append(nameHeading, ageSpan, daysLeftSpan, stepsLeftSpan);
+    daysLeftP.textContent = daysLeftString;
+    stepsLeftP.textContent = stepsLeftString;
+    infoDiv.append(nameHeading, ageP, daysLeftP, stepsLeftP);
     return infoDiv;
 }
 
