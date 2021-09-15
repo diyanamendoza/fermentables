@@ -60,18 +60,18 @@ export function updateState() {
     setActiveFerms(ferms);
 }
 
-export function checkAction(action, fermID) {
+export function checkAction(actionName, fermID) {
     // get the actions for the ferm
     const ferm = getActiveFermById(fermID);
     const actions = ferm.actions;
     let result = true;
     // see if the action is in the list
-    const doesActionExist = actions.find(entry => entry.action === action);
+    const doesActionExist = actions.find(entry => entry.action === actionName);
     if (!doesActionExist) {
         addToMistakePoints(fermID, 10);
         result = false;
     } else {
-        const correctActions = actions.filter(entry => entry.action === action);
+        const correctActions = actions.filter(entry => entry.action === actionName);
         let anyCorrectTimes = false;
         for (let entry of correctActions) {
             if (ferm.age >= entry.startDay && ferm.age < entry.endDay) {
@@ -85,12 +85,12 @@ export function checkAction(action, fermID) {
 
                     //add the negative care points that were set on the action.
                     //these should counteract minor mistakes
-                    ferm.mistakePoints += action.carePoints;
+                    ferm.mistakePoints += entry.carePoints;
                     entry.completed = true;
 
                     //change the ferm to adult if this step makes
                     //the ferm an adult
-                    if (action.makesAdult) {
+                    if (entry.makesAdult) {
                         setFermToAdultById(fermID);
                     }
                     updateAction(fermID, entry);
