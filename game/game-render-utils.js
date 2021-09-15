@@ -1,4 +1,4 @@
-import { fastForwardGame, getActiveFerms, getRemainingActionsCount, getFermNameById } from '../local-storage-utils.js';
+import { fastForwardGame, getActiveFerms, getRemainingActionsCount, getFermNameById, getActiveFermById } from '../local-storage-utils.js';
 import { getImageForFerm } from '../render-utils.js';
 import { checkAction, getAllActionNames, updateState } from '../utils.js';
 
@@ -13,8 +13,7 @@ export function renderActionButtons() {
         newButton.value = actionName;
         newButton.textContent = actionName;
         newButton.className = 'action-button';
-        // eslint-disable-next-line no-unused-vars
-        newButton.addEventListener('click', (e) => {
+        newButton.addEventListener('click', () => {
             const selectedFerm = document.querySelector('input:checked');
             const fermId = Number(selectedFerm.value);
             const result = checkAction(actionName, fermId);
@@ -132,14 +131,15 @@ export function renderFermInfo(fermId) {
 
 // Update once renderFermInfo() is functioning again
 export function reRenderGamePage(){
-    // const selectedFerm = document.querySelector('input:checked');
-    // const fermId = Number(selectedFerm.value);
-    const activeFermsDiv = renderActiveFerms();
-    // const activeFermsInfo = renderFermInfo(fermId);
+    const selectedFerm = document.querySelector('input:checked');
+    const fermId = Number(selectedFerm.value);
+    const activeFermsDiv = renderActiveFerms(fermId);
+    const activeFermsInfo = renderFermInfo(fermId);
     const fermGalleryEl = document.getElementById('ferm-gallery');
-    // const fermInfoEl = document.getElementById('ferm-info');
+    const fermInfoEl = document.getElementById('ferm-info');
     fermGalleryEl.textContent = '';
-    // fermInfoEl.append(activeFermsInfo);
+    fermInfoEl.textContent = '';
+    fermInfoEl.append(activeFermsInfo);
     fermGalleryEl.append(activeFermsDiv);
 }
 
