@@ -1,4 +1,4 @@
-import { fastForwardGame, getActiveFermById, getActiveFerms } from '../local-storage-utils.js';
+import { fastForwardGame, getActiveFerms } from '../local-storage-utils.js';
 import { getImageForFerm } from '../render-utils.js';
 import { checkAction, getAllActionNames, updateState } from '../utils.js';
 
@@ -113,18 +113,19 @@ export function renderActiveFerms() {
 // }
 
 
+// Update once renderFermInfo() is functioning again
 export function reRenderGamePage(){
-    const selectedFerm = document.querySelector('input:checked');
-    const fermId = Number(selectedFerm.value);
+    // const selectedFerm = document.querySelector('input:checked');
+    // const fermId = Number(selectedFerm.value);
 
     const actionsDiv = renderActionButtons();
     const activeFermsDiv = renderActiveFerms();
-    const activeFermsInfo = renderFermInfo(fermId);
+    // const activeFermsInfo = renderFermInfo(fermId);
     const actionsBarEl = document.getElementById('actions-bar');
     const fermGalleryEl = document.getElementById('ferm-gallery');
-    const fermInfoEl = document.getElementById('ferm-info');
+    // const fermInfoEl = document.getElementById('ferm-info');
 
-    fermInfoEl.append(activeFermsInfo);
+    // fermInfoEl.append(activeFermsInfo);
     actionsBarEl.append(actionsDiv);
     fermGalleryEl.append(activeFermsDiv);
 }
