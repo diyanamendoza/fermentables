@@ -2,6 +2,7 @@ html {
     margin: 0;
     padding-left: 30px;
     padding-right: 30px;
+    padding-bottom: 50px;
     width: 100%;
 }
 * {
@@ -24,18 +25,32 @@ main {
     gap: 30px;
 }
 
-button {
+#action-buttons-div > button {
     border: 1px solid black;
     font-family: 'Anonymous Pro', monospace;
     background-color: white;
     padding: 5px;
-}
-
-button:active, button:hover {
-    background-color: black;
-    color: white;
     cursor: pointer;
 }
+
+#action-buttons-div > button:hover {
+    background-color: black;
+    color: white;
+}
+
+#time-buttons > button {
+    border: 1px solid black;
+    font-family: 'Anonymous Pro', monospace;
+    background-color: yellowgreen;
+    padding: 5px;
+    cursor: pointer;
+}
+
+#time-buttons > button:hover {
+    background-color: black;
+    color: white;
+}
+
 
 img {
     width: 150px;
@@ -59,6 +74,9 @@ input[type="radio"]:checked + img {
 
 #chat-box {
     border: 1px solid black;
+    min-height: 50px;
+    max-height: 200px;
+    overflow: auto;
 }
 
 #time-and-chat {
@@ -66,8 +84,17 @@ input[type="radio"]:checked + img {
     flex-direction: column;
     gap: 30px;
     justify-content: flex-end;
+    padding-bottom: 50px;
 }
 
 #ferm-gallery {
     border: 1px dotted black;
+}
+
+.dead {
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+      -o-filter: grayscale(100%);
+     -ms-filter: grayscale(100%);
+         filter: grayscale(100%);
 }

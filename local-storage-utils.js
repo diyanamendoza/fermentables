@@ -102,3 +102,8 @@ export function getRemainingActionsCount(fermId) {
         }
     }, 0);
 }
+
+export function getFermNameById(fermId){
+    const ferm = getActiveFermById(fermId);
+    return ferm.isAdult ? ferm.adult : ferm.baby;
+}
