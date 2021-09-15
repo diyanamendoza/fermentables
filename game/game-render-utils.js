@@ -67,8 +67,11 @@ export function renderActiveFerms() {
         fermInput.setAttribute('value', `${ferm.id}`);
         fermInput.name = 'ferm';
         
-        // if dead add dead to classlist
-        // if alive add an alive to classlist
+        if (ferm.isDead){
+            fermImg.classList.add('dead');
+        } else {
+            fermImg.classList.add('alive');
+        }
         // stretchy AF: if complete, add a complete to classlist
 
         fermLabel.append(fermInput, fermImg);
