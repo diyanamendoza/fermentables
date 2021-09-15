@@ -1,4 +1,4 @@
-import { addToActiveFerms } from './local-storage-utils.js';
+import { addToActiveFerms, getActiveFermById } from './local-storage-utils.js';
 import { createFerm } from './utils.js';
 import { fermsTemplate } from './fermentables-template.js';
 
@@ -69,4 +69,27 @@ export function renderPlayButton() {
         window.location = './game';
     });
     mainEl.append(playButton);
+}
+
+
+export function getImageForFerm(fermID){
+    const ferm = getActiveFermById(fermID);
+    if (ferm.isAdult){
+        if (ferm.mood === 'sad'){
+            return `../assets/${ferm.images.adultSad}`;
+        }
+        if (ferm.mood === 'neutral'){
+            return `../assets/${ferm.images.adultNeutral}`;
+        }
+        return `../assets/${ferm.images.adultHappy}`;
+    }
+    if (!ferm.isAdult){
+        if (ferm.mood === 'sad'){
+            return `../assets/${ferm.images.babySad}`;
+        }
+        if (ferm.mood === 'neutral'){
+            return `../assets/${ferm.images.babyNeutral}`;
+        }
+        return `../assets/${ferm.images.babyHappy}`;
+    }
 }
