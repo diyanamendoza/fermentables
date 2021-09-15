@@ -37,6 +37,10 @@ export function updateState() {
     const ferms = getActiveFerms();
     //loop through each active ferm
     for (const ferm of ferms) {
+        if (ferm.age >= ferm.endDay) {
+            ferm.completed = true;
+            
+        }
         //find missed actions
         for (const action of ferm.actions) {
             if (ferm.age >= action.endDay && !action.completed && !action.missed) {
