@@ -80,7 +80,7 @@ export const fermsTemplate = [
                 action: 'check for bubbles',
                 required: false,
                 startDay: 1,
-                endDay: 6,
+                endDay: 20,
                 mistakePoints: 5,
                 carePoints: -1,
                 completed: false,
