@@ -15,11 +15,11 @@ export function createFerm(baby, fermsTemplate) {
 export function evaluateMistakePoints(fermID) {
     const ferm = getActiveFermById(fermID);
     let mood = 'happy';
-    if (mood > 0 && mood <= 10) {
+    if (ferm.mistakePoints > 0 && ferm.mistakePoints <= 10) {
         mood = 'neutral';
-    } else if (mood > 10 && mood <= 20) {
+    } else if (ferm.mistakePoints > 10 && ferm.mistakePoints <= 20) {
         mood = 'sad';
-    } else if (mood > 20) {
+    } else if (ferm.mistakePoints > 20) {
         mood = 'sad';
         ferm.isDead = true;
     }
@@ -65,10 +65,12 @@ export function checkAction(action, fermID) {
     // get the actions for the ferm
     const ferm = getActiveFermById(fermID);
     const actions = ferm.actions;
+    let result = true;
     // see if the action is in the list
     const doesActionExist = actions.find(entry => entry.action === action);
     if (!doesActionExist) {
         addToMistakePoints(fermID, 10);
+        result = false;
     } else {
         const correctActions = actions.filter(entry => entry.action === action);
         let anyCorrectTimes = false;
@@ -77,6 +79,7 @@ export function checkAction(action, fermID) {
                 anyCorrectTimes = true;
                 if (entry.completed) {
                     addToMistakePoints(fermID, 5);
+                    result = false;
                 } else {
                     //action was clicked on correct day and it hasn't
                     //been completed yet.
@@ -96,11 +99,13 @@ export function checkAction(action, fermID) {
             }
         }
         if (!anyCorrectTimes) {
-            addToMistakePoints(fermID, 5);
+            addToMistakePoints(fermID, 5); 
+            result = false;
         }
     }
     //update mood
     evaluateMistakePoints(ferm.id);
+    return result;
 }
 
 let fermData;

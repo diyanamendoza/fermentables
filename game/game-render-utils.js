@@ -1,4 +1,4 @@
-import { fastForwardGame, getActiveFerms } from '../local-storage-utils.js';
+import { fastForwardGame, getActiveFerms, getFermNameById } from '../local-storage-utils.js';
 import { getImageForFerm } from '../render-utils.js';
 import { checkAction, getAllActionNames, updateState } from '../utils.js';
 
@@ -17,7 +17,8 @@ export function renderActionButtons() {
         newButton.addEventListener('click', (e) => {
             const selectedFerm = document.querySelector('input:checked');
             const fermId = Number(selectedFerm.value);
-            checkAction(actionName, fermId);
+            const result = checkAction(actionName, fermId);
+            updateDisplayText(result, actionName, fermId);
         });
         actionsDiv.append(newButton);
     }
@@ -74,6 +75,12 @@ export function renderActiveFerms() {
         }
         // stretchy AF: if complete, add a complete to classlist
 
+        fermInput.addEventListener('click', () => {
+            // const selectedFerm = document.querySelector('input:checked');
+            // const fermId = Number(selectedFerm.value);
+            // renderFermInfo(fermId);
+        });
+
         fermLabel.append(fermInput, fermImg);
         fermDiv.append(fermLabel);
     }
@@ -127,4 +134,18 @@ export function reRenderGamePage(){
     fermGalleryEl.textContent = '';
     // fermInfoEl.append(activeFermsInfo);
     fermGalleryEl.append(activeFermsDiv);
+}
+
+export function updateDisplayText(successful, action, fermId){
+    const ferm = getFermNameById(fermId);
+    const textDisplayEl = document.getElementById('chat-box');
+    const newLineEl = document.createElement('p');
+
+    if (successful){
+        newLineEl.textContent = `You selected ${action} for ${ferm}. Good Job!`;
+    }
+    if (!successful){
+        newLineEl.textContent = `You selected ${action} for ${ferm}. Wrong action!`;
+    }
+    textDisplayEl.append(newLineEl);
 }
