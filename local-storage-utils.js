@@ -96,11 +96,13 @@ export function fastForwardGame(daysToAdd) {
 
 export function getRemainingActionsCount(fermId) {
     const ferm = getActiveFermById(fermId);
-    return ferm.actions.reduce((acc, curr) => {
-        if (!curr.completed && !curr.missed) {
-            acc++;
+    let count = 0;
+    for (let i = 0; i < ferm.actions.length; i++) {
+        if (!ferm.actions[i].completed && !ferm.actions[i].missed) {
+            count++;
         }
-    }, 0);
+    }
+    return count;
 }
 
 export function getFermNameById(fermId) {
