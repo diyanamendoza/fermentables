@@ -253,6 +253,8 @@ export const fermsTemplate = [
             adultNeutral: 'kvass-adult-neutral.png',
             adultHappy: 'kvass-adult-happy.png'
         },
+        isAdult: false,
+        mood: 'happy',
         instructions: `Prep the beets. Add the beets, salt and water to a jar. Let the jar ferment for 7 days. Open the jar every day and skim any scum that has formed. On the eighth day, strain the beets from your delicious salty beet water.`,
         endDay: 8,
         age: 0,
@@ -304,13 +306,15 @@ export const fermsTemplate = [
                 mistakePoints: 1
             },
             {
+                //fully updated example
                 id: 52,
                 action: 'give a loving kiss',
                 required: false,
                 startDay: 1,
                 endDay: 2,
                 completed: false,
-                carePoints: 2,
+                missed: false,
+                carePoints: -2, //negative is good
                 mistakePoints: 0
             },
             {
@@ -367,7 +371,8 @@ export const fermsTemplate = [
                 required: true,
                 startDay: 8,
                 endDay: 9,
-                completed: false
+                completed: false,
+                makesAdult: true
             }
         ]
     },

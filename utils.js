@@ -1,5 +1,5 @@
 import { fermsTemplate } from './fermentables-template.js';
-import { addToMistakePoints, getActiveFermById, updateAction } from './local-storage-utils.js';
+import { addToMistakePoints, getActiveFermById, getActiveFerms, updateAction, updateActiveFerm } from './local-storage-utils.js';
 
 
 export function createFerm(baby, fermsTemplate) {
@@ -10,6 +10,54 @@ export function createFerm(baby, fermsTemplate) {
     return newFerm;
 }
 
+//Determines what mood and aliveness the ferm
+//should have based on mistake points
+export function evaluateMistakePoints(fermID) {
+    const ferm = getActiveFermById(fermID);
+    let mood = 'happy';
+    if (mood > 0 && mood <= 10) {
+        mood = 'neutral';
+    } else if (mood > 10 && mood <= 20) {
+        mood = 'sad';
+    } else if (mood > 20) {
+        mood = 'sad';
+        ferm.isDead = true;
+    }
+    ferm.mood = mood;
+    updateActiveFerm(ferm);
+}
+
+//This function should be called after a fast
+//forward button is used. It will loop through
+//all active ferms and check for missed actions,
+//apply mistakePoints and update the mood, if the
+//missed action was required, isDead will be set
+//to true. 
+export function updateState() {
+    const ferms = getActiveFerms();
+    //loop through each active ferm
+    for (const ferm of ferms) {
+        //find missed actions
+        for (const action of ferm.actions) {
+            if (ferm.age >= action.endDay && !action.completed && !action.missed) {
+                //missed action
+                if (action.required) {
+                    //kill
+                    ferm.isDead = true;
+                } else {
+                    //dock points
+                    ferm.mistakePoints += action.mistakePoints;
+                }
+                //ensure user isn't affected by missing an action multiple times.
+                action.missed = true;
+            }
+        }
+        //update mood
+        evaluateMistakePoints(ferm.id);
+    }
+}
+
+//update isAdult
 export function checkAction(action, fermID) {
     // get the actions for the ferm
     const ferm = getActiveFermById(fermID);
@@ -26,9 +74,20 @@ export function checkAction(action, fermID) {
                 anyCorrectTimes = true;
                 if (entry.completed) {
                     addToMistakePoints(fermID, 5);
-                }
-                else {
+                } else {
+                    //action was clicked on correct day and it hasn't
+                    //been completed yet.
+
+                    //add the negative care points that were set on the action.
+                    //these should counteract minor mistakes
+                    ferm.mistakePoints += action.carePoints;
                     entry.completed = true;
+
+                    //change the ferm to adult if this step makes
+                    //the ferm an adult
+                    if (action.makesAdult) {
+                        ferm.isAdult = true;
+                    }
                     updateAction(fermID, entry);
                 }
             }
@@ -37,6 +96,8 @@ export function checkAction(action, fermID) {
             addToMistakePoints(fermID, 5);
         }
     }
+    //update mood
+    evaluateMistakePoints(ferm.id);
 }
 
 let fermData;
