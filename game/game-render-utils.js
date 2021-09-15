@@ -124,7 +124,7 @@ export function reRenderGamePage(){
     const actionsBarEl = document.getElementById('actions-bar');
     const fermGalleryEl = document.getElementById('ferm-gallery');
     // const fermInfoEl = document.getElementById('ferm-info');
-
+    fermGalleryEl.textContent = '';
     // fermInfoEl.append(activeFermsInfo);
     actionsBarEl.append(actionsDiv);
     fermGalleryEl.append(activeFermsDiv);
