@@ -481,11 +481,12 @@ export const fermsTemplate = [
             },
             {
                 id: 6,
-                action: 'bottle it',
+                action: 'bottle that shit',
                 required: true,
                 startDay: 12,
                 endDay: 17,
-                completed: false
+                completed: false,
+                makesAdult: true
             },
             {
                 id: 7,
