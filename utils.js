@@ -1,5 +1,5 @@
 import { fermsTemplate } from './fermentables-template.js';
-import { addToMistakePoints, getActiveFermById, getActiveFerms, setActiveFerms, updateAction, updateActiveFerm } from './local-storage-utils.js';
+import { addToMistakePoints, getActiveFermById, getActiveFerms, setActiveFerms, setFermToAdultById, updateAction, updateActiveFerm } from './local-storage-utils.js';
 
 
 export function createFerm(baby, fermsTemplate) {
@@ -91,7 +91,7 @@ export function checkAction(action, fermID) {
                     //change the ferm to adult if this step makes
                     //the ferm an adult
                     if (action.makesAdult) {
-                        ferm.isAdult = true;
+                        setFermToAdultById(fermID);
                     }
                     updateAction(fermID, entry);
                 }
