@@ -11,6 +11,7 @@ test('getGameData should return the default gameData object if it doesn\'t exist
         unlockedFerms: 1,
         activeFerms: [],
         completedFerms: [],
+        selectedFermIndex: -1
     };
     
     localStorage.removeItem(GAMEDATA);

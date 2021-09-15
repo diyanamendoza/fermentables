@@ -1,8 +1,6 @@
-import { fastForwardGame, getActiveFerms, getRemainingActionsCount, getFermNameById, getActiveFermById } from '../local-storage-utils.js';
+import { fastForwardGame, getActiveFerms, getRemainingActionsCount, getFermNameById, getActiveFermById, getSelectedFermIndex, getActiveFermIndex, setSelectedFermIndex } from '../local-storage-utils.js';
 import { getImageForFerm } from '../render-utils.js';
 import { checkAction, getAllActionNames, updateState } from '../utils.js';
-
-
 
 export function renderActionButtons() {
     const actionsDiv = document.createElement('div');
@@ -60,16 +58,21 @@ export function renderActiveFerms() {
 
     const fermDiv = document.createElement('div');
 
-    for (let ferm of activeFerms){
+    for (let i = 0; i < activeFerms.length; i++){
+        const ferm = activeFerms[i];
         const fermLabel = document.createElement('label');
         const fermImg = document.createElement('img');
-        const fermInput = document.createElement('input'); 
+        const fermInput = document.createElement('input');
+        const selectedFermIndex = getSelectedFermIndex();
 
         fermImg.src = getImageForFerm(ferm.id);
         fermImg.className = 'ferm-img';
         fermInput.type = 'radio';
         fermInput.setAttribute('value', `${ferm.id}`);
         fermInput.name = 'ferm';
+        if (i === selectedFermIndex) {
+            fermInput.checked = true;
+        }
         
         if (ferm.isDead){
             fermImg.classList.add('dead');
@@ -80,9 +83,15 @@ export function renderActiveFerms() {
         // stretchy AF: if complete, add a complete to classlist
 
         fermInput.addEventListener('click', () => {
-            // const selectedFerm = document.querySelector('input:checked');
-            // const fermId = Number(selectedFerm.value);
-            // renderFermInfo(fermId);
+            const selectedFerm = document.querySelector('input:checked');
+            const fermId = Number(selectedFerm.value);
+            const fermIndex = getActiveFermIndex(fermId);
+            setSelectedFermIndex(fermIndex);
+            const fermInfoEl = document.getElementById('ferm-info');
+            fermInfoEl.textContent = '';
+            const activeFermsInfo = renderFermInfo(fermId);
+
+            fermInfoEl.append(activeFermsInfo);
         });
 
         fermLabel.append(fermInput, fermImg);
