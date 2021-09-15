@@ -117,15 +117,11 @@ export function renderActiveFerms() {
 export function reRenderGamePage(){
     // const selectedFerm = document.querySelector('input:checked');
     // const fermId = Number(selectedFerm.value);
-
-    const actionsDiv = renderActionButtons();
     const activeFermsDiv = renderActiveFerms();
     // const activeFermsInfo = renderFermInfo(fermId);
-    const actionsBarEl = document.getElementById('actions-bar');
     const fermGalleryEl = document.getElementById('ferm-gallery');
     // const fermInfoEl = document.getElementById('ferm-info');
     fermGalleryEl.textContent = '';
     // fermInfoEl.append(activeFermsInfo);
-    actionsBarEl.append(actionsDiv);
     fermGalleryEl.append(activeFermsDiv);
 }
