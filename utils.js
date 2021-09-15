@@ -57,7 +57,6 @@ export function updateState() {
     }
 }
 
-//update isAdult
 export function checkAction(action, fermID) {
     // get the actions for the ferm
     const ferm = getActiveFermById(fermID);
