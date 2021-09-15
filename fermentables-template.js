@@ -413,6 +413,8 @@ export const fermsTemplate = [
         instructions: `Prepare the ingredients, sanitize your equipment, brew your ingredients, and store in a dark, cool place, all on the first day.`,
         endDay: 30,
         age: 0,
+        mood: 'happy',
+        isAdult: 'false',
         successMessage: `That's a tasty brew! You should consider opening a microbrewery.`,
         maxXP: 20,
         mistakePoints: 0,
@@ -424,7 +426,6 @@ export const fermsTemplate = [
                 required: true,
                 startDay: 0,
                 endDay: 1,
-                points: 0,
                 completed: false
             },
             {
@@ -433,7 +434,6 @@ export const fermsTemplate = [
                 required: true,
                 startDay: 0,
                 endDay: 1,
-                points: 0,
                 completed: false
             },
             {
@@ -442,7 +442,6 @@ export const fermsTemplate = [
                 required: true,
                 startDay: 0,
                 endDay: 1,
-                points: 0,
                 completed: false
             },
             {
@@ -451,7 +450,6 @@ export const fermsTemplate = [
                 required: true,
                 startDay: 0,
                 endDay: 1,
-                points: 0,
                 completed: false
             },
             {
@@ -460,16 +458,14 @@ export const fermsTemplate = [
                 required: true,
                 startDay: 12,
                 endDay: 17,
-                points: 0,
                 completed: false
             },
             {
                 id: 6,
-                action: 'bottle that shit',
+                action: 'bottle it',
                 required: true,
                 startDay: 12,
                 endDay: 17,
-                points: 0,
                 completed: false
             },
             {
@@ -477,7 +473,10 @@ export const fermsTemplate = [
                 action: 'check for taste',
                 required: false,
                 startDay: 12,
-                endDay: 30
+                endDay: 30,
+                mistakePoints: 0,
+                carePoints: -5,
+                missed: false
             }
         ]
     }
