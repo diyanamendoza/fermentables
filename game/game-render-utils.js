@@ -16,6 +16,10 @@ export function renderActionButtons() {
         // eslint-disable-next-line no-unused-vars
         newButton.addEventListener('click', (e) => {
             const selectedFerm = document.querySelector('input:checked');
+            if (!selectedFerm) {
+                alert('Please select a fermentable.');
+                return;
+            }
             const fermId = Number(selectedFerm.value);
             const result = checkAction(actionName, fermId);
             updateDisplayText(result, actionName, fermId);
@@ -70,6 +74,7 @@ export function renderActiveFerms() {
         
         if (ferm.isDead){
             fermImg.classList.add('dead');
+            fermInput.disabled = 'true';
         } else {
             fermImg.classList.add('alive');
         }
@@ -147,5 +152,5 @@ export function updateDisplayText(successful, action, fermId){
     if (!successful){
         newLineEl.textContent = `You selected ${action} for ${ferm}. Wrong action!`;
     }
-    textDisplayEl.append(newLineEl);
+    textDisplayEl.prepend(newLineEl);
 }

@@ -92,6 +92,7 @@ input[type="radio"]:checked + img {
 }
 
 .dead {
+    cursor: default;
     -webkit-filter: grayscale(100%);
     -moz-filter: grayscale(100%);
       -o-filter: grayscale(100%);

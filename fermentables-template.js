@@ -106,7 +106,8 @@ export const fermsTemplate = [
                 // mistakePoints: 0,
                 // carePoints: 0,
                 completed: false,
-                missed: false
+                missed: false,
+                makesAdult: true
             },
             {
                 id: 9, 
@@ -230,14 +231,15 @@ export const fermsTemplate = [
             },
             {
                 id: 8,
-                action: 'switch containers',
+                action: 'bottle that shit',
                 required: false,
                 startDay: 14,
                 endDay: 21,
                 mistakePoints: 0.25,
                 carePoints: -1,
                 completed: false,
-                missed: false
+                missed: false,
+                makesAdult: true
             },
             {
                 id: 9, 
