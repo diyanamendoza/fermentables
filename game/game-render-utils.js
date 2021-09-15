@@ -80,9 +80,12 @@ export function renderActiveFerms() {
         // stretchy AF: if complete, add a complete to classlist
 
         fermInput.addEventListener('click', () => {
-            // const selectedFerm = document.querySelector('input:checked');
-            // const fermId = Number(selectedFerm.value);
-            // renderFermInfo(fermId);
+            const selectedFerm = document.querySelector('input:checked');
+            const fermId = Number(selectedFerm.value);
+            const fermInfoEl = document.getElementById('ferm-info');
+            const activeFermsInfo = renderFermInfo(fermId);
+
+            fermInfoEl.append(activeFermsInfo);
         });
 
         fermLabel.append(fermInput, fermImg);
