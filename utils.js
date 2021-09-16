@@ -1,5 +1,6 @@
 import { fermsTemplate } from './fermentables-template.js';
-import { addToMistakePoints, getActiveFermById, getActiveFerms, setActiveFerms, setFermToAdultById, updateAction, updateActiveFerm } from './local-storage-utils.js';
+import { displayMessage, reRenderGamePage } from './game/game-render-utils.js';
+import { addToMistakePoints, addXP, deactivateFerm, getActiveFermById, getActiveFerms, getFermNameById, setActiveFerms, setFermToAdultById, updateAction, updateActiveFerm } from './local-storage-utils.js';
 
 
 export function createFerm(baby, fermsTemplate) {
@@ -38,8 +39,15 @@ export function updateState() {
     //loop through each active ferm
     for (const ferm of ferms) {
         if (ferm.age >= ferm.endDay) {
-            ferm.completed = true;
-            
+            if (!ferm.completed) {
+                ferm.completed = true;
+                displayMessage(ferm.successMessage + ` You gained ${ferm.maxXP} xp.`);
+                addXP(ferm.maxXP);
+                setTimeout(() => {
+                    deactivateFerm(ferm.id);
+                    reRenderGamePage();
+                }, 2000);
+            }
         }
         //find missed actions
         for (const action of ferm.actions) {
@@ -47,8 +55,12 @@ export function updateState() {
                 //missed action
                 if (action.required) {
                     //kill
-                    ferm.isDead = true;
-                    ferm.mood = 'sad';
+                    if (!ferm.isDead) {
+                        ferm.isDead = true;
+                        ferm.mood = 'sad';
+                        const fermName = getFermNameById(ferm.id);
+                        displayMessage(`Your ${fermName} is now dead.`);
+                    }
                 } else {
                     //dock points
                     ferm.mistakePoints += action.mistakePoints;
