@@ -144,5 +144,6 @@ export function getAllActionNamesForFerms(arrayOfFerms) {
             }
         }
     }
+    actionNames.sort();
     return actionNames;
 }
