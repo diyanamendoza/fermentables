@@ -3,6 +3,7 @@ import { displayMessage, reRenderGamePage } from './game-render-utils.js';
 import { addToMistakePoints, addXP, deactivateFerm, getActiveFermById, getActiveFerms, getFermNameById, setActiveFerms, setFermToAdultById, updateAction, updateActiveFerm } from '../local-storage-utils.js';
 import { updateNavXP } from '../render-utils.js';
 
+// tested ✔
 //Determines what mood and aliveness the ferm
 //should have based on mistake points
 export function evaluateMistakePoints(fermID) {
@@ -143,8 +144,8 @@ export function checkAction(actionName, fermID) {
     return result;
 }
 
+// tested ✔
 let fermData;
-
 //this is just a wrapper to make testing easier.
 export function getAllActionNames() {
     if (!fermData) {
@@ -158,6 +159,7 @@ export function setDataForGetAllActionNames(data) {
     fermData = data;
 }
 
+// tested ✔
 //Returns an array of all action names with no duplicates.
 //Currently it only pulls actions from activeFerms.
 export function getAllActionNamesForFerms(arrayOfFerms) {
