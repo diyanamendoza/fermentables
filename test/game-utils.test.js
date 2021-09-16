@@ -1,4 +1,4 @@
-import { getAllActionNames, setDataForGetAllActionNames } from '../utils.js';
+import { getAllActionNames, setDataForGetAllActionNames } from '../game/game-utils.js';
 
 const test = QUnit.test;
 
