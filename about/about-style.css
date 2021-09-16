@@ -15,10 +15,15 @@ html {
 
 h1 {
     font-size: 3em;
+    margin-bottom: 10px;
 }
 
 header {
     font-family: 'Amatic SC', cursive;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 body {
@@ -44,21 +49,21 @@ img {
 
 }
 
-a {
+.member-info > a {
     border: 1px solid black;
     font-family: 'Anonymous Pro', monospace;
     background-color: white;
     padding: 5px 10px;
     font-size: .8em;
-    background-color: lightgoldenrodyellow;
+    background-color: black;
     margin: 5px 0px;
     text-decoration: none;
-    color: black;
+    color: white;
 }
 
-a:active, a:hover {
-    background-color: black;
-    color: white;
+.member-info > a:hover {
+    background-color: rgb(176, 240, 133);
+    color: black;
     cursor: pointer;
 }
 
@@ -82,4 +87,9 @@ a:active, a:hover {
 
 .member-about {
     font-size: .8em;
+}
+
+#home-link {
+    color: black;
+    cursor: pointer;
 }
