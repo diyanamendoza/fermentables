@@ -4,9 +4,18 @@ html {
     padding-right: 30px;
     padding-bottom: 50px;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
+
 * {
     box-sizing: border-box;
+}
+
+h1 {
+    font-size: 3em;
 }
 
 header {
@@ -17,6 +26,8 @@ header {
 
 body {
     font-family: 'Anonymous Pro', monospace;
+    max-width: 800px;
+
 }
 
 main {
@@ -28,7 +39,7 @@ main {
 #action-buttons-div > button {
     border: 1px solid black;
     font-family: 'Anonymous Pro', monospace;
-    background-color: white;
+    background-color: lightgoldenrodyellow;
     padding: 5px;
     cursor: pointer;
 }
@@ -112,4 +123,5 @@ input[type="radio"]:checked + img {
     justify-content: center;
     align-items: center;
     font-size: .8em;
+    filter: drop-shadow(10px 10px 10px gray)
 }

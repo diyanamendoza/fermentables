@@ -4,9 +4,17 @@ html {
     padding-right: 30px;
     padding-bottom: 100px;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 * {
     box-sizing: border-box;
+}
+
+h1 {
+    font-size: 3em;
 }
 
 header {
@@ -19,6 +27,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    max-width: 800px;
 }
 
 main {
@@ -37,6 +46,7 @@ img {
 
 img:hover, img:active {
     cursor: pointer;
+    /* filter: drop-shadow(10px 10px 10px gray) */
 }
 
 button {
@@ -44,6 +54,10 @@ button {
     font-family: 'Anonymous Pro', monospace;
     background-color: white;
     padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 1em;
+    background-color: lightgoldenrodyellow;
 }
 
 button:active, button:hover {

@@ -67,7 +67,7 @@ export function renderPlayButton() {
 
     const playButton = document.createElement('button');
     playButton.className = 'play-button';
-    playButton.textContent = 'Play';
+    playButton.textContent = 'play';
     playButton.addEventListener('click', () => {
 
         const selectedFerm = document.querySelector('input:checked');
