@@ -1,6 +1,6 @@
 import { fermsTemplate } from '../fermentables-template.js';
 import { displayMessage, reRenderGamePage } from './game-render-utils.js';
-import { addToMistakePoints, addXP, deactivateFerm, getActiveFermById, getActiveFerms, getFermNameById, setActiveFerms, setFermToAdultById, updateAction, updateActiveFerm } from '../local-storage-utils.js';
+import { addToMistakePoints, addXP, deactivateFerm, getActiveFermById, getActiveFerms, getFermNameById, setActiveFerms, updateAction, updateActiveFerm } from '../local-storage-utils.js';
 import { updateNavXP } from '../render-utils.js';
 
 // tested ✔
