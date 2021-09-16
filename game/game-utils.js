@@ -71,6 +71,7 @@ export function updateState() {
     updateNavXP();
 }
 
+//tested ✔
 //checkAction handles the user selecting an action for a ferm. It does the
 //following:
 //--applies 10 mistake points if the action doesn't exist for the ferm
