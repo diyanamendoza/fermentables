@@ -131,3 +131,8 @@ export function updateNavXP() {
     const userXP = document.getElementById('user-xp');
     userXP.textContent = `You've got ${XP} XP`;
 }
+
+export function renderFooter() {
+    const footer = document.querySelector('footer');
+    footer.textContent = 'Fermentables drawn by @vietnguyenart';
+}
