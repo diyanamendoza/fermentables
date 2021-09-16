@@ -53,15 +53,14 @@ export function updateState() {
             }
         }
         if (ferm.age >= ferm.endDay && !ferm.isDead && !ferm.completed) {
-             
             ferm.completed = true;
             displayMessage(ferm.successMessage + ` You gained ${ferm.maxXP} xp.`);
             addXP(ferm.maxXP);
+            reRenderGamePage();
             setTimeout(() => {
                 deactivateFerm(ferm.id);
                 reRenderGamePage();
             }, 2000);
-            
         }
         //update mood
         evaluateMistakePoints(ferm.id);

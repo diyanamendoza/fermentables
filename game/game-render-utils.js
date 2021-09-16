@@ -66,9 +66,14 @@ export function renderActiveFerms() {
         const fermImg = document.createElement('img');
         const fermInput = document.createElement('input');
         const selectedFermIndex = getSelectedFermIndex();
+        // create new p tag for animation xp
+        const elP = document.createElement('p');
+        
+        //add xp-text class to p tag styling and animation
+        elP.classList.add('xp-text');
 
         fermImg.src = getImageForFerm(ferm.id);
-        fermImg.className = 'ferm-img';
+        fermImg.classList.add('ferm-img');
         fermInput.type = 'radio';
         fermInput.setAttribute('value', `${ferm.id}`);
         fermInput.name = 'ferm';
@@ -81,6 +86,13 @@ export function renderActiveFerms() {
             fermInput.disabled = 'true';
         } else {
             fermImg.classList.add('alive');
+        }
+
+        // If ferm is completed, run xp-gain animation
+        if (ferm.completed === true){
+            fermInput.display = 'none';
+            elP.display = 'block';
+            elP.classList.add('xp-gain');
         }
         // stretchy AF: if complete, add a complete to classlist
 
@@ -96,7 +108,7 @@ export function renderActiveFerms() {
             fermInfoEl.append(activeFermsInfo);
         });
 
-        fermLabel.append(fermInput, fermImg);
+        fermLabel.append(fermInput, fermImg, elP);
         fermDiv.append(fermLabel);
     }
     
