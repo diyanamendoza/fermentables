@@ -123,7 +123,7 @@ export function checkAction(actionName, fermID) {
                     //change the ferm to adult if this step makes
                     //the ferm an adult
                     if (entry.makesAdult) {
-                        setFermToAdultById(fermID);
+                        ferm.isAdult = true;
                     }
                     //store the change to entry.completed
                     updateAction(fermID, entry);
