@@ -1,4 +1,5 @@
-import { getAllActionNames, setDataForGetAllActionNames } from '../game/game-utils.js';
+import { evaluateMistakePoints, getAllActionNames, setDataForGetAllActionNames } from '../game/game-utils.js';
+import { GAMEDATA, getActiveFermById, getActiveFermIndex, setActiveFerms } from '../local-storage-utils.js';
 
 const test = QUnit.test;
 
@@ -103,4 +104,90 @@ test('getAllActionNames should not return duplicates', assert => {
     setDataForGetAllActionNames(testData);
     const actual = getAllActionNames();
     assert.deepEqual(actual, expected);
+});
+
+//evaluateMistakePoints
+test('evaluateMistakePoints doesnt change mood', assert => {
+    //Empty storage
+    localStorage.removeItem(GAMEDATA);
+    //Create a ferm to be stored with mistakePoints
+    const staticFermObj = [{
+        id: 1,
+        mistakePoints: 0,
+        mood: 'happy'
+    }];
+    //Push new ferm to active storage.
+    setActiveFerms(staticFermObj);
+    //Call evaluateMistakePoints
+    evaluateMistakePoints(1);
+    //Check the ferm in local storage to see that mood is what is expected.
+    const expected = 'happy';
+
+    const actual = getActiveFermById(1).mood;
+    
+    assert.equal(actual, expected);
+});
+
+test('evaluateMistakePoints changes mood to neutral', assert => {
+    localStorage.removeItem(GAMEDATA);
+
+    const staticFermObj = [{
+        id: 2,
+        mistakePoints: 9,
+        mood: 'happy'
+    }];
+
+    setActiveFerms(staticFermObj);
+
+    evaluateMistakePoints(2);
+
+    const expected = 'neutral';
+    const actual = getActiveFermById(2).mood;
+
+    assert.equal(actual, expected);
+});
+
+test('evaluateMistakePoints changes mood to sad', assert => {
+    
+    localStorage.removeItem(GAMEDATA);
+    
+    const staticFermObj = [{
+        id: 3,
+        mistakePoints: 11,
+        mood: 'happy'
+    }];
+    
+    setActiveFerms(staticFermObj);
+    
+    evaluateMistakePoints(3);
+    
+    const expected = 'sad';
+    const actual = getActiveFermById(3).mood;
+
+    assert.equal(actual, expected);
+});
+
+test('evaluateMistakePoints changes mood to sad and sets isDead to true', assert => {
+   
+    localStorage.removeItem(GAMEDATA);
+    
+    const staticFermObj = [{
+        id: 3,
+        mistakePoints: 21,
+        mood: 'happy',
+        isDead: false
+    }];
+    
+    setActiveFerms(staticFermObj);
+    
+    evaluateMistakePoints(3);
+ 
+    const expected1 = 'sad';
+    const actual1 = getActiveFermById(3).mood;
+
+    const expected2 = true;
+    const actual2 = getActiveFermById(3).isDead;
+
+    assert.equal(actual1, expected1);
+    assert.equal(actual2, expected2);
 });
