@@ -1,15 +1,6 @@
-import { fermsTemplate } from './fermentables-template.js';
-import { displayMessage, reRenderGamePage } from './game/game-render-utils.js';
-import { addToMistakePoints, addXP, deactivateFerm, getActiveFermById, getActiveFerms, getFermNameById, setActiveFerms, setFermToAdultById, updateAction, updateActiveFerm } from './local-storage-utils.js';
-
-
-export function createFerm(baby, fermsTemplate) {
-    const template = fermsTemplate.find(entry => entry.baby === baby);
-    const newFerm = {};
-    Object.assign(newFerm, template);
-    newFerm.id = Math.ceil(Math.random() * 1000);
-    return newFerm;
-}
+import { fermsTemplate } from '../fermentables-template.js';
+import { displayMessage, reRenderGamePage } from './game-render-utils.js';
+import { addToMistakePoints, addXP, deactivateFerm, getActiveFermById, getActiveFerms, getFermNameById, setActiveFerms, setFermToAdultById, updateAction, updateActiveFerm } from '../local-storage-utils.js';
 
 //Determines what mood and aliveness the ferm
 //should have based on mistake points
@@ -152,5 +143,3 @@ export function getAllActionNamesForFerms(arrayOfFerms) {
     }
     return actionNames;
 }
-
-

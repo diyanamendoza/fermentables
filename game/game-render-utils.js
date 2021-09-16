@@ -1,6 +1,6 @@
 import { fastForwardGame, getActiveFerms, getRemainingActionsCount, getFermNameById, getActiveFermById, getSelectedFermIndex, getActiveFermIndex, setSelectedFermIndex } from '../local-storage-utils.js';
 import { getImageForFerm } from '../render-utils.js';
-import { checkAction, getAllActionNames, updateState } from '../utils.js';
+import { checkAction, getAllActionNames, updateState } from './game-utils.js';
 
 export function renderActionButtons() {
     const actionsDiv = document.createElement('div');
@@ -30,7 +30,7 @@ export function renderFFOneDayButton() {
     const button = document.createElement('button');
     button.id = 'ff-one-day-button';
     button.className = 'ff-button';
-    button.textContent = 'Fast Forward One Day';
+    button.textContent = 'fast forward one day';
     button.addEventListener('click', () => {
         fastForwardGame(1);
         updateState();
@@ -43,7 +43,7 @@ export function renderFFOneWeekButton() {
     const button = document.createElement('button');
     button.id = 'ff-one-week-button';
     button.className = 'ff-button';
-    button.textContent = 'Fast Forward One Week';
+    button.textContent = 'fast forward one week';
     button.addEventListener('click', () => {
         fastForwardGame(7);
         updateState();
@@ -55,7 +55,6 @@ export function renderFFOneWeekButton() {
 
 export function renderActiveFerms() {
     const activeFerms = getActiveFerms();
-
     const fermDiv = document.createElement('div');
 
     for (let i = 0; i < activeFerms.length; i++){
@@ -152,7 +151,6 @@ export function renderFermInfo(fermId) {
     infoDiv.append(nameHeading, ageP, daysLeftP, stepsLeftP);
     return infoDiv;
 }
-
 
 // Update once renderFermInfo() is functioning again
 export function reRenderGamePage(){
