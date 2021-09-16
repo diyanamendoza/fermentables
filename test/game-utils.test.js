@@ -1,5 +1,6 @@
-import { evaluateMistakePoints, getAllActionNames, setDataForGetAllActionNames } from '../game/game-utils.js';
-import { GAMEDATA, getActiveFermById, getActiveFermIndex, setActiveFerms } from '../local-storage-utils.js';
+import { fermsTemplate } from '../fermentables-template.js';
+import { evaluateMistakePoints, getAllActionNames, setDataForGetAllActionNames, updateState } from '../game/game-utils.js';
+import { GAMEDATA, getActiveFermById, getActiveFerms, getGameData, setActiveFerms, setGameData } from '../local-storage-utils.js';
 
 const test = QUnit.test;
 
@@ -192,35 +193,60 @@ test('evaluateMistakePoints changes mood to sad and sets isDead to true', assert
     assert.equal(actual2, expected2, 'isDead is true');
 });
 
-// test('updateState ', assert => {
-   
+// test('updateState if ferm is of age and isnt already completed', assert => {
+//     //  Clear storage    
 //     localStorage.removeItem(GAMEDATA);
-    
-//     const staticFermObj = {
-//         activeFerms: [{
-//             id: 3,
-//             mistakePoints: 21,
-//             mood: 'happy',
-//             isDead: false
-//         }],
+//     // Declare a static game data obj
+//     const staticGameData = {
+//         activeFerms: [
+//             {
+//                 age: 20,
+//                 id: 4,
+//                 mistakePoints: 20,
+//                 mood: 'happy',
+//                 isDead: false,
+//                 completed: false,
+//                 endDay: 20,
+//                 rewardXP: 20,
+//                 actions: []
+//             }
+//             // ,
+//             // {
+//             //     age: 0,
+//             //     id: 5,
+//             //     mistakePoints: 20,
+//             //     mood: 'happy',
+//             //     isDead: false,
+//             //     completed: false,
+//             //     xp: 0
+//             // }
+//         ],
 //         completedFerms: [],
 //         selectedFermIndex: 1,
 //         unlockedFerms: 1,
 //         xp: 0
 //     };
+//     // Send staticGameData to local storage
+//     setGameData(staticGameData);
     
-//     setActiveFerms(staticFermObj);
-    
-//     evaluateMistakePoints(3);
- 
-//     const expected1 = 'sad';
-//     const actual1 = getActiveFermById(3).mood;
+//     // Call updateState
+//     updateState();
 
-//     const expected2 = true;
-//     const actual2 = getActiveFermById(3).isDead;
+//     //Check if ferm is set to complete as actual
+//     const completedActual = getActiveFerms()[0].completed;
+//     const completedExpected = true;
 
-//     assert.equal(actual1, expected1, 'Mood is sad');
-//     assert.equal(actual2, expected2, 'isDead is true');
+//     // Check if XP has increased by rewardXP
+//     const xpActual = getGameData().xp;
+//     const xpExpected = 20;
+
+//     // 
+
+//     // const expected2 = true;
+//     // const actual2 = getActiveFermById(3).isDead;
+
+//     assert.equal(completedActual, completedExpected, 'Completed is true');
+//     assert.equal(xpActual, xpExpected, 'xp is 20');
 // });
 
 
