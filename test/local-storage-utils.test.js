@@ -1,7 +1,7 @@
 // IMPORT MODULES under test here:
 // import { example } from '../example.js';
 
-import { addToActiveFerms, addToCompletedFerms, deactivateFerm, fastForwardGame, GAMEDATA, getActiveFerms, getGameData, setActiveFerms, setGameData } from '../local-storage-utils.js';
+import { addToActiveFerms, addToCompletedFerms, deactivateFerm, fastForwardGame, GAMEDATA, getActiveFermById, getActiveFerms, getGameData, setActiveFerms, setGameData } from '../local-storage-utils.js';
 
 const test = QUnit.test;
 
@@ -244,5 +244,33 @@ test('fastForwardGame increments the age of all active ferms by the amount speci
     setGameData(testData);
     fastForwardGame(1);
     const actual = getGameData();
+    assert.deepEqual(actual, expected);
+});
+
+
+test('getActiveFermByID returns the expected ferm object', assert => {
+    // clear local storage
+    localStorage.removeItem(GAMEDATA);
+    // create a static active ferms array.
+    const staticFermArr = [{
+        id: 1,
+        mistakePoints: 0,
+        mood: 'happy'
+    },
+    {
+        id: 2,
+        mistakePoints: 10,
+        mood: 'neutral'
+    }];
+    // save the static active ferms to local storage
+    setActiveFerms(staticFermArr);
+    //call get Activeferm as actual
+    const actual = getActiveFermById(1);
+    //set one of the ferm objects as expected
+    const expected = {
+        id: 1,
+        mistakePoints: 0,
+        mood: 'happy'
+    };
     assert.deepEqual(actual, expected);
 });
