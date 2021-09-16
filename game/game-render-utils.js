@@ -19,7 +19,7 @@ export function renderActionButtons() {
             }
             const fermId = Number(selectedFerm.value);
             const result = checkAction(actionName, fermId);
-            updateDisplayText(result, actionName, fermId);
+            displayActionMessage(result, actionName, fermId);
         });
         actionsDiv.append(newButton);
     }
@@ -131,8 +131,6 @@ export function renderFermInfo(fermId) {
         if (daysLeft === 1) {
             stepsLeftString = '1 step remainins';
         }
-    } else {
-        nameString = 'Select a Fermentable';
     }
 
     const infoDiv = document.createElement('div');
@@ -159,8 +157,11 @@ export function renderFermInfo(fermId) {
 // Update once renderFermInfo() is functioning again
 export function reRenderGamePage(){
     const selectedFerm = document.querySelector('input:checked');
-    const fermId = Number(selectedFerm.value);
-    const activeFermsDiv = renderActiveFerms(fermId);
+    let fermId = undefined;
+    if (selectedFerm) {
+        fermId = Number(selectedFerm.value);
+    }
+    const activeFermsDiv = renderActiveFerms();
     const activeFermsInfo = renderFermInfo(fermId);
     const fermGalleryEl = document.getElementById('ferm-gallery');
     const fermInfoEl = document.getElementById('ferm-info');
@@ -170,16 +171,21 @@ export function reRenderGamePage(){
     fermGalleryEl.append(activeFermsDiv);
 }
 
-export function updateDisplayText(successful, action, fermId){
-    const ferm = getFermNameById(fermId);
+export function displayMessage(message) {
     const textDisplayEl = document.getElementById('chat-box');
     const newLineEl = document.createElement('p');
+    newLineEl.textContent = message;
+    textDisplayEl.prepend(newLineEl);
+}
 
+export function displayActionMessage(successful, action, fermId){
+    const ferm = getFermNameById(fermId);
+    let message = '';
     if (successful){
-        newLineEl.textContent = `You selected ${action} for ${ferm}. Good Job!`;
+        message = `You selected ${action} for ${ferm}. Good Job!`;
     }
     if (!successful){
-        newLineEl.textContent = `You selected ${action} for ${ferm}. Wrong action!`;
+        message = `You selected ${action} for ${ferm}. Wrong action!`;
     }
-    textDisplayEl.prepend(newLineEl);
+    displayMessage(message);
 }

@@ -8,7 +8,7 @@ export function getGameData() {
         unlockedFerms: 1,
         activeFerms: [],
         completedFerms: [],
-        selectedFermIndex: -1
+        selectedFermIndex: 0
     };
     }
     return parsedGameData;
@@ -22,7 +22,7 @@ export function setGameData(currentGameData) {
 export function addXP(xpToAdd) {
     const gameData = getGameData();
     gameData.xp += xpToAdd;
-    setGameData(xpToAdd);
+    setGameData(gameData);
 }
 
 export function getSelectedFermIndex() {
@@ -111,7 +111,8 @@ export function updateAction(fermID, completedAction) {
 export function fastForwardGame(daysToAdd) {
     const ferms = getActiveFerms();
     for (const ferm of ferms) {
-        ferm.age += daysToAdd;
+        if (!ferm.isDead)
+            ferm.age += daysToAdd;
     }
     setActiveFerms(ferms);
 }

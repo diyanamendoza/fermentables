@@ -36,4 +36,4 @@ toiletDiv.addEventListener('click', () => {
     }
 });
 
-
+reRenderGamePage();

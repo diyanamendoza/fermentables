@@ -93,3 +93,12 @@ label {
 .instructions {
     font-size: .8em;
 }
+
+.locked {
+    cursor: default;
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+      -o-filter: grayscale(100%);
+     -ms-filter: grayscale(100%);
+         filter: grayscale(100%);
+}

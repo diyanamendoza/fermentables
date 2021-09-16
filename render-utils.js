@@ -1,4 +1,4 @@
-import { addToActiveFerms, getActiveFermById } from './local-storage-utils.js';
+import { addToActiveFerms, getActiveFermById, getGameData } from './local-storage-utils.js';
 import { createFerm } from './utils.js';
 import { fermsTemplate } from './fermentables-template.js';
 
@@ -7,6 +7,10 @@ const welcomeDiv = document.getElementById('welcome');
 
 
 export function renderFerms(fermsTemplate) {
+
+    const gameData = getGameData();
+    const XP = gameData.xp;
+
     for (let ferm of fermsTemplate) {
         const labelEl = document.createElement('label');
         const inputEl = document.createElement('input');
@@ -17,6 +21,11 @@ export function renderFerms(fermsTemplate) {
         inputEl.setAttribute('value', `${ferm.baby}`);
         imageEl.src = `./assets/${ferm.images.babyHappy}`;
         imageEl.classList.add('ferm-image');
+
+        if (XP < ferm.unlockXP) {
+            inputEl.disabled = 'true';
+            imageEl.classList.add('locked');
+        }
 
         const instructionsP = document.createElement('div');
         instructionsP.textContent = `${ferm.instructions}`;
