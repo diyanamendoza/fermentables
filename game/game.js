@@ -1,6 +1,6 @@
 
 import { deactivateFerm, getActiveFerms } from '../local-storage-utils.js';
-import { renderFooter, renderNav } from '../render-utils.js';
+import { renderNav } from '../render-utils.js';
 import { renderActionButtons, renderActiveFerms, renderFFOneDayButton, renderFFOneWeekButton, reRenderGamePage } from './game-render-utils.js';
 
 renderNav();
