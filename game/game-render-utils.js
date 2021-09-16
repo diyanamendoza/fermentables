@@ -2,6 +2,7 @@ import { fastForwardGame, getActiveFerms, getRemainingActionsCount, getFermNameB
 import { getImageForFerm } from '../render-utils.js';
 import { checkAction, getAllActionNames, updateState } from './game-utils.js';
 
+// tested ✔
 export function renderActionButtons() {
     const actionsDiv = document.createElement('div');
     actionsDiv.id = 'action-buttons-div';
@@ -26,6 +27,7 @@ export function renderActionButtons() {
     return actionsDiv;
 }
 
+// tested ✔
 export function renderFFOneDayButton() {
     const button = document.createElement('button');
     button.id = 'ff-one-day-button';
@@ -39,6 +41,7 @@ export function renderFFOneDayButton() {
     return button;
 }
 
+// tested ✔
 export function renderFFOneWeekButton() {
     const button = document.createElement('button');
     button.id = 'ff-one-week-button';

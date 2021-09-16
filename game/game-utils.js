@@ -3,6 +3,7 @@ import { displayMessage, reRenderGamePage } from './game-render-utils.js';
 import { addToMistakePoints, addXP, deactivateFerm, getActiveFermById, getActiveFerms, getFermNameById, setActiveFerms, setFermToAdultById, updateAction, updateActiveFerm } from '../local-storage-utils.js';
 import { updateNavXP } from '../render-utils.js';
 
+// tested ✔
 //Determines what mood and aliveness the ferm
 //should have based on mistake points
 export function evaluateMistakePoints(fermID) {
@@ -70,6 +71,17 @@ export function updateState() {
     updateNavXP();
 }
 
+//checkAction handles the user selecting an action for a ferm. It does the
+//following:
+//--applies 10 mistake points if the action doesn't exist for the ferm
+//--applies 5 mistake points if the action was already completed
+//--applies any care points the action gives if the correct action was
+//    chosen
+//--makes the ferm an adult if the correct action was selected and it makes the
+//    ferm an adult
+//--applies 5 mistake points if action exists but it was done on the wrong day
+//--updates the mood of the ferm to reflect the new mistakePoints value
+//--returns true if it was a correct action, returns false if it wasn't
 export function checkAction(actionName, fermID) {
     // get the actions for the ferm
     const ferm = getActiveFermById(fermID);
@@ -78,16 +90,25 @@ export function checkAction(actionName, fermID) {
     // see if the action is in the list
     const doesActionExist = actions.find(entry => entry.action === actionName);
     if (!doesActionExist) {
+        //the action doesn't exist for this ferm, apply 10 mistake points
         addToMistakePoints(fermID, 10);
+        //signal that this was an incorrect action
         result = false;
     } else {
+        //the action does exist for this ferm
         const correctActions = actions.filter(entry => entry.action === actionName);
         let anyCorrectTimes = false;
+        //loop through all instances of actions that match actionName
         for (let entry of correctActions) {
+            //check if this action is on the correct day
             if (ferm.age >= entry.startDay && ferm.age < entry.endDay) {
+                //this action entry was specified for this day
+                //store that there was a correct action found for other penalties
                 anyCorrectTimes = true;
                 if (entry.completed) {
+                    //apply 5 mistake points if the action was already completed
                     addToMistakePoints(fermID, 5);
+                    //signal that this was an incorrect action
                     result = false;
                 } else {
                     //action was clicked on correct day and it hasn't
@@ -96,6 +117,7 @@ export function checkAction(actionName, fermID) {
                     //add the negative care points that were set on the action.
                     //these should counteract minor mistakes
                     ferm.mistakePoints += entry.carePoints;
+                    //signal that this was a correct action
                     entry.completed = true;
 
                     //change the ferm to adult if this step makes
@@ -103,12 +125,17 @@ export function checkAction(actionName, fermID) {
                     if (entry.makesAdult) {
                         setFermToAdultById(fermID);
                     }
+                    //store the change to entry.completed
                     updateAction(fermID, entry);
+                    updateActiveFerm(ferm);
                 }
             }
         }
+        //check if no matching actions were found for this day
         if (!anyCorrectTimes) {
-            addToMistakePoints(fermID, 5); 
+            //apply 5 mistake points if action exists but it was done on the wrong day
+            addToMistakePoints(fermID, 5);
+            //signal that this was an incorrect ation;
             result = false;
         }
     }
@@ -117,8 +144,8 @@ export function checkAction(actionName, fermID) {
     return result;
 }
 
+// tested ✔
 let fermData;
-
 //this is just a wrapper to make testing easier.
 export function getAllActionNames() {
     if (!fermData) {
@@ -132,6 +159,7 @@ export function setDataForGetAllActionNames(data) {
     fermData = data;
 }
 
+// tested ✔
 //Returns an array of all action names with no duplicates.
 //Currently it only pulls actions from activeFerms.
 export function getAllActionNamesForFerms(arrayOfFerms) {
@@ -144,5 +172,6 @@ export function getAllActionNamesForFerms(arrayOfFerms) {
             }
         }
     }
+    actionNames.sort();
     return actionNames;
 }
