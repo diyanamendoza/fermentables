@@ -71,6 +71,9 @@ export function renderPlayButton() {
     playButton.addEventListener('click', () => {
 
         const selectedFerm = document.querySelector('input:checked');
+        if (!selectedFerm) {
+            alert('Click on your fermentable and then play!');
+        }
         const selectedFermName = selectedFerm.value;
 
         const fermObject = createFerm(selectedFermName, fermsTemplate);
