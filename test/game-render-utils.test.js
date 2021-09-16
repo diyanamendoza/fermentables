@@ -1,6 +1,6 @@
 import { renderActionButtons, renderFFOneDayButton, renderFFOneWeekButton } from '../game/game-render-utils.js';
 import { setGameData } from '../local-storage-utils.js';
-import { setDataForGetAllActionNames } from '../utils.js';
+import { setDataForGetAllActionNames } from '../game/game-utils.js';
 
 const test = QUnit.test;
 
