@@ -32,17 +32,6 @@ export function updateState() {
     const ferms = getActiveFerms();
     //loop through each active ferm
     for (const ferm of ferms) {
-        if (ferm.age >= ferm.endDay) {
-            if (!ferm.completed) {
-                ferm.completed = true;
-                displayMessage(ferm.successMessage + ` You gained ${ferm.rewardXP} xp.`);
-                addXP(ferm.rewardXP);
-                setTimeout(() => {
-                    deactivateFerm(ferm.id);
-                    reRenderGamePage();
-                }, 2000);
-            }
-        }
         //find missed actions
         for (const action of ferm.actions) {
             if (ferm.age >= action.endDay && !action.completed && !action.missed) {
@@ -62,6 +51,17 @@ export function updateState() {
                 //ensure user isn't affected by missing an action multiple times.
                 action.missed = true;
             }
+        }
+        if (ferm.age >= ferm.endDay && !ferm.isDead && !ferm.completed) {
+             
+            ferm.completed = true;
+            displayMessage(ferm.successMessage + ` You gained ${ferm.maxXP} xp.`);
+            addXP(ferm.maxXP);
+            setTimeout(() => {
+                deactivateFerm(ferm.id);
+                reRenderGamePage();
+            }, 2000);
+            
         }
         //update mood
         evaluateMistakePoints(ferm.id);
