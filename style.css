@@ -84,11 +84,6 @@ input[type="radio"]:checked + img {
     transition: all .05s ease-in-out;
 }
 
-/* input[type="radio"]:checked + div {
-    display: block;
-    border: 1px solid black;
-} */
-
 #container {
     display: flex;
     flex-direction: row;
@@ -97,10 +92,6 @@ input[type="radio"]:checked + img {
     justify-content: center;
 }
 
-/* #container > p {
-    width: 200px;
-} */
-
 label {
     display: flex;
     flex-direction: row;
@@ -108,10 +99,6 @@ label {
     width: 300px;
     justify-content: center;
 }
-
-/* .instructions {
-    display: none;
-} */
 
 .instructions {
     font-size: .8em;
@@ -124,4 +111,16 @@ label {
       -o-filter: grayscale(100%);
      -ms-filter: grayscale(100%);
          filter: grayscale(100%);
+}
+
+#welcome {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+}
+
+#welcome > button {
+    margin-top: 30px;
 }

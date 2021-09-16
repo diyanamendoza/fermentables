@@ -18,7 +18,7 @@ export function renderFerms(fermsTemplate) {
         inputEl.setAttribute('type', 'radio');
         inputEl.setAttribute('name', 'ferm');
         inputEl.setAttribute('value', `${ferm.baby}`);
-        imageEl.src = `./assets/${ferm.images.babyHappy}`;
+        imageEl.src = `../assets/${ferm.images.babyHappy}`;
         imageEl.classList.add('ferm-image');
 
         if (XP < ferm.unlockXP) {
@@ -47,14 +47,18 @@ export function renderFerms(fermsTemplate) {
 }
 
 export function renderWelcome() {
-    const titleEl = document.createElement('h3');
     const firstP = document.createElement('p');
     const secondP = document.createElement('p');
-    titleEl.textContent = 'Welcome!';
-    firstP.textContent = `Fermentables is a cutting edge fermentation simulator utilizing the latest technologies in Javascript and Local Storage.`;
-    secondP.textContent = `To master fermentation, one must carefully memorize the recipes of their craft. One wrong move could kill your adorable little friend. Prove your worth by completing a fermentation to unlock more recipes. For the brave, return to this page to start additional fermentations.`;
+    firstP.textContent = `Welcome! Fermentables is a cutting edge fermentation simulator utilizing the latest technologies in Javascript and Local Storage.`;
+    secondP.textContent = `To master fermentation, one must carefully memorize the recipes of their craft. One wrong move could kill your adorable little friend. Prove your worth by completing a fermentation to unlock more recipes. Head to the pantry get started.`;
 
-    welcomeDiv.append(titleEl, firstP, secondP);
+    const goToPantry = document.createElement('button');
+    goToPantry.textContent = `go to pantry`;
+    goToPantry.addEventListener('click', () => {
+        window.location = './pantry';
+    });
+
+    welcomeDiv.append(firstP, secondP, goToPantry);
 }
 
 export function renderPlayButton() {
@@ -71,7 +75,7 @@ export function renderPlayButton() {
 
         const fermObject = createFerm(selectedFermName, fermsTemplate);
         addToActiveFerms(fermObject);
-        window.location = './game';
+        window.location = '../game';
     });
     mainEl.append(playButton);
 }
@@ -102,22 +106,19 @@ export function getImageForFerm(fermID){
 export function renderNav() {
     const header = document.querySelector('header');
     const navDiv = document.createElement('nav');
-    const storeLink = document.createElement('a');
-    const aboutLink = document.createElement('a');
+    const pantryLink = document.createElement('a');
     const userXP = document.createElement('span');
 
     const gameData = getGameData();
     const XP = gameData.xp;
 
     navDiv.className = 'menu';
-    storeLink.textContent = 'Store';
-    aboutLink.textContent = 'About';
-    storeLink.href = '../index.html';
-    aboutLink.href = '../about/index.html';
+    pantryLink.textContent = 'Back to Pantry';
+    pantryLink.href = '../pantry';
     userXP.id = 'user-xp';
     userXP.textContent = `You've got ${XP} XP`;
 
-    navDiv.append(storeLink, aboutLink, userXP);
+    navDiv.append(pantryLink, userXP);
     header.append(navDiv);
 }
 
