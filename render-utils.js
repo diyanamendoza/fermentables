@@ -71,6 +71,9 @@ export function renderPlayButton() {
     playButton.addEventListener('click', () => {
 
         const selectedFerm = document.querySelector('input:checked');
+        if (!selectedFerm) {
+            alert('Click on your fermentable and then play!');
+        }
         const selectedFermName = selectedFerm.value;
 
         const fermObject = createFerm(selectedFermName, fermsTemplate);
@@ -127,4 +130,9 @@ export function updateNavXP() {
     const XP = gameData.xp;
     const userXP = document.getElementById('user-xp');
     userXP.textContent = `You've got ${XP} XP`;
+}
+
+export function renderFooter() {
+    const footer = document.querySelector('footer');
+    footer.textContent = 'Fermentables drawn by @vietnguyenart';
 }

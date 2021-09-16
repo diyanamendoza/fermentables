@@ -31,7 +31,7 @@ toiletDiv.addEventListener('click', () => {
     const fermInfoEl = document.getElementById('ferm-info');
 
     if (newActiveArray.length === 0) {
-        fermGalleryEl.textContent = '';
+        fermGalleryEl.textContent = 'Head back to the pantry to get a fermentable!';
         fermInfoEl.textContent = '';
     } else {
         reRenderGamePage();
