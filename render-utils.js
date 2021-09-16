@@ -51,8 +51,8 @@ export function renderWelcome() {
     const firstP = document.createElement('p');
     const secondP = document.createElement('p');
     titleEl.textContent = 'Welcome!';
-    firstP.textContent = `Ready to ferment?`;
-    secondP.textContent = `Select a fermentable below and click play.`;
+    firstP.textContent = `Fermentables is a cutting edge fermentation simulator utilizing the latest technologies in Javascript and Local Storage.`;
+    secondP.textContent = `To master fermentation, one must carefully memorize the recipes of their craft. One wrong move could kill your adorable little friend. Prove your worth by completing a fermentation to unlock more recipes. For the brave, return to this page to start additional fermentations.`;
 
     welcomeDiv.append(titleEl, firstP, secondP);
 }
