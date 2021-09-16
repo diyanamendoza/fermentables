@@ -138,4 +138,3 @@ export function setFermToAdultById(fermId) {
     ferm.isAdult = true;
     updateActiveFerm(ferm);
 }
-
