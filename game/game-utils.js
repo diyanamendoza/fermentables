@@ -177,3 +177,12 @@ export function getAllActionNamesForFerms(arrayOfFerms) {
     actionNames.sort();
     return actionNames;
 }
+
+//Returns the correct action, 'FF1', or 'FF7'
+export function getCorrectOptionForFerm(fermId) {
+
+}
+
+export function getRandomOption() {
+
+}

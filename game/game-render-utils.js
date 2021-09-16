@@ -1,4 +1,4 @@
-import { fastForwardGame, getActiveFerms, getRemainingActionsCount, getFermNameById, getActiveFermById, getSelectedFermIndex, getActiveFermIndex, setSelectedFermIndex } from '../local-storage-utils.js';
+import { fastForwardGame, getActiveFerms, getRemainingActionsCount, getFermNameById, getActiveFermById, getSelectedFermIndex, getActiveFermIndex, setSelectedFermIndex, getHintsRemaining, setHintsRemaining } from '../local-storage-utils.js';
 import { getImageForFerm } from '../render-utils.js';
 import { checkAction, getAllActionNames, updateState } from './game-utils.js';
 
@@ -164,12 +164,15 @@ export function reRenderGamePage(){
     }
     const activeFermsDiv = renderActiveFerms();
     const activeFermsInfo = renderFermInfo(fermId);
+    const hintButton = renderHintButton(fermId);
     const fermGalleryEl = document.getElementById('ferm-gallery');
     const fermInfoEl = document.getElementById('ferm-info');
+    const hintContainer = document.getElementById('hint-container');
     fermGalleryEl.textContent = '';
     fermInfoEl.textContent = '';
     fermInfoEl.append(activeFermsInfo);
     fermGalleryEl.append(activeFermsDiv);
+    hintContainer.append(hintButton);
 }
 
 // Can't be tested?
@@ -190,4 +193,27 @@ export function displayActionMessage(successful, action, fermId){
         message = `You selected ${action} for ${ferm}. Wrong action!`;
     }
     displayMessage(message);
+}
+
+export function showHint(fermId) {
+    const hintsRemaining = getHintsRemaining(fermId);
+    if (hintsRemaining > 0) {
+        setHintsRemaining(hintsRemaining - 1);
+    }
+}
+
+export function renderHintButton(selectedFermId) {
+    const ferm = getActiveFermById(selectedFermId);
+    const hintButton = document.createElement('button');
+    hintButton.id = 'hint-button';
+    if (ferm) {
+        hintButton.textContent = `Give Hint (${ferm.hintsRemaining} left)`;
+        hintButton.addEventListener('click', () => {
+            console.log(ferm.id);
+            showHint(ferm.id);
+        });
+    } else {
+        hintButton.textContent = `Select Ferm.`;
+    }
+    return hintButton;
 }
