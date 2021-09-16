@@ -131,8 +131,6 @@ export function renderFermInfo(fermId) {
         if (daysLeft === 1) {
             stepsLeftString = '1 step remainins';
         }
-    } else {
-        nameString = 'Select a Fermentable';
     }
 
     const infoDiv = document.createElement('div');
