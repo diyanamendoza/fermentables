@@ -1,7 +1,7 @@
 // IMPORT MODULES under test here:
 // import { example } from '../example.js';
 
-import { addToActiveFerms, addToCompletedFerms, deactivateFerm, fastForwardGame, GAMEDATA, getActiveFermById, getActiveFerms, getGameData, setActiveFerms, setGameData } from '../local-storage-utils.js';
+import { addToActiveFerms, addToCompletedFerms, addXP, deactivateFerm, fastForwardGame, GAMEDATA, getActiveFermById, getActiveFerms, getGameData, getSelectedFermIndex, setActiveFerms, setGameData, setSelectedFermIndex } from '../local-storage-utils.js';
 
 const test = QUnit.test;
 
@@ -274,3 +274,55 @@ test('getActiveFermByID returns the expected ferm object', assert => {
     };
     assert.deepEqual(actual, expected);
 });
+
+test('addXP adds the expected amount of XP', assert => {
+    // clear local storage
+    localStorage.removeItem(GAMEDATA);
+    
+    const staticGameDataObj = {
+        xp: 0
+    };
+   
+    setGameData(staticGameDataObj);
+   
+    addXP(20);
+    const actual = getGameData().xp;
+    
+    const expected = 20;
+    assert.equal(actual, expected);
+});
+
+test('getSelectedFermIndex returns the selectedFermIndex property value from local storage', assert => {
+    // clear local storage
+    localStorage.removeItem(GAMEDATA);
+    
+    const staticGameDataObj = {
+        selectedFermIndex: 2
+    };
+   
+    setGameData(staticGameDataObj);
+   
+    const actual = getSelectedFermIndex();
+    
+    const expected = 2;
+    assert.equal(actual, expected);
+});
+
+test('setSelectedFermIndex sets the selectedFermIndex property value in local storage', assert => {
+    // clear local storage
+    localStorage.removeItem(GAMEDATA);
+    
+    const staticGameDataObj = {
+        selectedFermIndex: 2
+    };
+   
+    setGameData(staticGameDataObj);
+   
+    setSelectedFermIndex(1);
+
+    const actual = getSelectedFermIndex();
+    const expected = 1;
+
+    assert.equal(actual, expected);
+});
+
