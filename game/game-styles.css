@@ -16,12 +16,27 @@ html {
 
 h1 {
     font-size: 3em;
+    margin-bottom: 10px;
 }
 
 header {
     font-family: 'Amatic SC', cursive;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    padding-bottom: 30px;
+}
+
+nav > a {
+    color: black;
+    cursor: pointer;
 }
 
 body {
@@ -52,7 +67,7 @@ main {
 #time-buttons > button {
     border: 1px solid black;
     font-family: 'Anonymous Pro', monospace;
-    background-color: yellowgreen;
+    background-color: rgb(176, 240, 133);
     padding: 5px;
     cursor: pointer;
 }

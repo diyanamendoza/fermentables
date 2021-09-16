@@ -51,8 +51,8 @@ export function renderWelcome() {
     const firstP = document.createElement('p');
     const secondP = document.createElement('p');
     titleEl.textContent = 'Welcome!';
-    firstP.textContent = `Ready to ferment?`;
-    secondP.textContent = `Select a fermentable below and click play.`;
+    firstP.textContent = `Fermentables is a cutting edge fermentation simulator utilizing the latest technologies in Javascript and Local Storage.`;
+    secondP.textContent = `To master fermentation, one must carefully memorize the recipes of their craft. One wrong move could kill your adorable little friend. Prove your worth by completing a fermentation to unlock more recipes. For the brave, return to this page to start additional fermentations.`;
 
     welcomeDiv.append(titleEl, firstP, secondP);
 }
@@ -97,4 +97,33 @@ export function getImageForFerm(fermID){
         }
         return `../assets/${ferm.images.babyHappy}`;
     }
+}
+
+export function renderNav() {
+    const header = document.querySelector('header');
+    const navDiv = document.createElement('nav');
+    const storeLink = document.createElement('a');
+    const aboutLink = document.createElement('a');
+    const userXP = document.createElement('span');
+
+    const gameData = getGameData();
+    const XP = gameData.xp;
+
+    navDiv.className = 'menu';
+    storeLink.textContent = 'Store';
+    aboutLink.textContent = 'About';
+    storeLink.href = '../index.html';
+    aboutLink.href = '../about.html';
+    userXP.id = 'user-xp';
+    userXP.textContent = `You've got ${XP} XP`;
+
+    navDiv.append(storeLink, aboutLink, userXP);
+    header.append(navDiv);
+}
+
+export function updateNavXP() {
+    const gameData = getGameData();
+    const XP = gameData.xp;
+    const userXP = document.getElementById('user-xp');
+    userXP.textContent = `You've got ${XP} XP`;
 }

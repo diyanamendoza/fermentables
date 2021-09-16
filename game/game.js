@@ -1,6 +1,9 @@
 
 import { deactivateFerm, getActiveFerms } from '../local-storage-utils.js';
+import { renderNav } from '../render-utils.js';
 import { renderActionButtons, renderActiveFerms, renderFFOneDayButton, renderFFOneWeekButton, reRenderGamePage } from './game-render-utils.js';
+
+renderNav();
 
 const actionsDiv = renderActionButtons();
 const dayButton = renderFFOneDayButton();
@@ -14,7 +17,6 @@ actionsBarEl.append(actionsDiv);
 timeButtonsEl.append(dayButton, weekButton);
 fermGalleryEl.append(activeFermsDiv);
 
-//TODO add event listener to toilet that clears the dead
 const toiletDiv = document.getElementById('toilet');
 toiletDiv.addEventListener('click', () => {
     const activeFerms = getActiveFerms();
