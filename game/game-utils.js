@@ -3,7 +3,7 @@ import { displayMessage, reRenderGamePage } from './game-render-utils.js';
 import { addToMistakePoints, addXP, deactivateFerm, getActiveFermById, getActiveFerms, getFermNameById, setActiveFerms, updateAction, updateActiveFerm } from '../local-storage-utils.js';
 import { updateNavXP } from '../render-utils.js';
 
-// tested ✔
+// ***tested ✔
 //Determines what mood and aliveness the ferm
 //should have based on mistake points
 export function evaluateMistakePoints(fermID) {
@@ -27,21 +27,11 @@ export function evaluateMistakePoints(fermID) {
 //apply mistakePoints and update the mood, if the
 //missed action was required, isDead will be set
 //to true. 
+//*** Needs to be refactored before testing. Can't be tested with impure render functions.
 export function updateState() {
     const ferms = getActiveFerms();
     //loop through each active ferm
     for (const ferm of ferms) {
-        if (ferm.age >= ferm.endDay) {
-            if (!ferm.completed) {
-                ferm.completed = true;
-                displayMessage(ferm.successMessage + ` You gained ${ferm.maxXP} xp.`);
-                addXP(ferm.maxXP);
-                setTimeout(() => {
-                    deactivateFerm(ferm.id);
-                    reRenderGamePage();
-                }, 2000);
-            }
-        }
         //find missed actions
         for (const action of ferm.actions) {
             if (ferm.age >= action.endDay && !action.completed && !action.missed) {
@@ -61,6 +51,17 @@ export function updateState() {
                 //ensure user isn't affected by missing an action multiple times.
                 action.missed = true;
             }
+        }
+        if (ferm.age >= ferm.endDay && !ferm.isDead && !ferm.completed) {
+             
+            ferm.completed = true;
+            displayMessage(ferm.successMessage + ` You gained ${ferm.maxXP} xp.`);
+            addXP(ferm.maxXP);
+            setTimeout(() => {
+                deactivateFerm(ferm.id);
+                reRenderGamePage();
+            }, 2000);
+            
         }
         //update mood
         evaluateMistakePoints(ferm.id);
@@ -144,7 +145,7 @@ export function checkAction(actionName, fermID) {
     return result;
 }
 
-// tested ✔
+// ***tested ✔
 let fermData;
 //this is just a wrapper to make testing easier.
 export function getAllActionNames() {
@@ -159,7 +160,7 @@ export function setDataForGetAllActionNames(data) {
     fermData = data;
 }
 
-// tested ✔
+// ***tested ✔
 //Returns an array of all action names with no duplicates.
 //Currently it only pulls actions from activeFerms.
 export function getAllActionNamesForFerms(arrayOfFerms) {
