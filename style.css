@@ -15,10 +15,19 @@ html {
 
 h1 {
     font-size: 3em;
+    margin-bottom: 10px;
 }
 
 header {
     font-family: 'Amatic SC', cursive;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+a {
+    color: black;
+    cursor: pointer;
 }
 
 body {
