@@ -4,7 +4,7 @@ export function getGameData() {
     const stringGameData = localStorage.getItem(GAMEDATA);
     const parsedGameData = JSON.parse(stringGameData);
     if (!stringGameData) { return {
-        xp: 0,
+        xp: 80,
         unlockedFerms: 1,
         activeFerms: [],
         completedFerms: [],

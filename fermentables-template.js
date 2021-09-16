@@ -11,12 +11,12 @@ export const fermsTemplate = [
             adultNeutral: 'kimchi-adult-neutral.png',
             adultHappy: 'kimchi-adult-happy.png'
         },
-        instructions: `To prep, wash and cut Napa cabbage, then soak in salt water for an hour and rinse thoroughly. Mix in kimchi seasonings. Pack down in jar and remove excess air. Leave at room temperature at least one day - look for bubbles. Ferment in fridge at least two weeks. While fermenting, check if it needs to be packed down, burp the container every few days, check for taste.`,
+        instructions: `Prep the cabbage with salt. Mix in kimchi ingredients. Pack down in jar and seal tightly. Store at room temperature at least one day - look for bubbles. To ferment, store in fridge at least two weeks. While fermenting, check if it needs to be packed down, burp the container as needed, and check for taste.`,
         endDay: 20,
         age: 0,
         successMessage: 'Woohoo! You successfully fermented your baby Napa Cabbage. Check out that happy Kimchi.',
         maxXP: 20,
-        unlockXP: 0,
+        unlockXP: 40,
         mistakePoints: 0,
         isDead: false,
         mood: 'happy',
@@ -34,7 +34,7 @@ export const fermsTemplate = [
             },
             {
                 id: 2,
-                action: 'add seasoning',
+                action: 'add ingredients',
                 required: true,
                 startDay: 0,
                 endDay: 1,
@@ -45,7 +45,7 @@ export const fermsTemplate = [
             },
             {
                 id: 3,
-                action: 'pack down in jar',
+                action: 'pack down',
                 required: true,
                 startDay: 0,
                 endDay: 1,
@@ -83,7 +83,7 @@ export const fermsTemplate = [
                 startDay: 1,
                 endDay: 20,
                 mistakePoints: 5,
-                carePoints: -1,
+                carePoints: -5,
                 completed: false,
                 missed: false
             },
@@ -94,7 +94,7 @@ export const fermsTemplate = [
                 startDay: 2,
                 endDay: 20,
                 mistakePoints: 5,
-                carePoints: -1,
+                carePoints: -5,
                 completed: false,
                 missed: false
             },
@@ -117,10 +117,21 @@ export const fermsTemplate = [
                 startDay: 2,
                 endDay: 20,
                 mistakePoints: 5,
-                carePoints: -1,
+                carePoints: -5,
                 completed: false,
                 missed: false
-            }
+            },
+            {
+                id: 34,
+                action: 'pack down',
+                required: false,
+                startDay: 2,
+                endDay: 20,
+                // mistakePoints: 0,
+                carePoints: -5,
+                completed: false,
+                missed: false
+            },
         ]
     },
     {
@@ -135,7 +146,7 @@ export const fermsTemplate = [
             adultNeutral: 'mead-adult-neutral.png',
             adultHappy: 'mead-adult-happy.png'
         },
-        instructions: `To prep Wort, sanitize all of your equipment, add honey and water. Soak yeast and nutrients in warm water for 20 minutes before adding to Wort. Mix until homogenous. Add nutrients on day 2 and 3. Stir/Mix every two days for the first week. Leave at room temperature out of direct sunlight. Check for taste on 3rd, 4th, 5th, and 6th month.`,
+        instructions: `You need to prep Wort, sanitize all of your equipment, add ingredients. To improve the final quality, store in a dark cool place and add nutrients on day 2 and 3, aerate every two days for the first week, check for taste on 3rd, 4th, 5th, and 6th month.`,
         endDay: 180,
         age: 0,
         successMessage: 'Woohoo! You successfully fermented your baby Wort. Check out that happy Mead.',
@@ -157,22 +168,43 @@ export const fermsTemplate = [
                 missed: false
             },
             {
-                id: 2,
-                action: 'add yeast and nutrients',
+                id: 20,
+                action: 'sanitize',
                 required: true,
                 startDay: 0,
                 endDay: 1,
-                // points: 0,
-                completed: false,
-                missed: false
+                completed: false
             },
             {
-                id: 3,
-                action: 'mix',
+                id: 23,
+                action: 'add ingredients',
                 required: true,
                 startDay: 0,
                 endDay: 1,
-                // points: 0,
+                completed: false,
+                missed: false,
+                carePoints: 0,
+                mistakePoints: 0
+            },
+            // {
+            //     id: 2,
+            //     action: 'add yeast and nutrients',
+            //     required: true,
+            //     startDay: 0,
+            //     endDay: 1,
+            //     // points: 0,
+            //     completed: false,
+            //     missed: false
+            // },
+            
+            {
+                id: 76,
+                action: 'store in a cool dark place',
+                required: false,
+                startDay: 0,
+                endDay: 120,
+                mistakePoints: 5,
+                carePoints: -5,
                 completed: false,
                 missed: false
             },
@@ -200,7 +232,7 @@ export const fermsTemplate = [
             },
             {
                 id: 6,
-                action: 'mix',
+                action: 'aerate',
                 required: false,
                 startDay: 3,
                 endDay: 4,
@@ -211,7 +243,7 @@ export const fermsTemplate = [
             },
             {
                 id: 7,
-                action: 'mix',
+                action: 'aerate',
                 required: false,
                 startDay: 5,
                 endDay: 6,
@@ -222,7 +254,7 @@ export const fermsTemplate = [
             },
             {
                 id: 7,
-                action: 'mix',
+                action: 'aerate',
                 required: false,
                 startDay: 7,
                 endDay: 8,
@@ -300,12 +332,12 @@ export const fermsTemplate = [
         },
         isAdult: false,
         mood: 'happy',
-        instructions: `Prep the beets. Add the beets, salt and water to a jar. Let the jar ferment for 7 days. Open the jar every day and skim any scum that has formed. On the eighth day, strain the beets from your delicious salty beet water.`,
+        instructions: `Prep the beets. Add the ingredients and then water to a jar. Let the jar ferment for 7 days. Open the jar every day and skim any scum that has formed. On the eighth day, strain the beets from your delicious salty beet water.`,
         endDay: 8,
         age: 0,
         successMessage: 'Kak krasivo comrade! Your Beet Kvass is excellent!',
         maxXP: 20,
-        unlockXP: 40,
+        unlockXP: 0,
         mistakePoints: 0,
         isDead: false,
         actions: [
@@ -322,18 +354,7 @@ export const fermsTemplate = [
             },
             {
                 id: 2,
-                action: 'add beets',
-                required: true,
-                startDay: 0,
-                endDay: 1,
-                completed: false,
-                missed: false,
-                carePoints: 0,
-                mistakePoints: 0
-            },
-            {
-                id: 3,
-                action: 'add salt',
+                action: 'add ingredients',
                 required: true,
                 startDay: 0,
                 endDay: 1,
@@ -444,10 +465,10 @@ export const fermsTemplate = [
             },
             {
                 id: 12,
-                action: 'strain beets',
+                action: 'strain',
                 required: true,
-                startDay: 8,
-                endDay: 9,
+                startDay: 7,
+                endDay: 10,
                 completed: false,
                 makesAdult: true,
                 missed: false,
@@ -468,7 +489,7 @@ export const fermsTemplate = [
             adultNeutral: 'beer-adult-neutral.png',
             adultHappy: 'beer-adult-happy.png'
         },
-        instructions: `Prepare the ingredients, sanitize your equipment, brew your ingredients, and store in a dark, cool place, all on the first day. Wait roughly two weeks, then add priming sugar and bottle that shit. After this you can check for taste if you want.`,
+        instructions: `Prepare the ingredients, sanitize your equipment, brew your ingredients, and store in a dark, cool place, all on the first day. Wait roughly two weeks, then add nutrients and bottle that shit. After this you can check for taste if you want.`,
         endDay: 30,
         age: 0,
         mood: 'happy',
@@ -505,7 +526,7 @@ export const fermsTemplate = [
             },
             {
                 id: 4,
-                action: 'store in dark cool place',
+                action: 'store in a cool dark place',
                 required: true,
                 startDay: 0,
                 endDay: 1,
@@ -513,7 +534,7 @@ export const fermsTemplate = [
             },
             {
                 id: 5,
-                action: 'add priming sugar',
+                action: 'add nutrients',
                 required: true,
                 startDay: 12,
                 endDay: 17,
