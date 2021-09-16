@@ -2,7 +2,7 @@ import { fastForwardGame, getActiveFerms, getRemainingActionsCount, getFermNameB
 import { getImageForFerm } from '../render-utils.js';
 import { checkAction, getAllActionNames, updateState } from './game-utils.js';
 
-// tested ✔
+// ***tested ✔
 export function renderActionButtons() {
     const actionsDiv = document.createElement('div');
     actionsDiv.id = 'action-buttons-div';
@@ -27,7 +27,7 @@ export function renderActionButtons() {
     return actionsDiv;
 }
 
-// tested ✔
+// ***tested ✔
 export function renderFFOneDayButton() {
     const button = document.createElement('button');
     button.id = 'ff-one-day-button';
@@ -41,7 +41,7 @@ export function renderFFOneDayButton() {
     return button;
 }
 
-// tested ✔
+// ***tested ✔
 export function renderFFOneWeekButton() {
     const button = document.createElement('button');
     button.id = 'ff-one-week-button';
@@ -155,7 +155,7 @@ export function renderFermInfo(fermId) {
     return infoDiv;
 }
 
-// Update once renderFermInfo() is functioning again
+// Can't be tested?
 export function reRenderGamePage(){
     const selectedFerm = document.querySelector('input:checked');
     let fermId = undefined;
@@ -172,6 +172,7 @@ export function reRenderGamePage(){
     fermGalleryEl.append(activeFermsDiv);
 }
 
+// Can't be tested?
 export function displayMessage(message) {
     const textDisplayEl = document.getElementById('chat-box');
     const newLineEl = document.createElement('p');
