@@ -1,25 +1,298 @@
-import { fermsTemplate } from '../fermentables-template.js';
-import { evaluateMistakePoints, getAllActionNames, setDataForGetAllActionNames, updateState } from '../game/game-utils.js';
-import { GAMEDATA, getActiveFermById, getActiveFerms, getGameData, setActiveFerms, setGameData } from '../local-storage-utils.js';
+import { checkAction, evaluateMistakePoints, getAllActionNames, setDataForGetAllActionNames } from '../game/game-utils.js';
+import { GAMEDATA, getActiveFermById, getGameData, setActiveFerms, setGameData } from '../local-storage-utils.js';
 
 const test = QUnit.test;
 
-/*
-test('checkAction should add 5 mistake points if the action was already completed', assert => {
-    const testData = {
+test('checkAction works correctly', assert => {
+    //checkAction applies 5 mistake points if the action was already completed
+    let testData = {
         xp: 1,
-        unlockedFerms: 2,
         activeFerms: [{
             id: 1,
-            
-        }],
-        completedFerms: [{
-            id: 2,
-            test2: 'test2'
+            mistakePoints: 0,
+            age: 0,
+            actions: [
+                {
+                    action: 'prep',
+                    completed: true,
+                    startDay: 0,
+                    endDay: 1,
+                    id: 1,
+                    required: true
+                }
+            ]
         }]
     };
+    let expected = {
+        xp: 1,
+        activeFerms: [{
+            id: 1,
+            mistakePoints: 5,
+            age: 0,
+            mood: 'neutral',
+            actions: [
+                {
+                    id: 1,
+                    action: 'prep',
+                    completed: true,
+                    startDay: 0,
+                    endDay: 1,
+                    required: true
+                }
+            ]
+        }]
+    };
+    setGameData(testData);
+    const result1 = checkAction('prep', 1);
+    let actual = getGameData(testData);
+    assert.deepEqual(actual, expected, 'checkAction applies 5 mistake points if the action was already completed');
+
+    //checkAction applies 10 mistake points if the action doesn't exist for the ferm
+    testData = {
+        xp: 1,
+        activeFerms: [{
+            id: 1,
+            mistakePoints: 0,
+            age: 0,
+            mood: 'happy',
+            actions: [
+                {
+                    action: 'prep',
+                    completed: true,
+                    startDay: 0,
+                    endDay: 1,
+                    id: 1,
+                    required: true
+                }
+            ]
+        }]
+    };
+    expected = {
+        xp: 1,
+        activeFerms: [{
+            id: 1,
+            mistakePoints: 10,
+            age: 0,
+            mood: 'neutral',
+            actions: [
+                {
+                    id: 1,
+                    action: 'prep',
+                    completed: true,
+                    startDay: 0,
+                    endDay: 1,
+                    required: true
+                }
+            ]
+        }]
+    };
+    setGameData(testData);
+    const result2 = checkAction('burp', 1);
+    actual = getGameData(testData);
+    assert.deepEqual(actual, expected, 'checkAction applies 10 mistake points if the action doesn\'t exist for the ferm');
+
+    //checkAction applies any care points the action gives if the correct action was chosen
+    testData = {
+        xp: 1,
+        activeFerms: [{
+            id: 1,
+            mistakePoints: 0,
+            age: 0,
+            mood: 'happy',
+            actions: [
+                {
+                    action: 'prep',
+                    completed: false,
+                    startDay: 0,
+                    endDay: 1,
+                    id: 1,
+                    required: true,
+                    carePoints: -5
+                }
+            ]
+        }]
+    };
+    expected = {
+        xp: 1,
+        activeFerms: [{
+            id: 1,
+            mistakePoints: -5,
+            age: 0,
+            mood: 'happy',
+            actions: [
+                {
+                    id: 1,
+                    action: 'prep',
+                    completed: true,
+                    startDay: 0,
+                    endDay: 1,
+                    required: true,
+                    carePoints: -5
+                }
+            ]
+        }]
+    };
+    setGameData(testData);
+    const result3 = checkAction('prep', 1);
+    actual = getGameData(testData);
+    assert.deepEqual(actual, expected, 'checkAction applies any care points the action gives if the correct action was chosen');
+
+    //checkAction makes the ferm an adult if the correct action was selected and action.makesAdult=true
+    testData = {
+        xp: 1,
+        activeFerms: [{
+            id: 1,
+            mistakePoints: 0,
+            age: 0,
+            mood: 'happy',
+            isAdult: false,
+            actions: [
+                {
+                    action: 'prep',
+                    completed: false,
+                    startDay: 0,
+                    endDay: 1,
+                    id: 1,
+                    required: true,
+                    carePoints: -5,
+                    makesAdult: true
+                }
+            ]
+        }]
+    };
+    expected = {
+        xp: 1,
+        activeFerms: [{
+            id: 1,
+            mistakePoints: -5,
+            age: 0,
+            mood: 'happy',
+            isAdult: true,
+            actions: [
+                {
+                    id: 1,
+                    action: 'prep',
+                    completed: true,
+                    startDay: 0,
+                    endDay: 1,
+                    required: true,
+                    carePoints: -5,
+                    makesAdult: true
+                }
+            ]
+        }]
+    };
+    setGameData(testData);
+    checkAction('prep', 1);
+    actual = getGameData(testData);
+    assert.deepEqual(actual, expected, 'checkAction makes the ferm an adult if the correct action was selected and action.makesAdult=true');
+
+    //applies 5 mistake points if action exists but it was done on the wrong day
+    testData = {
+        xp: 1,
+        activeFerms: [{
+            id: 1,
+            mistakePoints: 0,
+            age: 1,
+            mood: 'happy',
+            isAdult: false,
+            actions: [
+                {
+                    action: 'prep',
+                    completed: false,
+                    startDay: 0,
+                    endDay: 1,
+                    id: 1,
+                    required: true,
+                    carePoints: -5,
+                    makesAdult: true
+                }
+            ]
+        }]
+    };
+    expected = {
+        xp: 1,
+        activeFerms: [{
+            id: 1,
+            mistakePoints: 5,
+            age: 1,
+            mood: 'neutral',
+            isAdult: false,
+            actions: [
+                {
+                    id: 1,
+                    action: 'prep',
+                    completed: false,
+                    startDay: 0,
+                    endDay: 1,
+                    required: true,
+                    carePoints: -5,
+                    makesAdult: true
+                }
+            ]
+        }]
+    };
+    setGameData(testData);
+    const result5 = checkAction('prep', 1);
+    actual = getGameData(testData);
+    assert.deepEqual(actual, expected, 'checkAction applies 5 mistake points if action exists but it was done on the wrong day');
+
+    //updates the mood of the ferm to reflect the new mistakePoints value
+    testData = {
+        xp: 1,
+        activeFerms: [{
+            id: 1,
+            mistakePoints: 0,
+            age: 1,
+            mood: 'happy',
+            isAdult: false,
+            actions: [
+                {
+                    action: 'prep',
+                    completed: false,
+                    startDay: 0,
+                    endDay: 1,
+                    id: 1,
+                    required: true,
+                    carePoints: -5,
+                    makesAdult: true
+                }
+            ]
+        }]
+    };
+    expected = {
+        xp: 1,
+        activeFerms: [{
+            id: 1,
+            mistakePoints: 5,
+            age: 1,
+            mood: 'neutral',
+            isAdult: false,
+            actions: [
+                {
+                    id: 1,
+                    action: 'prep',
+                    completed: false,
+                    startDay: 0,
+                    endDay: 1,
+                    required: true,
+                    carePoints: -5,
+                    makesAdult: true
+                }
+            ]
+        }]
+    };
+    setGameData(testData);
+    checkAction('prep', 1);
+    actual = getGameData(testData);
+    assert.deepEqual(actual, expected, 'checkAction updates the mood of the ferm to reflect the new mistakePoints value');
+
+    
+    assert.deepEqual(result1, false, 'checkAction returns false if the action was already completed');
+    assert.deepEqual(result2, false, 'checkAction returns false if the action doesn\'t exist for the ferm');
+    assert.deepEqual(result3, true, 'checkAction return true if the correct action was chosen');
+    assert.deepEqual(result5, false, 'checkAction return false if the action exists but it was done on the wrong day');
 });
-*/
 
 test('getAllActionNamesForFerms should return an array containing all possibles actions for the current activeFerms', assert => {
     const testData = [
