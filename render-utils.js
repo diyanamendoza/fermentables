@@ -98,3 +98,32 @@ export function getImageForFerm(fermID){
         return `../assets/${ferm.images.babyHappy}`;
     }
 }
+
+export function renderNav() {
+    const header = document.querySelector('header');
+    const navDiv = document.createElement('nav');
+    const storeLink = document.createElement('a');
+    const aboutLink = document.createElement('a');
+    const userXP = document.createElement('span');
+
+    const gameData = getGameData();
+    const XP = gameData.xp;
+
+    navDiv.className = 'menu';
+    storeLink.textContent = 'Store';
+    aboutLink.textContent = 'About';
+    storeLink.href = '../index.html';
+    aboutLink.href = '../about.html';
+    userXP.id = 'user-xp';
+    userXP.textContent = `You've got ${XP} XP`;
+
+    navDiv.append(storeLink, aboutLink, userXP);
+    header.append(navDiv);
+}
+
+export function updateNavXP() {
+    const gameData = getGameData();
+    const XP = gameData.xp;
+    const userXP = document.getElementById('user-xp');
+    userXP.textContent = `You've got ${XP} XP`;
+}
