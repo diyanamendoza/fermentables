@@ -188,6 +188,39 @@ test('evaluateMistakePoints changes mood to sad and sets isDead to true', assert
     const expected2 = true;
     const actual2 = getActiveFermById(3).isDead;
 
-    assert.equal(actual1, expected1);
-    assert.equal(actual2, expected2);
+    assert.equal(actual1, expected1, 'Mood is sad');
+    assert.equal(actual2, expected2, 'isDead is true');
 });
+
+// test('updateState ', assert => {
+   
+//     localStorage.removeItem(GAMEDATA);
+    
+//     const staticFermObj = {
+//         activeFerms: [{
+//             id: 3,
+//             mistakePoints: 21,
+//             mood: 'happy',
+//             isDead: false
+//         }],
+//         completedFerms: [],
+//         selectedFermIndex: 1,
+//         unlockedFerms: 1,
+//         xp: 0
+//     };
+    
+//     setActiveFerms(staticFermObj);
+    
+//     evaluateMistakePoints(3);
+ 
+//     const expected1 = 'sad';
+//     const actual1 = getActiveFermById(3).mood;
+
+//     const expected2 = true;
+//     const actual2 = getActiveFermById(3).isDead;
+
+//     assert.equal(actual1, expected1, 'Mood is sad');
+//     assert.equal(actual2, expected2, 'isDead is true');
+// });
+
+

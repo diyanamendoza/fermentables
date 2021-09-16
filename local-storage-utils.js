@@ -1,5 +1,6 @@
 export const GAMEDATA = 'GAMEDATA';
 
+// tested ✔
 export function getGameData() {
     const stringGameData = localStorage.getItem(GAMEDATA);
     const parsedGameData = JSON.parse(stringGameData);
@@ -14,10 +15,12 @@ export function getGameData() {
     return parsedGameData;
 }
 
+// tested ✔
 export function setGameData(currentGameData) {
     const stringGameData = JSON.stringify(currentGameData);
     localStorage.setItem(GAMEDATA, stringGameData);
 }
+
 
 export function addXP(xpToAdd) {
     const gameData = getGameData();
@@ -35,16 +38,19 @@ export function setSelectedFermIndex(index) {
     setGameData(gameData);
 }
 
+// tested ✔
 export function getActiveFerms() {
     return getGameData().activeFerms;
 }
 
+// tested ✔
 export function setActiveFerms(currentActiveFerms) {
     const currentGameData = getGameData();
     currentGameData.activeFerms = currentActiveFerms;
     setGameData(currentGameData);
 }
 
+// tested ✔
 export function addToActiveFerms(newFerm) {
     const updatedFermsArray = [...getActiveFerms(), newFerm];
     setActiveFerms(updatedFermsArray);
@@ -55,6 +61,7 @@ export function getActiveFermIndex(fermId) {
     return ferms.findIndex(ferm => ferm.id === fermId);
 }
 
+// tested ✔
 export function deactivateFerm(fermID) {
     const fermsArray = getActiveFerms();
     const fermToRemove = fermsArray.find(ferm => ferm.id === fermID);
@@ -66,6 +73,7 @@ export function deactivateFerm(fermID) {
     return fermToRemove;
 }
 
+// tested ✔
 export function addToCompletedFerms(ferm) {
     const currentGameData = getGameData();
     const completedFerms = [...currentGameData.completedFerms, ferm];
@@ -73,12 +81,14 @@ export function addToCompletedFerms(ferm) {
     setGameData(currentGameData);
 }
 
+
 export function getActionsForFermID(fermID) {
     const activeFerms = getActiveFerms();
     const { actions } = activeFerms.find(entry => entry.id === fermID);
     return actions;
 }
 
+// tested ✔
 export function getActiveFermById(fermID) {
     return getActiveFerms().find(entry => entry.id === fermID);
 } 
@@ -108,6 +118,7 @@ export function updateAction(fermID, completedAction) {
     updateActiveFerm(ferm);
 }
 
+// tested ✔
 export function fastForwardGame(daysToAdd) {
     const ferms = getActiveFerms();
     for (const ferm of ferms) {
