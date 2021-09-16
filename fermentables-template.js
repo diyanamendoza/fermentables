@@ -16,7 +16,7 @@ export const fermsTemplate = [
         age: 0,
         successMessage: 'Woohoo! You successfully fermented your baby Napa Cabbage. Check out that happy Kimchi.',
         maxXP: 20,
-        unlockXP: 0,
+        unlockXP: 40,
         mistakePoints: 0,
         isDead: false,
         mood: 'happy',
@@ -305,7 +305,7 @@ export const fermsTemplate = [
         age: 0,
         successMessage: 'Kak krasivo comrade! Your Beet Kvass is excellent!',
         maxXP: 20,
-        unlockXP: 40,
+        unlockXP: 0,
         mistakePoints: 0,
         isDead: false,
         actions: [
