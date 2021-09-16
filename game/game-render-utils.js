@@ -1,6 +1,6 @@
 import { fastForwardGame, getActiveFerms, getRemainingActionsCount, getFermNameById, getActiveFermById, getSelectedFermIndex, getActiveFermIndex, setSelectedFermIndex } from '../local-storage-utils.js';
 import { getImageForFerm } from '../render-utils.js';
-import { checkAction, getAllActionNames, updateState } from '../utils.js';
+import { checkAction, getAllActionNames, updateState } from './game-utils.js';
 
 export function renderActionButtons() {
     const actionsDiv = document.createElement('div');
@@ -55,7 +55,6 @@ export function renderFFOneWeekButton() {
 
 export function renderActiveFerms() {
     const activeFerms = getActiveFerms();
-
     const fermDiv = document.createElement('div');
 
     for (let i = 0; i < activeFerms.length; i++){
@@ -152,7 +151,6 @@ export function renderFermInfo(fermId) {
     infoDiv.append(nameHeading, ageP, daysLeftP, stepsLeftP);
     return infoDiv;
 }
-
 
 // Update once renderFermInfo() is functioning again
 export function reRenderGamePage(){
