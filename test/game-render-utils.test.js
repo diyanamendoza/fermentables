@@ -59,13 +59,13 @@ test('renderActionButtons renders a div with a button for each ferm action', ass
 });
 
 test('renderFFOneDayButton renders a fast forward one day button', assert => {
-    const expected = '<button id="ff-one-day-button" class="ff-button">Fast Forward One Day</button>';
+    const expected = '<button id="ff-one-day-button" class="ff-button">fast forward one day</button>';
     const actual = renderFFOneDayButton().outerHTML;
     assert.equal(actual, expected);
 });
 
 test('renderFFOneWeekButton renders a fast forward one day button', assert => {
-    const expected = '<button id="ff-one-week-button" class="ff-button">Fast Forward One Week</button>';
+    const expected = '<button id="ff-one-week-button" class="ff-button">fast forward one week</button>';
     const actual = renderFFOneWeekButton().outerHTML;
     assert.equal(actual, expected);
 });
