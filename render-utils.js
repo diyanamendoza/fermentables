@@ -113,7 +113,7 @@ export function renderNav() {
     storeLink.textContent = 'Store';
     aboutLink.textContent = 'About';
     storeLink.href = '../index.html';
-    aboutLink.href = '../about.html';
+    aboutLink.href = '../about/index.html';
     userXP.id = 'user-xp';
     userXP.textContent = `You've got ${XP} XP`;
 
