@@ -74,7 +74,7 @@ export function updateState() {
 //following:
 //--applies 10 mistake points if the action doesn't exist for the ferm
 //--applies 5 mistake points if the action was already completed
-//--applies any care points that the action gives if the correct action was
+//--applies any care points the action gives if the correct action was
 //    chosen
 //--makes the ferm an adult if the correct action was selected and it makes the
 //    ferm an adult

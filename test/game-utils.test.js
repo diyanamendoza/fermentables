@@ -135,7 +135,7 @@ test('checkAction works correctly', assert => {
     setGameData(testData);
     checkAction('prep', 1);
     actual = getGameData(testData);
-    assert.deepEqual(actual, expected, 'checkAction applies 10 mistake points if the action doesn\'t exist for the ferm');
+    assert.deepEqual(actual, expected, 'checkAction applies any care points that the action gives if the correct action was chosen');
 });
 
 test('getAllActionNamesForFerms should return an array containing all possibles actions for the current activeFerms', assert => {
