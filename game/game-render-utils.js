@@ -30,7 +30,7 @@ export function renderFFOneDayButton() {
     const button = document.createElement('button');
     button.id = 'ff-one-day-button';
     button.className = 'ff-button';
-    button.textContent = 'Fast Forward One Day';
+    button.textContent = 'fast forward one day';
     button.addEventListener('click', () => {
         fastForwardGame(1);
         updateState();
@@ -43,7 +43,7 @@ export function renderFFOneWeekButton() {
     const button = document.createElement('button');
     button.id = 'ff-one-week-button';
     button.className = 'ff-button';
-    button.textContent = 'Fast Forward One Week';
+    button.textContent = 'fast forward one week';
     button.addEventListener('click', () => {
         fastForwardGame(7);
         updateState();
