@@ -1,6 +1,6 @@
 import { fermsTemplate } from '../fermentables-template.js';
 import { displayMessage, reRenderGamePage } from './game-render-utils.js';
-import { addToMistakePoints, addXP, deactivateFerm, getActionsForFermID, getActiveFermById, getActiveFerms, getFermNameById, setActiveFerms, updateAction, updateActiveFerm } from '../local-storage-utils.js';
+import { addToMistakePoints, addXP, deactivateFerm, getActionsForFermID, getActiveFermById, getActiveFerms, getFermNameById, updateAction, updateActiveFerm } from '../local-storage-utils.js';
 import { updateNavXP } from '../render-utils.js';
 
 // ***tested ✔
@@ -64,16 +64,10 @@ export function updateState() {
             reRenderGamePage();
             // remove ferm from active ferms
             deactivateFerm(ferm.id);
-            // wait 1.25s for animation to complete before rerendering active ferms(without complete).
-            setTimeout(() => {
-                reRenderGamePage();
-            }, 1250);
         }
         //update mood
         evaluateMistakePoints(ferm.id);
     }
-    // save
-    setActiveFerms(ferms);
     // rerender nav to show updated XP
     updateNavXP();
 }
