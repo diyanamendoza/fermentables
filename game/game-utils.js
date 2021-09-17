@@ -8,17 +8,19 @@ import { updateNavXP } from '../render-utils.js';
 //should have based on mistake points
 export function evaluateMistakePoints(fermID) {
     const ferm = getActiveFermById(fermID);
-    let mood = 'happy';
-    if (ferm.mistakePoints > 0 && ferm.mistakePoints <= 10) {
-        mood = 'neutral';
-    } else if (ferm.mistakePoints > 10 && ferm.mistakePoints <= 20) {
-        mood = 'sad';
-    } else if (ferm.mistakePoints > 20) {
-        mood = 'sad';
-        ferm.isDead = true;
+    if (ferm) {
+        let mood = 'happy';
+        if (ferm.mistakePoints > 0 && ferm.mistakePoints <= 10) {
+            mood = 'neutral';
+        } else if (ferm.mistakePoints > 10 && ferm.mistakePoints <= 20) {
+            mood = 'sad';
+        } else if (ferm.mistakePoints > 20) {
+            mood = 'sad';
+            ferm.isDead = true;
+        }
+        ferm.mood = mood;
+        updateActiveFerm(ferm);
     }
-    ferm.mood = mood;
-    updateActiveFerm(ferm);
 }
 
 //This function should be called after a fast

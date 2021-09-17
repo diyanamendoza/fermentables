@@ -1,6 +1,261 @@
 export const fermsTemplate = [
     {
         id: 1,
+        baby: 'Beet',
+        adult: 'Beet Kvass',
+        images: {
+            babySad: 'beet-baby-sad.png',
+            babyNeutral: 'beet-baby-neutral.png',
+            babyHappy: 'beet-baby-happy.png',
+            adultSad: 'kvass-adult-sad.png',
+            adultNeutral: 'kvass-adult-neutral.png',
+            adultHappy: 'kvass-adult-happy.png'
+        },
+        isAdult: false,
+        mood: 'happy',
+        instructions: `Prep the beets. Add the ingredients and then water to a jar. Let the jar ferment for 7 days. Open the jar every day and skim any scum that has formed. On the eighth day, strain the beets from your delicious salty beet water.`,
+        endDay: 10,
+        age: 0,
+        successMessage: 'Kak krasivo comrade! Your Beet Kvass is excellent!',
+        rewardXP: 20,
+        unlockXP: 0,
+        mistakePoints: 0,
+        isDead: false,
+        hintsRemaining: 3,
+        actions: [
+            {
+                id: 1,
+                action: 'prep',
+                required: true,
+                startDay: 0,
+                endDay: 1,
+                completed: false,
+                missed: false,
+                carePoints: 0,
+                mistakePoints: 0,
+                sequence: 1
+            },
+            {
+                id: 2,
+                action: 'add ingredients',
+                required: true,
+                startDay: 0,
+                endDay: 1,
+                completed: false,
+                missed: false,
+                carePoints: 0,
+                mistakePoints: 0,
+                sequence: 2
+            },
+            {
+                id: 4,
+                action: 'add water',
+                required: true,
+                startDay: 0,
+                endDay: 1,
+                completed: false,
+                missed: false,
+                carePoints: 0,
+                mistakePoints: 0,
+                sequence: 3
+            },
+            {
+                id: 5,
+                action: 'skim scum',
+                required: false,
+                startDay: 1,
+                endDay: 2,
+                completed: false,
+                missed: false,
+                carePoints: 0,
+                mistakePoints: 1
+            },
+            {
+                //fully updated example
+                id: 52,
+                action: 'give a loving kiss',
+                required: false,
+                startDay: 1,
+                endDay: 9,
+                completed: false,
+                missed: false,
+                carePoints: -2, //negative is good
+                mistakePoints: 0
+            },
+            {
+                id: 6,
+                action: 'skim scum',
+                required: false,
+                startDay: 2,
+                endDay: 3,
+                completed: false,
+                missed: false,
+                carePoints: 0,
+                mistakePoints: 5
+            },
+            {
+                id: 7,
+                action: 'skim scum',
+                required: false,
+                startDay: 3,
+                endDay: 4,
+                completed: false,
+                missed: false,
+                carePoints: 0,
+                mistakePoints: 5
+            },
+            {
+                id: 8,
+                action: 'skim scum',
+                required: false,
+                startDay: 4,
+                endDay: 5,
+                completed: false,
+                missed: false,
+                carePoints: 0,
+                mistakePoints: 5
+            },
+            {
+                id: 9,
+                action: 'skim scum',
+                required: false,
+                startDay: 5,
+                endDay: 6,
+                completed: false,
+                missed: false,
+                carePoints: 0,
+                mistakePoints: 5
+            },
+            {
+                id: 10,
+                action: 'skim scum',
+                required: false,
+                startDay: 6,
+                endDay: 7,
+                completed: false,
+                missed: false,
+                carePoints: 0,
+                mistakePoints: 5
+            },
+            {
+                id: 11,
+                action: 'skim scum',
+                required: false,
+                startDay: 7,
+                endDay: 8,
+                completed: false,
+                missed: false,
+                carePoints: 0,
+                mistakePoints: 5
+            },
+            {
+                id: 12,
+                action: 'strain',
+                required: true,
+                startDay: 7,
+                endDay: 10,
+                completed: false,
+                makesAdult: true,
+                missed: false,
+                carePoints: 0,
+                mistakePoints: 0,
+                sequence: 4
+            }
+        ]
+    },
+    {
+        id: 2,
+        baby: 'Hops',
+        adult: 'Ale',
+        images: {
+            babySad: 'hop-baby-sad.png',
+            babyNeutral: 'hop-baby-neutral.png',
+            babyHappy: 'hop-baby-happy.png',
+            adultSad: 'beer-adult-sad.png',
+            adultNeutral: 'beer-adult-neutral.png',
+            adultHappy: 'beer-adult-happy.png'
+        },
+        instructions: `Prepare the ingredients, sanitize your equipment, brew your ingredients, and store in a dark, cool place, all on the first day. Wait roughly two weeks, then add nutrients and bottle that shit. After this you can check for taste if you want.`,
+        endDay: 30,
+        age: 0,
+        mood: 'happy',
+        isAdult: false,
+        successMessage: `That's a tasty brew! You should consider opening a microbrewery.`,
+        rewardXP: 20,
+        unlockXP: 20,
+        mistakePoints: 0,
+        isDead: false,
+        hintsRemaining: 3,
+        actions: [
+            {
+                id: 1,
+                action: 'prep',
+                required: true,
+                startDay: 0,
+                endDay: 1,
+                completed: false,
+                sequence: 1
+            },
+            {
+                id: 2,
+                action: 'sanitize',
+                required: true,
+                startDay: 0,
+                endDay: 1,
+                completed: false,
+                sequence: 2
+            },
+            {
+                id: 3,
+                action: 'brew',
+                required: true,
+                startDay: 0,
+                endDay: 1,
+                completed: false,
+                sequence: 3
+            },
+            {
+                id: 4,
+                action: 'store in a cool dark place',
+                required: true,
+                startDay: 0,
+                endDay: 1,
+                completed: false,
+                sequence: 4
+            },
+            {
+                id: 5,
+                action: 'add nutrients',
+                required: true,
+                startDay: 12,
+                endDay: 17,
+                completed: false,
+                sequence: 5
+            },
+            {
+                id: 6,
+                action: 'bottle that shit',
+                required: true,
+                startDay: 12,
+                endDay: 17,
+                completed: false,
+                makesAdult: true,
+                sequence: 6
+            },
+            {
+                id: 7,
+                action: 'check for taste',
+                required: false,
+                startDay: 12,
+                endDay: 30,
+                mistakePoints: 0,
+                carePoints: -5,
+                missed: false
+            }
+        ]
+    },
+    {
+        id: 3,
         baby: 'Napa Cabbage',
         adult: 'Kimchi',
         images: {
@@ -331,260 +586,5 @@ export const fermsTemplate = [
                 missed: false
             },
         ]
-    },
-    {
-        id: 4,
-        baby: 'Beet',
-        adult: 'Beet Kvass',
-        images: {
-            babySad: 'beet-baby-sad.png',
-            babyNeutral: 'beet-baby-neutral.png',
-            babyHappy: 'beet-baby-happy.png',
-            adultSad: 'kvass-adult-sad.png',
-            adultNeutral: 'kvass-adult-neutral.png',
-            adultHappy: 'kvass-adult-happy.png'
-        },
-        isAdult: false,
-        mood: 'happy',
-        instructions: `Prep the beets. Add the ingredients and then water to a jar. Let the jar ferment for 7 days. Open the jar every day and skim any scum that has formed. On the eighth day, strain the beets from your delicious salty beet water.`,
-        endDay: 10,
-        age: 0,
-        successMessage: 'Kak krasivo comrade! Your Beet Kvass is excellent!',
-        rewardXP: 20,
-        unlockXP: 0,
-        mistakePoints: 0,
-        isDead: false,
-        hintsRemaining: 3,
-        actions: [
-            {
-                id: 1,
-                action: 'prep',
-                required: true,
-                startDay: 0,
-                endDay: 1,
-                completed: false,
-                missed: false,
-                carePoints: 0,
-                mistakePoints: 0,
-                sequence: 1
-            },
-            {
-                id: 2,
-                action: 'add ingredients',
-                required: true,
-                startDay: 0,
-                endDay: 1,
-                completed: false,
-                missed: false,
-                carePoints: 0,
-                mistakePoints: 0,
-                sequence: 2
-            },
-            {
-                id: 4,
-                action: 'add water',
-                required: true,
-                startDay: 0,
-                endDay: 1,
-                completed: false,
-                missed: false,
-                carePoints: 0,
-                mistakePoints: 0,
-                sequence: 3
-            },
-            {
-                id: 5,
-                action: 'skim scum',
-                required: false,
-                startDay: 1,
-                endDay: 2,
-                completed: false,
-                missed: false,
-                carePoints: 0,
-                mistakePoints: 1
-            },
-            {
-                //fully updated example
-                id: 52,
-                action: 'give a loving kiss',
-                required: false,
-                startDay: 1,
-                endDay: 9,
-                completed: false,
-                missed: false,
-                carePoints: -2, //negative is good
-                mistakePoints: 0
-            },
-            {
-                id: 6,
-                action: 'skim scum',
-                required: false,
-                startDay: 2,
-                endDay: 3,
-                completed: false,
-                missed: false,
-                carePoints: 0,
-                mistakePoints: 5
-            },
-            {
-                id: 7,
-                action: 'skim scum',
-                required: false,
-                startDay: 3,
-                endDay: 4,
-                completed: false,
-                missed: false,
-                carePoints: 0,
-                mistakePoints: 5
-            },
-            {
-                id: 8,
-                action: 'skim scum',
-                required: false,
-                startDay: 4,
-                endDay: 5,
-                completed: false,
-                missed: false,
-                carePoints: 0,
-                mistakePoints: 5
-            },
-            {
-                id: 9,
-                action: 'skim scum',
-                required: false,
-                startDay: 5,
-                endDay: 6,
-                completed: false,
-                missed: false,
-                carePoints: 0,
-                mistakePoints: 5
-            },
-            {
-                id: 10,
-                action: 'skim scum',
-                required: false,
-                startDay: 6,
-                endDay: 7,
-                completed: false,
-                missed: false,
-                carePoints: 0,
-                mistakePoints: 5
-            },
-            {
-                id: 11,
-                action: 'skim scum',
-                required: false,
-                startDay: 7,
-                endDay: 8,
-                completed: false,
-                missed: false,
-                carePoints: 0,
-                mistakePoints: 5
-            },
-            {
-                id: 12,
-                action: 'strain',
-                required: true,
-                startDay: 7,
-                endDay: 10,
-                completed: false,
-                makesAdult: true,
-                missed: false,
-                carePoints: 0,
-                mistakePoints: 0,
-                sequence: 4
-            }
-        ]
-    },
-    {
-        id: 3,
-        baby: 'Hops',
-        adult: 'Ale',
-        images: {
-            babySad: 'hop-baby-sad.png',
-            babyNeutral: 'hop-baby-neutral.png',
-            babyHappy: 'hop-baby-happy.png',
-            adultSad: 'beer-adult-sad.png',
-            adultNeutral: 'beer-adult-neutral.png',
-            adultHappy: 'beer-adult-happy.png'
-        },
-        instructions: `Prepare the ingredients, sanitize your equipment, brew your ingredients, and store in a dark, cool place, all on the first day. Wait roughly two weeks, then add nutrients and bottle that shit. After this you can check for taste if you want.`,
-        endDay: 30,
-        age: 0,
-        mood: 'happy',
-        isAdult: false,
-        successMessage: `That's a tasty brew! You should consider opening a microbrewery.`,
-        rewardXP: 20,
-        unlockXP: 20,
-        mistakePoints: 0,
-        isDead: false,
-        hintsRemaining: 3,
-        actions: [
-            {
-                id: 1,
-                action: 'prep',
-                required: true,
-                startDay: 0,
-                endDay: 1,
-                completed: false,
-                sequence: 1
-            },
-            {
-                id: 2,
-                action: 'sanitize',
-                required: true,
-                startDay: 0,
-                endDay: 1,
-                completed: false,
-                sequence: 2
-            },
-            {
-                id: 3,
-                action: 'brew',
-                required: true,
-                startDay: 0,
-                endDay: 1,
-                completed: false,
-                sequence: 3
-            },
-            {
-                id: 4,
-                action: 'store in a cool dark place',
-                required: true,
-                startDay: 0,
-                endDay: 1,
-                completed: false,
-                sequence: 4
-            },
-            {
-                id: 5,
-                action: 'add nutrients',
-                required: true,
-                startDay: 12,
-                endDay: 17,
-                completed: false,
-                sequence: 5
-            },
-            {
-                id: 6,
-                action: 'bottle that shit',
-                required: true,
-                startDay: 12,
-                endDay: 17,
-                completed: false,
-                makesAdult: true,
-                sequence: 6
-            },
-            {
-                id: 7,
-                action: 'check for taste',
-                required: false,
-                startDay: 12,
-                endDay: 30,
-                mistakePoints: 0,
-                carePoints: -5,
-                missed: false
-            }
-        ]
-    }
+    }    
 ];

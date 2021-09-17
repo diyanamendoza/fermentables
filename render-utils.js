@@ -11,6 +11,7 @@ export function renderFerms(fermsTemplate) {
     const XP = gameData.xp;
 
     for (let ferm of fermsTemplate) {
+        console.log(ferm.baby);
         const labelEl = document.createElement('label');
         const inputEl = document.createElement('input');
         const imageEl = document.createElement('img');
