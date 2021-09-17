@@ -153,3 +153,14 @@ export function setFermToAdultById(fermId) {
     ferm.isAdult = true;
     updateActiveFerm(ferm);
 }
+
+export function getHintsRemaining(fermId) {
+    const ferm = getActiveFermById(fermId);
+    return ferm.hintsRemaining;
+}
+
+export function setHintsRemaining(fermId, newHintsRemaining) {
+    const ferm = getActiveFermById(fermId);
+    ferm.hintsRemaining = newHintsRemaining;
+    updateActiveFerm(ferm);
+}

@@ -20,6 +20,7 @@ export const fermsTemplate = [
         mistakePoints: 0,
         isDead: false,
         mood: 'happy',
+        hintsRemaining: 3,
         actions: [
             {
                 id: 1,
@@ -162,6 +163,7 @@ export const fermsTemplate = [
         mood: 'happy',
         isAdult: false,
         isDead: false,
+        hintsRemaining: 3,
         actions: [
             {
                 id: 1,
@@ -352,6 +354,7 @@ export const fermsTemplate = [
         unlockXP: 0,
         mistakePoints: 0,
         isDead: false,
+        hintsRemaining: 3,
         actions: [
             {
                 id: 1,
@@ -515,6 +518,7 @@ export const fermsTemplate = [
         unlockXP: 20,
         mistakePoints: 0,
         isDead: false,
+        hintsRemaining: 3,
         actions: [
             {
                 id: 1,
