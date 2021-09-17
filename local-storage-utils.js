@@ -135,7 +135,7 @@ export function fastForwardGame(daysToAdd) {
     setActiveFerms(ferms);
 }
 
-// Needs to be tested
+// ***tested ✔
 export function getRemainingActionsCount(fermId) {
     const ferm = getActiveFermById(fermId);
     let count = 0;
