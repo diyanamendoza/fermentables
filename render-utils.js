@@ -112,6 +112,7 @@ export function renderNav() {
     const homeLink = document.createElement('a');
     const aboutLink = document.createElement('a');
     const pantryLink = document.createElement('a');
+    const playLink = document.createElement('a');
     const userXP = document.createElement('span');
 
     const gameData = getGameData();
@@ -124,10 +125,12 @@ export function renderNav() {
     homeLink.href = 'https://diyanamendoza.github.io/fermentables/index.html';
     aboutLink.textContent = 'About';
     aboutLink.href = 'https://diyanamendoza.github.io/fermentables/about/index.html';
+    playLink.textContent = 'Play';
+    playLink.href = 'https://diyanamendoza.github.io/fermentables/game/';
     userXP.id = 'user-xp';
     userXP.textContent = `You've got ${XP} XP`;
 
-    navDiv.append(homeLink, aboutLink, pantryLink, userXP);
+    navDiv.append(homeLink, aboutLink, pantryLink, playLink, userXP);
     header.prepend(navDiv);
 }
 
