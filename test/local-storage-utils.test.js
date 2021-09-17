@@ -1,7 +1,7 @@
 // IMPORT MODULES under test here:
 // import { example } from '../example.js';
 
-import { addToActiveFerms, addToCompletedFerms, addToMistakePoints, addXP, deactivateFerm, fastForwardGame, GAMEDATA, getActionsForFermID, getActiveFermById, getActiveFerms, getFermNameById, getGameData, getRemainingActionsCount, getSelectedFermIndex, setActiveFerms, setGameData, setSelectedFermIndex, updateAction, updateActiveFerm } from '../local-storage-utils.js';
+import { addToActiveFerms, addToCompletedFerms, addToMistakePoints, addXP, deactivateFerm, fastForwardGame, GAMEDATA, getActionsForFermID, getActiveFermById, getActiveFerms, getFermNameById, getGameData, getRemainingActionsCount, getSelectedFermIndex, setActiveFerms, setFermToAdultById, setGameData, setSelectedFermIndex, updateAction, updateActiveFerm } from '../local-storage-utils.js';
 
 const test = QUnit.test;
 
@@ -457,5 +457,23 @@ test('getRemainingActionsCount returns the correct number of actions from local 
     assert.equal(actual, expected, 'returns baby name');
 });
 
+test('setFermToAdultByID updates the correct ferms isAdult property value in local storage', assert => {
+    // clear local storage
+    localStorage.removeItem(GAMEDATA);
+    
+    const staticGameDataObj = {
+        activeFerms: [
+            { id: 1, isAdult: false },
+            { id: 2, isAdult: false } 
+        ]
+    };
+   
+    setGameData(staticGameDataObj);
 
+    setFermToAdultById(2);
+    
+    const expected = true;
+    const actual = getActiveFermById(2).isAdult;
+    assert.equal(actual, expected);
+});
 

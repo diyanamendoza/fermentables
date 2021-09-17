@@ -153,7 +153,7 @@ export function getFermNameById(fermId) {
     return ferm.isAdult ? ferm.adult : ferm.baby;
 }
 
-// Needs to be tested
+// ***tested ✔
 export function setFermToAdultById(fermId) {
     const ferm = getActiveFermById(fermId);
     ferm.isAdult = true;
