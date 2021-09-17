@@ -54,13 +54,18 @@ export function updateState() {
         }
         if (ferm.age >= ferm.endDay && !ferm.isDead && !ferm.completed) {
             ferm.completed = true;
-            displayMessage(ferm.successMessage + ` You gained ${ferm.maxXP} xp.`);
-            addXP(ferm.maxXP);
+            displayMessage(ferm.successMessage + ` You gained ${ferm.rewardXP} xp.`);
+            addXP(ferm.rewardXP);
+            // update active ferms after completing.
+            updateActiveFerm(ferm);
+            // rerender page to catch completed ferm and animate
             reRenderGamePage();
+            // remove ferm from active ferms
+            deactivateFerm(ferm.id);
+            // wait 1.25s for animation to complete before rerendering page without completed ferms
             setTimeout(() => {
-                deactivateFerm(ferm.id);
                 reRenderGamePage();
-            }, 2000);
+            }, 1250);
         }
         //update mood
         evaluateMistakePoints(ferm.id);

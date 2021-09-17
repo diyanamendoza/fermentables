@@ -70,7 +70,7 @@ export function renderActiveFerms() {
         const elP = document.createElement('p');
         
         //add xp-text class to p tag styling and animation
-        elP.classList.add('xp-text');
+        elP.classList.add('xp-text-start');
 
         fermImg.src = getImageForFerm(ferm.id);
         fermImg.classList.add('ferm-img');
@@ -90,11 +90,10 @@ export function renderActiveFerms() {
 
         // If ferm is completed, run xp-gain animation
         if (ferm.completed === true){
-            fermInput.display = 'none';
-            elP.display = 'block';
-            elP.classList.add('xp-gain');
+            fermImg.style.display = 'none';
+            elP.textContent = `+${ferm.rewardXP}`;
+            elP.className = 'gain-xp';
         }
-        // stretchy AF: if complete, add a complete to classlist
 
         fermInput.addEventListener('click', () => {
             const selectedFerm = document.querySelector('input:checked');
