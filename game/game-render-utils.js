@@ -71,13 +71,29 @@ export function renderFFOneWeekButton() {
     return button;
 }
 
+// Needs to be tested
+export function renderFFOneMonthButton() {
+    const button = document.createElement('button');
+    button.id = 'ff-one-month-button';
+    button.className = 'ff-button';
+    button.textContent = 'fast forward one month';
+    button.addEventListener('click', () => {
+        fastForwardGame(30);
+        updateState();
+        reRenderGamePage();
+        runFFAnimation();
+    });
+    return button;
+}
+
 // Can't be tested?
 export function reRenderFFButtons() {
     const dayButton = renderFFOneDayButton();
     const weekButton = renderFFOneWeekButton();
+    const monthButton = renderFFOneMonthButton();
     const timeButtonsEl = document.getElementById('time-buttons');
     timeButtonsEl.textContent = '';
-    timeButtonsEl.append(dayButton, weekButton);
+    timeButtonsEl.append(dayButton, weekButton, monthButton);
 }
 
 // Needs to be tested
