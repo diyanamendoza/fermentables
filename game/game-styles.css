@@ -184,6 +184,7 @@ input[type="radio"]:checked + img {
 }
 
 .gain-xp{
+    font-family: 'Amatic SC', sans-serif;
     font-size: 2rem;
     font-weight: bold;
     color: rgb(19, 170, 19);
@@ -214,7 +215,7 @@ input[type="radio"]:checked + img {
     }
 }
 /* ➕ */
-
+/*MICHAEL*/
 .bounce {
     animation: fly 3s infinite;
 }
