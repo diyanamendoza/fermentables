@@ -186,7 +186,7 @@ export function renderFermInfo(fermId) {
 
         const stepsLeft = getRemainingActionsCount(fermId);
         stepsLeftString = `${stepsLeft} steps remaining`;
-        if (daysLeft === 1) {
+        if (stepsLeft === 1) {
             stepsLeftString = '1 step remaining';
         }
     }
