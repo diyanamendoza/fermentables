@@ -202,9 +202,10 @@ input[type="radio"]:checked + img {
 /* For img */
 .anim-ff-img-start{
     position: absolute;
-    width: 45vw;
-    transform: translateY(-35vh) translateX(3vw);
+    width: 50vw;
+    transform: translateY(-35vh);
     z-index: -1;
+    left: 25%;
 }
 
 /* For img */
@@ -222,25 +223,25 @@ input[type="radio"]:checked + img {
 
 @keyframes drop-moon{
     0%{
-       transform: translateY(-35vh) translateX(3vw);
+       transform: translateY(-35vh);
     }
     10%{
-        transform: translateY(-2vh) translateX(3vw);
+        transform: translateY(-2vh);
     }
     22%{
-        transform: translateY(-3vh) translateX(3vw);
+        transform: translateY(-3vh);
     }
     35%{
-        transform: translateY(-1vh) translateX(3vw);
+        transform: translateY(-1vh);
     }
     55%{
-        transform: translateY(-1.5vh) translateX(3vw);
+        transform: translateY(-1.5vh);
     }
     90%{
-        transform: translateY(-1vh) translateX(3vw);
+        transform: translateY(-1vh);
     } 
     100%{
-        transform: translateY(-35vh) translateX(3vw);
+        transform: translateY(-35vh);
     }
 
 }
@@ -290,6 +291,12 @@ input[type="radio"]:checked + img {
     #ferm-gallery {
         max-height: 250px;
         overflow: scroll;
+    }
+
+    /* FF animation IMG: sets size to 70% of view width and displaces left 15%(centers) */
+    .anim-ff-img-start{
+        width: 70vw;
+        left: 15%;
     }
 
     input + img {
