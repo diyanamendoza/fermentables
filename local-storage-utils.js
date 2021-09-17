@@ -97,7 +97,7 @@ export function getActiveFermById(fermID) {
     return getActiveFerms().find(entry => entry.id === fermID);
 } 
 
-// Needs to be tested
+// ***tested ✔
 export function addToMistakePoints(fermID, pointsToAdd) {
     const ferm = getActiveFermById(fermID);
     ferm.mistakePoints += pointsToAdd;
