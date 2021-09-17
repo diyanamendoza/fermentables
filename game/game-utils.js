@@ -29,7 +29,7 @@ export function evaluateMistakePoints(fermID) {
 //apply mistakePoints and update the mood, if the
 //missed action was required, isDead will be set
 //to true. 
-//*** Needs to be refactored before testing. Can't be tested with impure render functions.
+//DYLAN
 export function updateState() {
     const ferms = getActiveFerms();
     //loop through each active ferm
@@ -90,6 +90,7 @@ export function updateState() {
 //--applies 5 mistake points if action exists but it was done on the wrong day
 //--updates the mood of the ferm to reflect the new mistakePoints value
 //--returns true if it was a correct action, returns false if it wasn't
+//DYLAN
 export function checkAction(actionName, fermID) {
     // get the actions for the ferm
     const ferm = getActiveFermById(fermID);

@@ -19,7 +19,7 @@ h1 {
 }
 
 header {
-    font-family: 'Amatic SC', sans serif;
+    font-family: 'Amatic SC', sans-serf;
     display: flex;
     flex-direction: column;
     justify-content: center;
