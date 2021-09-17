@@ -180,3 +180,27 @@ export function getAllActionNamesForFerms(arrayOfFerms) {
     actionNames.sort();
     return actionNames;
 }
+
+
+export function runFFAnimation(){
+    const htmlEls = document.getElementsByTagName('html');
+    const htmlEl = htmlEls[0];
+    const bodyEls = document.getElementsByTagName('body');
+    const bodyEl = bodyEls[0];
+
+    // To prevent rendering extra imgs: could check if html classlist already contains anim-ff-color before attempting to render another img.
+    const imgEl = document.createElement('img');
+
+    imgEl.classList.add('anim-ff-img-start');
+    htmlEl.classList.add('anim-ff-color');
+    imgEl.classList.add('anim-ff-drop-moon');
+
+    imgEl.src = '../assets/moon-and-stars-transparent-5.png';
+
+    bodyEl.prepend(imgEl);
+
+    setTimeout(() => {
+        bodyEl.removeChild(imgEl);
+        htmlEl.classList.remove('anim-ff-color');
+    }, 2500);
+}

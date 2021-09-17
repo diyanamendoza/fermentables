@@ -198,13 +198,69 @@ input[type="radio"]:checked + img {
 }
 
 
+/* 🌛 FF-Animation ⭐ */
+/* For img */
+.anim-ff-img-start{
+    position: absolute;
+    width: 45vw;
+    transform: translateY(-35vh) translateX(3vw);
+    z-index: -1;
+}
+
+/* For img */
+.anim-ff-drop-moon{
+    animation: drop-moon 1.5s linear forwards;
+    animation-delay: .25s;
+}
+
+/* For body */
+.anim-ff-color{
+    animation: fade-to-night-and-back 2s linear;
+    z-index: -2
+}
 
 
+@keyframes drop-moon{
+    0%{
+       transform: translateY(-35vh) translateX(3vw);
+    }
+    10%{
+        transform: translateY(-2vh) translateX(3vw);
+    }
+    22%{
+        transform: translateY(-3vh) translateX(3vw);
+    }
+    35%{
+        transform: translateY(-1vh) translateX(3vw);
+    }
+    55%{
+        transform: translateY(-1.5vh) translateX(3vw);
+    }
+    90%{
+        transform: translateY(-1vh) translateX(3vw);
+    } 
+    100%{
+        transform: translateY(-35vh) translateX(3vw);
+    }
+
+}
 
 
-
-
-
+@keyframes fade-to-night-and-back {
+    25%{
+       background-color: rgba(10, 10, 50, 0.5);
+    }
+    50%{
+       background-color: rgb(5, 5, 20);
+    }
+    75%{
+       background-color: rgba(10, 10, 50, 0.5);
+    }
+    100%{
+       background-color: white;
+    }
+}
+/* 🌛 ... ⭐ */
 
 
 
