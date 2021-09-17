@@ -134,13 +134,13 @@ export function renderNav() {
         navDiv.append(homeLink, aboutLink, pantryLink, userXP);
     }
     else if (window.location.href.indexOf('about') > -1) {
-        navDiv.append(homeLink, pantryLink, playLink, userXP);
+        navDiv.append(homeLink, pantryLink, playLink);
     }
     else if (window.location.href.indexOf('pantry') > -1) {
         navDiv.append(homeLink, aboutLink, playLink, userXP);
     }
     else {
-        navDiv.append(aboutLink, pantryLink, playLink, userXP);
+        navDiv.append(aboutLink, pantryLink, playLink);
     }
     header.prepend(navDiv);
 }
