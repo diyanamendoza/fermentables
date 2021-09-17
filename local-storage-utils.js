@@ -147,7 +147,7 @@ export function getRemainingActionsCount(fermId) {
     return count;
 }
 
-// Needs to be tested
+// ***tested ✔
 export function getFermNameById(fermId) {
     const ferm = getActiveFermById(fermId);
     return ferm.isAdult ? ferm.adult : ferm.baby;
