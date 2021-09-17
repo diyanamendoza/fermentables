@@ -56,13 +56,13 @@ export function updateState() {
             ferm.completed = true;
             displayMessage(ferm.successMessage + ` You gained ${ferm.rewardXP} xp.`);
             addXP(ferm.rewardXP);
-            // update active ferms after completing.
+            // Update active ferms after completing on line 56.
             updateActiveFerm(ferm);
-            // rerender page to catch completed ferm and animate
+            // Rerender active ferms to catch completed ferm and animate.
             reRenderGamePage();
             // remove ferm from active ferms
             deactivateFerm(ferm.id);
-            // wait 1.25s for animation to complete before rerendering page without completed ferms
+            // wait 1.25s for animation to complete before rerendering active ferms(without complete).
             setTimeout(() => {
                 reRenderGamePage();
             }, 1250);
