@@ -283,8 +283,6 @@ export const fermsTemplate = [
                 required: true,
                 startDay: 0,
                 endDay: 1,
-                // mistakePoints: 0,
-                // carePoints: 0,
                 completed: false,
                 missed: false,
                 sequence: 1
@@ -295,8 +293,6 @@ export const fermsTemplate = [
                 required: true,
                 startDay: 0,
                 endDay: 1,
-                // mistakePoints: 0,
-                // carePoints: 0,
                 completed: false,
                 missed: false,
                 sequence: 2
@@ -307,8 +303,6 @@ export const fermsTemplate = [
                 required: true,
                 startDay: 0,
                 endDay: 1,
-                // mistakePoints: 0,
-                // carePoints: 0,
                 completed: false,
                 missed: false,
                 sequence: 3
@@ -319,8 +313,6 @@ export const fermsTemplate = [
                 required: true,
                 startDay: 0,
                 endDay: 1,
-                // mistakePoints: 0,
-                // carePoints: -1,
                 completed: false,
                 missed: false,
                 sequence: 4
@@ -331,8 +323,6 @@ export const fermsTemplate = [
                 required: true,
                 startDay: 0,
                 endDay: 6,
-                // mistakePoints: 0,
-                // carePoints: -1,
                 completed: false,
                 missed: false,
                 sequence: 5
@@ -365,8 +355,6 @@ export const fermsTemplate = [
                 required: true,
                 startDay: 1,
                 endDay: 20,
-                // mistakePoints: 0,
-                // carePoints: 0,
                 completed: false,
                 missed: false,
                 makesAdult: true,
@@ -389,7 +377,6 @@ export const fermsTemplate = [
                 required: false,
                 startDay: 2,
                 endDay: 20,
-                // mistakePoints: 0,
                 carePoints: -5,
                 completed: false,
                 missed: false
@@ -426,7 +413,6 @@ export const fermsTemplate = [
                 required: true,
                 startDay: 0,
                 endDay: 1,
-                // points: 0,
                 completed: false,
                 missed: false,
                 sequence: 1
@@ -452,17 +438,6 @@ export const fermsTemplate = [
                 mistakePoints: 0,
                 sequence: 3
             },
-            // {
-            //     id: 2,
-            //     action: 'add yeast and nutrients',
-            //     required: true,
-            //     startDay: 0,
-            //     endDay: 1,
-            //     // points: 0,
-            //     completed: false,
-            //     missed: false
-            // },
-            
             {
                 id: 76,
                 action: 'store in a cool dark place',
