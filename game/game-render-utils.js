@@ -21,8 +21,7 @@ export function renderActionButtons() {
             const fermId = Number(selectedFerm.value);
             const result = checkAction(actionName, fermId);
             displayActionMessage(result, actionName, fermId);
-            reRenderActionButtons();
-            reRenderFFButtons();
+            reRenderGamePage();
         });
         actionsDiv.append(newButton);
     }
@@ -185,9 +184,9 @@ export function renderFermInfo(fermId) {
         }
 
         const stepsLeft = getRemainingActionsCount(fermId);
-        stepsLeftString = `${stepsLeft} steps remaining`;
+        stepsLeftString = `${stepsLeft} steps remaining.`;
         if (stepsLeft === 1) {
-            stepsLeftString = '1 step remaining';
+            stepsLeftString = '1 step remaining.';
         }
     }
 
