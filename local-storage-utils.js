@@ -104,7 +104,7 @@ export function addToMistakePoints(fermID, pointsToAdd) {
     updateActiveFerm(ferm);
 }
 
-// Needs to be tested
+// ***tested ✔
 export function updateActiveFerm(ferm) {
     const activeFerms = getActiveFerms();
     for (let i = 0 ; i < activeFerms.length ; i++) {
@@ -115,7 +115,7 @@ export function updateActiveFerm(ferm) {
     setActiveFerms(activeFerms);
 }
 
-// Needs to be tested
+// ***tested ✔
 export function updateAction(fermID, completedAction) {
     const ferm = getActiveFermById(fermID);
     const actions = ferm.actions;

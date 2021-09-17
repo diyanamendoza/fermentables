@@ -1,7 +1,7 @@
 // IMPORT MODULES under test here:
 // import { example } from '../example.js';
 
-import { addToActiveFerms, addToCompletedFerms, addToMistakePoints, addXP, deactivateFerm, fastForwardGame, GAMEDATA, getActionsForFermID, getActiveFermById, getActiveFerms, getGameData, getSelectedFermIndex, setActiveFerms, setGameData, setSelectedFermIndex, updateActiveFerm } from '../local-storage-utils.js';
+import { addToActiveFerms, addToCompletedFerms, addToMistakePoints, addXP, deactivateFerm, fastForwardGame, GAMEDATA, getActionsForFermID, getActiveFermById, getActiveFerms, getGameData, getSelectedFermIndex, setActiveFerms, setGameData, setSelectedFermIndex, updateAction, updateActiveFerm } from '../local-storage-utils.js';
 
 const test = QUnit.test;
 
@@ -392,6 +392,27 @@ test('updateActiveFerm updates the correct ferm in local storage', assert => {
     const actual = getActiveFermById(2);
     
     assert.deepEqual(actual, expected);
+});
+
+test('updateAction updates the correct action in local storage', assert => {
+    // clear local storage
+    localStorage.removeItem(GAMEDATA);
+    
+    const staticGameDataObj = {
+        activeFerms: [
+            { id: 1, actions: [{ id: 1 }, { id: 2 }, { id: 3 }], mistakePoints: 0 },
+            { id: 2, actions: [{ id: 4 }, { id: 5, updated: false }, { id: 6 }], mistakePoints: 0 }, 
+        ]
+    };
+   
+    setGameData(staticGameDataObj);
+
+    updateAction(2, { id: 5, updated: true });
+    
+    const expected = true;
+    const actual = getActionsForFermID(2)[1].updated;
+    
+    assert.equal(actual, expected);
 });
 
 
