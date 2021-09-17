@@ -8,17 +8,19 @@ import { updateNavXP } from '../render-utils.js';
 //should have based on mistake points
 export function evaluateMistakePoints(fermID) {
     const ferm = getActiveFermById(fermID);
-    let mood = 'happy';
-    if (ferm.mistakePoints > 0 && ferm.mistakePoints <= 10) {
-        mood = 'neutral';
-    } else if (ferm.mistakePoints > 10 && ferm.mistakePoints <= 20) {
-        mood = 'sad';
-    } else if (ferm.mistakePoints > 20) {
-        mood = 'sad';
-        ferm.isDead = true;
+    if (ferm) {
+        let mood = 'happy';
+        if (ferm.mistakePoints > 0 && ferm.mistakePoints <= 10) {
+            mood = 'neutral';
+        } else if (ferm.mistakePoints > 10 && ferm.mistakePoints <= 20) {
+            mood = 'sad';
+        } else if (ferm.mistakePoints > 20) {
+            mood = 'sad';
+            ferm.isDead = true;
+        }
+        ferm.mood = mood;
+        updateActiveFerm(ferm);
     }
-    ferm.mood = mood;
-    updateActiveFerm(ferm);
 }
 
 //This function should be called after a fast
@@ -95,7 +97,7 @@ export function checkAction(actionName, fermID) {
     let result = true;
     // see if the action is in the list
     const doesActionExist = actions.find(entry => entry.action === actionName);
-// find out if the action is out of sequence
+    // find out if the action is out of sequence
     let isNotInOrder = false;
     for (let action of actions) {
         if (action.sequence) {
@@ -104,7 +106,6 @@ export function checkAction(actionName, fermID) {
             }
         }
     }
-
     if (!doesActionExist) {
         //the action doesn't exist for this ferm, apply 10 mistake points
         addToMistakePoints(fermID, 10);
@@ -112,10 +113,10 @@ export function checkAction(actionName, fermID) {
         result = false;
     } else {
         //the action does exist for this ferm
-        const correctActions = actions.filter(entry => entry.action === actionName);
+        const matchingActions = actions.filter(entry => entry.action === actionName);
         let anyCorrectTimes = false;
         //loop through all instances of actions that match actionName
-        for (let entry of correctActions) {
+        for (let entry of matchingActions) {
             //check if this action is on the correct day
             if (ferm.age >= entry.startDay && ferm.age < entry.endDay) {
                 //this action entry was specified for this day
@@ -126,16 +127,11 @@ export function checkAction(actionName, fermID) {
                     addToMistakePoints(fermID, 5);
                     //signal that this was an incorrect action
                     result = false;
-                } 
-
-
-                // gives mistake points for failing to be in sequence.
-                else if (isNotInOrder) {
+                } else if (isNotInOrder) {
+                    // gives mistake points for failing to be in sequence.
                     addToMistakePoints(fermID, 10);
                     result = false;
-                }
-
-                else {
+                } else {
                     //action was clicked on correct day and it hasn't
                     //been completed yet.
 

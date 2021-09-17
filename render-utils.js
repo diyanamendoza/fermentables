@@ -29,18 +29,6 @@ export function renderFerms(fermsTemplate) {
         const instructionsP = document.createElement('div');
         instructionsP.textContent = `${ferm.instructions}`;
         instructionsP.className = 'instructions';
-        
-        // instructionsP.style.display = 'none';
-        
-        // inputEl.addEventListener('click', () => {
-        //     instructionsP.style.display = 'block';
-            
-            // instructionsP.classList.remove('instructions');
-            // instructionsP.classList.add('after');
-            // instructionsP.style.display = 'block'; 
-            // welcomeDiv.style.display = 'none';
-        // });
-
         labelEl.append(inputEl, imageEl, instructionsP);
         containerDiv.append(labelEl);
     }
