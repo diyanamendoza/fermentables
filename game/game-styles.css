@@ -184,6 +184,7 @@ input[type="radio"]:checked + img {
 }
 
 .gain-xp{
+    font-family: 'Amatic SC', cursive;
     font-size: 2rem;
     font-weight: bold;
     color: rgb(19, 170, 19);
@@ -299,8 +300,10 @@ input[type="radio"]:checked + img {
 
 
 .highlight {
-    border-color: red !important;
-    color: red;
+    background-color: darkslateblue !important;
+    color: white;
+    /* background-color: black !important;
+    color: white; */
 }
 
 @media only screen and (max-device-width: 699px)
