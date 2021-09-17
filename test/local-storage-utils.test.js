@@ -1,7 +1,7 @@
 // IMPORT MODULES under test here:
 // import { example } from '../example.js';
 
-import { addToActiveFerms, addToCompletedFerms, addToMistakePoints, addXP, deactivateFerm, fastForwardGame, GAMEDATA, getActionsForFermID, getActiveFermById, getActiveFerms, getFermNameById, getGameData, getHintsRemaining, getRemainingActionsCount, getSelectedFermIndex, setActiveFerms, setFermToAdultById, setGameData, setHintsRemaining, setSelectedFermIndex, updateAction, updateActiveFerm } from '../local-storage-utils.js';
+import { addToActiveFerms, addToCompletedFerms, addToMistakePoints, addXP, deactivateFerm, fastForwardGame, GAMEDATA, getActionsForFermID, getActiveFermById, getActiveFermIndex, getActiveFerms, getFermNameById, getGameData, getHintsRemaining, getRemainingActionsCount, getSelectedFermIndex, setActiveFerms, setFermToAdultById, setGameData, setHintsRemaining, setSelectedFermIndex, updateAction, updateActiveFerm } from '../local-storage-utils.js';
 
 const test = QUnit.test;
 
@@ -513,6 +513,25 @@ test('setHintsRemaining updates the correct ferms hintsRemaining property value 
     
     const expected = 8;
     const actual = getHintsRemaining(2);
+    
+    assert.equal(actual, expected);
+});
+
+test('getActiveFermIndex returns the correct index of a ferm in local storage', assert => {
+    // clear local storage
+    localStorage.removeItem(GAMEDATA);
+    
+    const staticGameDataObj = {
+        activeFerms: [
+            { id: 1, hintsRemaining: 4 },
+            { id: 2, hintsRemaining: 3 } 
+        ]
+    };
+   
+    setGameData(staticGameDataObj);
+    
+    const expected = 1;
+    const actual = getActiveFermIndex(2);
     
     assert.equal(actual, expected);
 });

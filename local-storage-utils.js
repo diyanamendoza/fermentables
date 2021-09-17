@@ -59,7 +59,7 @@ export function addToActiveFerms(newFerm) {
     setActiveFerms(updatedFermsArray);
 }
 
-// Needs to be tested
+// ***tested ✔
 export function getActiveFermIndex(fermId) {
     const ferms = getActiveFerms();
     return ferms.findIndex(ferm => ferm.id === fermId);
@@ -160,13 +160,13 @@ export function setFermToAdultById(fermId) {
     updateActiveFerm(ferm);
 }
 
-// Needs to be tested
+// ***tested ✔
 export function getHintsRemaining(fermId) {
     const ferm = getActiveFermById(fermId);
     return ferm.hintsRemaining;
 }
 
-// Needs to be tested
+// ***tested ✔
 export function setHintsRemaining(fermId, newHintsRemaining) {
     const ferm = getActiveFermById(fermId);
     ferm.hintsRemaining = newHintsRemaining;
