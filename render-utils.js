@@ -109,20 +109,29 @@ export function getImageForFerm(fermID){
 export function renderNav() {
     const header = document.querySelector('header');
     const navDiv = document.createElement('nav');
+    const homeLink = document.createElement('a');
+    const aboutLink = document.createElement('a');
     const pantryLink = document.createElement('a');
+    const playLink = document.createElement('a');
     const userXP = document.createElement('span');
 
     const gameData = getGameData();
     const XP = gameData.xp;
 
     navDiv.className = 'menu';
-    pantryLink.textContent = 'Back to Pantry';
-    pantryLink.href = '../pantry';
+    pantryLink.textContent = 'Pantry';
+    pantryLink.href = 'https://diyanamendoza.github.io/fermentables/pantry/';
+    homeLink.textContent = 'Home';
+    homeLink.href = 'https://diyanamendoza.github.io/fermentables/index.html';
+    aboutLink.textContent = 'About';
+    aboutLink.href = 'https://diyanamendoza.github.io/fermentables/about/index.html';
+    playLink.textContent = 'Play';
+    playLink.href = 'https://diyanamendoza.github.io/fermentables/game/';
     userXP.id = 'user-xp';
     userXP.textContent = `You've got ${XP} XP`;
 
-    navDiv.append(pantryLink, userXP);
-    header.append(navDiv);
+    navDiv.append(homeLink, aboutLink, pantryLink, playLink, userXP);
+    header.prepend(navDiv);
 }
 
 export function updateNavXP() {
