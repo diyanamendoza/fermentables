@@ -96,23 +96,24 @@ export function checkAction(actionName, fermID) {
     const actions = ferm.actions;
     let result = true;
     // see if the action is in the list
-    const matchingActions = actions.find(entry => entry.action === actionName);
+    const doesActionExist = actions.find(entry => entry.action === actionName);
     // find out if the action is out of sequence
     let isNotInOrder = false;
     for (let action of actions) {
         if (action.sequence) {
-            if (action.sequence < matchingActions.sequence && !action.completed) {
+            if (action.sequence < doesActionExist.sequence && !action.completed) {
                 isNotInOrder = true;
             }
         }
     }
-    if (!matchingActions) {
+    if (!doesActionExist) {
         //the action doesn't exist for this ferm, apply 10 mistake points
         addToMistakePoints(fermID, 10);
         //signal that this was an incorrect action
         result = false;
     } else {
         //the action does exist for this ferm
+        const matchingActions = actions.filter(entry => entry.action === actionName);
         let anyCorrectTimes = false;
         //loop through all instances of actions that match actionName
         for (let entry of matchingActions) {
