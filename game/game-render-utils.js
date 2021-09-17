@@ -59,7 +59,10 @@ export function renderFFOneWeekButton() {
 export function renderActiveFerms() {
     const activeFerms = getActiveFerms();
     const fermDiv = document.createElement('div');
-
+    if (activeFerms.length === 0) {
+        fermDiv.textContent = 'Head back to the pantry to get a fermentable!';
+    }
+    
     for (let i = 0; i < activeFerms.length; i++){
         const ferm = activeFerms[i];
         const fermLabel = document.createElement('label');
@@ -142,7 +145,7 @@ export function renderFermInfo(fermId) {
         const stepsLeft = getRemainingActionsCount(fermId);
         stepsLeftString = `${stepsLeft} steps remaining`;
         if (daysLeft === 1) {
-            stepsLeftString = '1 step remainins';
+            stepsLeftString = '1 step remaining';
         }
     }
 
