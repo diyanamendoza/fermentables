@@ -29,6 +29,7 @@ export function renderActionButtons() {
     return actionsDiv;
 }
 
+// Can't be tested?
 export function reRenderActionButtons() {
     const actionsDiv = renderActionButtons();
     const hintButton = renderHintButton();
@@ -70,6 +71,7 @@ export function renderFFOneWeekButton() {
     return button;
 }
 
+// Can't be tested?
 export function reRenderFFButtons() {
     const dayButton = renderFFOneDayButton();
     const weekButton = renderFFOneWeekButton();
@@ -78,6 +80,7 @@ export function reRenderFFButtons() {
     timeButtonsEl.append(dayButton, weekButton);
 }
 
+// Needs to be tested
 export function renderActiveFerms() {
     const activeFerms = getActiveFerms();
     const fermDiv = document.createElement('div');
@@ -142,6 +145,7 @@ export function renderActiveFerms() {
 //Renders a div containing info about the ferm.
 //if fermId is undefined, only nameHeading will be
 //be rendered, with "Select a Fermentable" as the text.
+// Needs to be tested
 export function renderFermInfo(fermId) {
     const ferm = getActiveFermById(fermId);
     let nameString = '';
@@ -219,6 +223,7 @@ export function displayMessage(message) {
     textDisplayEl.prepend(newLineEl);
 }
 
+// Can't be tested?
 export function displayActionMessage(successful, action, fermId){
     const ferm = getFermNameById(fermId);
     let message = '';
@@ -231,6 +236,7 @@ export function displayActionMessage(successful, action, fermId){
     displayMessage(message);
 }
 
+// Can't be tested?
 export function highlightAction(actionName) {
     const actionButtonsDiv = document.getElementById('action-buttons-div');
     for (const element of actionButtonsDiv.children) {
@@ -240,17 +246,20 @@ export function highlightAction(actionName) {
     }
 }
 
+// Can't be tested?
 export function highlightFF1Button() {
     const ff1Button = document.getElementById('ff-one-day-button');
     ff1Button.classList.add('highlight');
 }
 
+// Can't be tested?
 export function highlightFF7Button() {
     const ff7Button = document.getElementById('ff-one-week-button');
     ff7Button.classList.add('highlight');
 
 }
 
+// Can't be tested?
 export function highlightOption(optionName) {
     if (optionName === 'FF1') {
         highlightFF1Button();
@@ -261,6 +270,7 @@ export function highlightOption(optionName) {
     }
 }
 
+// Can't be tested?
 export function showHint(selectedFermId) {
     const hintsRemaining = getHintsRemaining(selectedFermId);
     if (hintsRemaining > 0) {
@@ -276,6 +286,7 @@ export function showHint(selectedFermId) {
     reRenderHintButton(selectedFermId);
 }
 
+// Needs to be tested
 export function renderHintButton() {
     const selectedFerm = document.querySelector('input:checked');
     let selectedFermId = undefined;
@@ -302,6 +313,7 @@ export function renderHintButton() {
     return hintButton;
 }
 
+// Can't be tested?
 export function reRenderHintButton() {
     const hintButton = renderHintButton();
     const hintContainer = document.getElementById('hint-container');

@@ -182,7 +182,7 @@ export function getAllActionNamesForFerms(arrayOfFerms) {
     return actionNames;
 }
 
-
+// Can't be tested?
 export function runFFAnimation(){
     const htmlEls = document.getElementsByTagName('html');
     const htmlEl = htmlEls[0];
@@ -230,6 +230,7 @@ export function getCorrectOptionForFerm(fermId) {
     return 'FF7';
 }
 
+// Needs to be tested
 export function getRandomOption() {
     const allActions = getAllActionNames();
     allActions.push('FF1');
@@ -238,6 +239,7 @@ export function getRandomOption() {
     return allActions[randomIndex];
 }
 
+// Needs to be tested
 export function getUniqueRandomOption(arrayOfOtherOptions) {
     let newOption = getRandomOption();
     let unique = false;
