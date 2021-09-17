@@ -129,6 +129,8 @@ label {
 #ferms-gang {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 #ferms-gang > img {
@@ -174,4 +176,16 @@ footer {
     color: black;
     font-family: 'Amatic SC', cursive;
     text-align: center;
+}
+
+@media only screen and (max-device-width: 800px)
+ {
+    body {
+        font-family: 'Anonymous Pro', monospace;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 300px;
+    }
 }
