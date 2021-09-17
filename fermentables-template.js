@@ -345,7 +345,7 @@ export const fermsTemplate = [
         isAdult: false,
         mood: 'happy',
         instructions: `Prep the beets. Add the ingredients and then water to a jar. Let the jar ferment for 7 days. Open the jar every day and skim any scum that has formed. On the eighth day, strain the beets from your delicious salty beet water.`,
-        endDay: 9,
+        endDay: 10,
         age: 0,
         successMessage: 'Kak krasivo comrade! Your Beet Kvass is excellent!',
         rewardXP: 20,
