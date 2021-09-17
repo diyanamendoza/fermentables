@@ -45,10 +45,21 @@ body {
 
 }
 
-main {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 30px;
+@media screen and (min-width: 700px) {
+    main {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 30px;
+    }
+
+    #chat-box {
+        border: 1px solid black;
+        min-height: 200px;
+        max-height: 400px;
+        overflow: auto;
+        padding: 10px;
+    }
+    
 }
 
 #action-buttons-div > button {
@@ -98,13 +109,6 @@ input[type="radio"]:checked + img {
     gap: 10px;
 }
 
-#chat-box {
-    border: 1px solid black;
-    min-height: 200px;
-    max-height: 400px;
-    overflow: auto;
-    padding: 10px;
-}
 
 #time-and-chat {
     display: flex;
@@ -119,9 +123,8 @@ input[type="radio"]:checked + img {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
     overflow: auto;
-    padding: 30px;
+    padding-top: 30px;
 }
 
 .dead {
@@ -156,4 +159,56 @@ input[type="radio"]:checked + img {
    0%{
        transform: translatey(-10px);
    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media only screen and (max-device-width: 699px)
+ {
+    main {
+        display: flex;
+        flex-direction: row; 
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    #ferm-gallery {
+        max-height: 250px;
+        overflow: scroll;
+    }
+
+    input + img {
+        width: 100px;
+    }
+
+    #chat-box {
+        height: 50px;
+        width: 300px;
+        overflow: scroll;
+        border: 1px solid black;
+        padding-left: 15px;
+    }
 }
