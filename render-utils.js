@@ -130,7 +130,18 @@ export function renderNav() {
     userXP.id = 'user-xp';
     userXP.textContent = `You've got ${XP} XP`;
 
-    navDiv.append(homeLink, aboutLink, pantryLink, playLink, userXP);
+    if (window.location.href.indexOf('game') > -1) {
+        navDiv.append(homeLink, aboutLink, pantryLink, userXP);
+    }
+    else if (window.location.href.indexOf('about') > -1) {
+        navDiv.append(homeLink, pantryLink, playLink, userXP);
+    }
+    else if (window.location.href.indexOf('pantry') > -1) {
+        navDiv.append(homeLink, aboutLink, playLink, userXP);
+    }
+    else {
+        navDiv.append(aboutLink, pantryLink, playLink, userXP);
+    }
     header.prepend(navDiv);
 }
 
