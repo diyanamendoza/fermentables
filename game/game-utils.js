@@ -90,6 +90,14 @@ export function checkAction(actionName, fermID) {
     let result = true;
     // see if the action is in the list
     const doesActionExist = actions.find(entry => entry.action === actionName);
+// find out if the action is out of sequence
+    let isNotInOrder = false;
+    for (let action of actions) {
+        if (action.sequence < doesActionExist.sequence && !action.completed) {
+            isNotInOrder = true;
+        }
+    }
+
     if (!doesActionExist) {
         //the action doesn't exist for this ferm, apply 10 mistake points
         addToMistakePoints(fermID, 10);
@@ -111,7 +119,16 @@ export function checkAction(actionName, fermID) {
                     addToMistakePoints(fermID, 5);
                     //signal that this was an incorrect action
                     result = false;
-                } else {
+                } 
+
+
+                //add else if here that gives mistake points for failing to be in sequence.
+                else if (isNotInOrder) {
+                    addToMistakePoints(fermID, 10);
+                    result = false;
+                }
+
+                else {
                     //action was clicked on correct day and it hasn't
                     //been completed yet.
 

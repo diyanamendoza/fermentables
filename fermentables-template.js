@@ -30,7 +30,8 @@ export const fermsTemplate = [
                 // mistakePoints: 0,
                 // carePoints: 0,
                 completed: false,
-                missed: false
+                missed: false,
+                sequence: 1
             },
             {
                 id: 2,
@@ -41,7 +42,8 @@ export const fermsTemplate = [
                 // mistakePoints: 0,
                 // carePoints: 0,
                 completed: false,
-                missed: false
+                missed: false,
+                sequence: 2
             },
             {
                 id: 3,
@@ -52,7 +54,8 @@ export const fermsTemplate = [
                 // mistakePoints: 0,
                 // carePoints: 0,
                 completed: false,
-                missed: false
+                missed: false,
+                sequence: 3
             },
             {
                 id: 4,
@@ -63,7 +66,8 @@ export const fermsTemplate = [
                 // mistakePoints: 0,
                 // carePoints: -1,
                 completed: false,
-                missed: false
+                missed: false,
+                sequence: 4
             },
             {
                 id: 5,
@@ -74,7 +78,8 @@ export const fermsTemplate = [
                 // mistakePoints: 0,
                 // carePoints: -1,
                 completed: false,
-                missed: false
+                missed: false,
+                sequence: 5
             },
             {
                 id: 6,
@@ -108,7 +113,8 @@ export const fermsTemplate = [
                 // carePoints: 0,
                 completed: false,
                 missed: false,
-                makesAdult: true
+                makesAdult: true,
+                sequence: 6
             },
             {
                 id: 9, 
@@ -151,7 +157,7 @@ export const fermsTemplate = [
         age: 0,
         successMessage: 'Woohoo! You successfully fermented your baby Wort. Check out that happy Mead.',
         rewardXP: 20,
-        unlockXP: 60,
+        unlockXP: 0,
         mistakePoints: 0,
         mood: 'happy',
         isAdult: false,
@@ -165,7 +171,8 @@ export const fermsTemplate = [
                 endDay: 1,
                 // points: 0,
                 completed: false,
-                missed: false
+                missed: false,
+                sequence: 1
             },
             {
                 id: 20,
@@ -173,7 +180,8 @@ export const fermsTemplate = [
                 required: true,
                 startDay: 0,
                 endDay: 1,
-                completed: false
+                completed: false,
+                sequence: 2
             },
             {
                 id: 23,
@@ -184,7 +192,8 @@ export const fermsTemplate = [
                 completed: false,
                 missed: false,
                 carePoints: 0,
-                mistakePoints: 0
+                mistakePoints: 0,
+                sequence: 3
             },
             // {
             //     id: 2,
@@ -340,7 +349,7 @@ export const fermsTemplate = [
         age: 0,
         successMessage: 'Kak krasivo comrade! Your Beet Kvass is excellent!',
         rewardXP: 20,
-        unlockXP: 40,
+        unlockXP: 0,
         mistakePoints: 0,
         isDead: false,
         actions: [
@@ -353,7 +362,8 @@ export const fermsTemplate = [
                 completed: false,
                 missed: false,
                 carePoints: 0,
-                mistakePoints: 0
+                mistakePoints: 0,
+                sequence: 1
             },
             {
                 id: 2,
@@ -364,7 +374,8 @@ export const fermsTemplate = [
                 completed: false,
                 missed: false,
                 carePoints: 0,
-                mistakePoints: 0
+                mistakePoints: 0,
+                sequence: 2
             },
             {
                 id: 4,
@@ -375,7 +386,8 @@ export const fermsTemplate = [
                 completed: false,
                 missed: false,
                 carePoints: 0,
-                mistakePoints: 0
+                mistakePoints: 0,
+                sequence: 3
             },
             {
                 id: 5,
@@ -476,7 +488,8 @@ export const fermsTemplate = [
                 makesAdult: true,
                 missed: false,
                 carePoints: 0,
-                mistakePoints: 0
+                mistakePoints: 0,
+                sequence: 4
             }
         ]
     },
@@ -499,7 +512,7 @@ export const fermsTemplate = [
         isAdult: false,
         successMessage: `That's a tasty brew! You should consider opening a microbrewery.`,
         rewardXP: 20,
-        unlockXP: 20,
+        unlockXP: 0,
         mistakePoints: 0,
         isDead: false,
         actions: [
@@ -509,7 +522,8 @@ export const fermsTemplate = [
                 required: true,
                 startDay: 0,
                 endDay: 1,
-                completed: false
+                completed: false,
+                sequence: 1
             },
             {
                 id: 2,
@@ -517,7 +531,8 @@ export const fermsTemplate = [
                 required: true,
                 startDay: 0,
                 endDay: 1,
-                completed: false
+                completed: false,
+                sequence: 2
             },
             {
                 id: 3,
@@ -525,7 +540,8 @@ export const fermsTemplate = [
                 required: true,
                 startDay: 0,
                 endDay: 1,
-                completed: false
+                completed: false,
+                sequence: 3
             },
             {
                 id: 4,
@@ -533,7 +549,8 @@ export const fermsTemplate = [
                 required: true,
                 startDay: 0,
                 endDay: 1,
-                completed: false
+                completed: false,
+                sequence: 4
             },
             {
                 id: 5,
@@ -541,7 +558,8 @@ export const fermsTemplate = [
                 required: true,
                 startDay: 12,
                 endDay: 17,
-                completed: false
+                completed: false,
+                sequence: 5
             },
             {
                 id: 6,
@@ -550,7 +568,8 @@ export const fermsTemplate = [
                 startDay: 12,
                 endDay: 17,
                 completed: false,
-                makesAdult: true
+                makesAdult: true,
+                sequence: 6
             },
             {
                 id: 7,
