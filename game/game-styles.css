@@ -155,6 +155,8 @@ input[type="radio"]:checked + img {
     flex-wrap: wrap;
     overflow: auto;
     padding-top: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
     justify-content: center;
 }
 
@@ -182,6 +184,7 @@ input[type="radio"]:checked + img {
 }
 
 .gain-xp{
+    font-family: 'Amatic SC', cursive;
     font-size: 2rem;
     font-weight: bold;
     color: rgb(19, 170, 19);
@@ -230,19 +233,16 @@ input[type="radio"]:checked + img {
 }
 
 /* 🌛 FF-Animation ⭐ */
-/* For img */
-.anim-ff-img-start{
-    position: absolute;
-    width: 50vw;
-    transform: translateY(-50vh);
-    z-index: -1;
-    left: 25%;
-}
 
 /* For img */
 .anim-ff-drop-moon{
     animation: drop-moon 1.2s linear forwards;
     animation-delay: .40s;
+    position: fixed;
+    width: 50vw;
+    transform: translateY(-50vh);
+    z-index: -1;
+    left: 25%;
 }
 
 /* For body */
@@ -297,8 +297,10 @@ input[type="radio"]:checked + img {
 
 
 .highlight {
-    border-color: red !important;
-    color: red;
+    background-color: darkslateblue !important;
+    color: white;
+    /* background-color: black !important;
+    color: white; */
 }
 
 @media only screen and (max-device-width: 699px)

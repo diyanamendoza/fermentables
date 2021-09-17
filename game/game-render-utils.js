@@ -313,9 +313,9 @@ export function renderHintButton() {
     hintButton.id = 'hint-button';
     if (ferm) {
         if (ferm.hintsRemaining > 0) {
-            hintButton.textContent = `Give Hint (${ferm.hintsRemaining} left)`;
+            hintButton.textContent = `give hint (${ferm.hintsRemaining} left)`;
         } else {
-            hintButton.textContent = 'No Hints Remaining';
+            hintButton.textContent = 'no hints remaining';
             hintButton.classList.add('dead');
             hintButton.disabled = true;
         }
@@ -323,7 +323,7 @@ export function renderHintButton() {
             showHint(ferm.id);
         });
     } else {
-        hintButton.textContent = `Select Ferm.`;
+        hintButton.textContent = `select fermentable`;
     }
     return hintButton;
 }
