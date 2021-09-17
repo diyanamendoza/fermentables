@@ -45,6 +45,7 @@ export function updateState() {
                         ferm.mood = 'sad';
                         const fermName = getFermNameById(ferm.id);
                         displayMessage(`Your ${fermName} is now dead.`);
+                        updateActiveFerm(ferm);
                     }
                 } else {
                     //dock points
