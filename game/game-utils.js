@@ -199,7 +199,31 @@ export function getAllActionNamesForFerms(arrayOfFerms) {
     return actionNames;
 }
 
-//Returns the correct action, 'FF1', or 'FF7'
+// Can't be tested?
+export function runFFAnimation(){
+    const htmlEls = document.getElementsByTagName('html');
+    const htmlEl = htmlEls[0];
+    const bodyEls = document.getElementsByTagName('body');
+    const bodyEl = bodyEls[0];
+    
+    // To prevent rendering extra imgs: could check if html classlist already contains anim-ff-color before attempting to render another img.
+    const imgEl = document.createElement('img');
+    
+    imgEl.classList.add('anim-ff-img-start');
+    htmlEl.classList.add('anim-ff-color');
+    imgEl.classList.add('anim-ff-drop-moon');
+    
+    imgEl.src = '../assets/moon-and-stars-transparent-5.png';
+    
+    bodyEl.prepend(imgEl);
+    
+    setTimeout(() => {
+        bodyEl.removeChild(imgEl);
+        htmlEl.classList.remove('anim-ff-color');
+    }, 2500);
+}
+
+    //Returns the correct action, 'FF1', or 'FF7'
 export function getCorrectOptionForFerm(fermId) {
     const ferm = getActiveFermById(fermId);
     const actions = getActionsForFermID(fermId);
@@ -223,6 +247,7 @@ export function getCorrectOptionForFerm(fermId) {
     return 'FF7';
 }
 
+// Needs to be tested
 export function getRandomOption() {
     const allActions = getAllActionNames();
     allActions.push('FF1');
@@ -231,6 +256,7 @@ export function getRandomOption() {
     return allActions[randomIndex];
 }
 
+// Needs to be tested
 export function getUniqueRandomOption(arrayOfOtherOptions) {
     let newOption = getRandomOption();
     let unique = false;
