@@ -19,7 +19,7 @@ h1 {
 }
 
 header {
-    font-family: 'Amatic SC', cursive;
+    font-family: 'Amatic SC', sans serif;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -184,7 +184,7 @@ input[type="radio"]:checked + img {
 }
 
 .gain-xp{
-    font-family: 'Amatic SC', cursive;
+    font-family: 'Amatic SC', sans serif;
     font-size: 2rem;
     font-weight: bold;
     color: rgb(19, 170, 19);
@@ -233,16 +233,19 @@ input[type="radio"]:checked + img {
 }
 
 /* 🌛 FF-Animation ⭐ */
+/* For img */
+.anim-ff-img-start{
+    position: absolute;
+    width: 50vw;
+    transform: translateY(-50vh);
+    z-index: -1;
+    left: 25%;
+}
 
 /* For img */
 .anim-ff-drop-moon{
     animation: drop-moon 1.2s linear forwards;
     animation-delay: .40s;
-    position: fixed;
-    width: 50vw;
-    transform: translateY(-50vh);
-    z-index: -1;
-    left: 25%;
 }
 
 /* For body */
