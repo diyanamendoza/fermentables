@@ -1,6 +1,6 @@
-import { fastForwardGame, getActiveFerms, getRemainingActionsCount, getFermNameById, getActiveFermById, getSelectedFermIndex, getActiveFermIndex, setSelectedFermIndex } from '../local-storage-utils.js';
+import { fastForwardGame, getActiveFerms, getRemainingActionsCount, getFermNameById, getActiveFermById, getSelectedFermIndex, getActiveFermIndex, setSelectedFermIndex, getHintsRemaining, setHintsRemaining } from '../local-storage-utils.js';
 import { getImageForFerm } from '../render-utils.js';
-import { checkAction, getAllActionNames, runFFAnimation, updateState } from './game-utils.js';
+import { checkAction, getAllActionNames, getCorrectOptionForFerm, getUniqueRandomOption, updateState, runFFAnimation } from './game-utils.js';
 
 // ***tested ✔
 export function renderActionButtons() {
@@ -21,10 +21,23 @@ export function renderActionButtons() {
             const fermId = Number(selectedFerm.value);
             const result = checkAction(actionName, fermId);
             displayActionMessage(result, actionName, fermId);
+            reRenderActionButtons();
+            reRenderFFButtons();
         });
         actionsDiv.append(newButton);
     }
     return actionsDiv;
+}
+
+export function reRenderActionButtons() {
+    const actionsDiv = renderActionButtons();
+    const hintButton = renderHintButton();
+    const hintContainer = document.createElement('div');
+    hintContainer.id = 'hint-container';
+    hintContainer.append(hintButton);
+    const actionsBarEl = document.getElementById('actions-bar');
+    actionsBarEl.textContent = '';
+    actionsBarEl.append(hintContainer, actionsDiv);
 }
 
 // ***tested ✔
@@ -57,6 +70,13 @@ export function renderFFOneWeekButton() {
     return button;
 }
 
+export function reRenderFFButtons() {
+    const dayButton = renderFFOneDayButton();
+    const weekButton = renderFFOneWeekButton();
+    const timeButtonsEl = document.getElementById('time-buttons');
+    timeButtonsEl.textContent = '';
+    timeButtonsEl.append(dayButton, weekButton);
+}
 
 export function renderActiveFerms() {
     const activeFerms = getActiveFerms();
@@ -109,6 +129,7 @@ export function renderActiveFerms() {
             const activeFermsInfo = renderFermInfo(fermId);
 
             fermInfoEl.append(activeFermsInfo);
+            reRenderHintButton();
         });
 
         fermLabel.append(fermInput, fermImg, elP);
@@ -185,6 +206,9 @@ export function reRenderGamePage(){
     fermInfoEl.textContent = '';
     fermInfoEl.append(activeFermsInfo);
     fermGalleryEl.append(activeFermsDiv);
+    reRenderHintButton(fermId);
+    reRenderActionButtons();
+    reRenderFFButtons();
 }
 
 // Can't be tested?
@@ -205,4 +229,82 @@ export function displayActionMessage(successful, action, fermId){
         message = `You selected ${action} for ${ferm}. Wrong action!`;
     }
     displayMessage(message);
+}
+
+export function highlightAction(actionName) {
+    const actionButtonsDiv = document.getElementById('action-buttons-div');
+    for (const element of actionButtonsDiv.children) {
+        if (element.textContent === actionName) {
+            element.classList.add('highlight');
+        }
+    }
+}
+
+export function highlightFF1Button() {
+    const ff1Button = document.getElementById('ff-one-day-button');
+    ff1Button.classList.add('highlight');
+}
+
+export function highlightFF7Button() {
+    const ff7Button = document.getElementById('ff-one-week-button');
+    ff7Button.classList.add('highlight');
+
+}
+
+export function highlightOption(optionName) {
+    if (optionName === 'FF1') {
+        highlightFF1Button();
+    } else if (optionName === 'FF7') {
+        highlightFF7Button();
+    } else {
+        highlightAction(optionName);
+    }
+}
+
+export function showHint(selectedFermId) {
+    const hintsRemaining = getHintsRemaining(selectedFermId);
+    if (hintsRemaining > 0) {
+        setHintsRemaining(selectedFermId, hintsRemaining - 1);
+    }
+    const correctAction = getCorrectOptionForFerm(selectedFermId);
+    const option2 = getUniqueRandomOption([correctAction]);
+    const option3 = getUniqueRandomOption([correctAction, option2]);
+    highlightOption(correctAction);
+    highlightOption(option2);
+    highlightOption(option3);
+
+    reRenderHintButton(selectedFermId);
+}
+
+export function renderHintButton() {
+    const selectedFerm = document.querySelector('input:checked');
+    let selectedFermId = undefined;
+    if (selectedFerm) {
+        selectedFermId = Number(selectedFerm.value);
+    }
+    const ferm = getActiveFermById(selectedFermId);
+    const hintButton = document.createElement('button');
+    hintButton.id = 'hint-button';
+    if (ferm) {
+        if (ferm.hintsRemaining > 0) {
+            hintButton.textContent = `Give Hint (${ferm.hintsRemaining} left)`;
+        } else {
+            hintButton.textContent = 'No Hints Remaining';
+            hintButton.classList.add('dead');
+            hintButton.disabled = true;
+        }
+        hintButton.addEventListener('click', () => {
+            showHint(ferm.id);
+        });
+    } else {
+        hintButton.textContent = `Select Ferm.`;
+    }
+    return hintButton;
+}
+
+export function reRenderHintButton() {
+    const hintButton = renderHintButton();
+    const hintContainer = document.getElementById('hint-container');
+    hintContainer.textContent = '';
+    hintContainer.append(hintButton);
 }
