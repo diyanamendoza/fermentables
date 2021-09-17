@@ -1,7 +1,7 @@
 // IMPORT MODULES under test here:
 // import { example } from '../example.js';
 
-import { addToActiveFerms, addToCompletedFerms, addToMistakePoints, addXP, deactivateFerm, fastForwardGame, GAMEDATA, getActionsForFermID, getActiveFermById, getActiveFerms, getFermNameById, getGameData, getRemainingActionsCount, getSelectedFermIndex, setActiveFerms, setFermToAdultById, setGameData, setSelectedFermIndex, updateAction, updateActiveFerm } from '../local-storage-utils.js';
+import { addToActiveFerms, addToCompletedFerms, addToMistakePoints, addXP, deactivateFerm, fastForwardGame, GAMEDATA, getActionsForFermID, getActiveFermById, getActiveFerms, getFermNameById, getGameData, getHintsRemaining, getRemainingActionsCount, getSelectedFermIndex, setActiveFerms, setFermToAdultById, setGameData, setHintsRemaining, setSelectedFermIndex, updateAction, updateActiveFerm } from '../local-storage-utils.js';
 
 const test = QUnit.test;
 
@@ -474,6 +474,46 @@ test('setFermToAdultByID updates the correct ferms isAdult property value in loc
     
     const expected = true;
     const actual = getActiveFermById(2).isAdult;
+    assert.equal(actual, expected);
+});
+
+test('getHintsRemaining returns the correct number from local storage', assert => {
+    // clear local storage
+    localStorage.removeItem(GAMEDATA);
+    
+    const staticGameDataObj = {
+        activeFerms: [
+            { id: 1, hintsRemaining: 4 },
+            { id: 2, hintsRemaining: 3 } 
+        ]
+    };
+   
+    setGameData(staticGameDataObj);
+    
+    const expected = 3;
+    const actual = getHintsRemaining(2);
+
+    assert.equal(actual, expected);
+});
+
+test('setHintsRemaining updates the correct ferms hintsRemaining property value with the correct number in local storage', assert => {
+    // clear local storage
+    localStorage.removeItem(GAMEDATA);
+    
+    const staticGameDataObj = {
+        activeFerms: [
+            { id: 1, hintsRemaining: 4 },
+            { id: 2, hintsRemaining: 3 } 
+        ]
+    };
+   
+    setGameData(staticGameDataObj);
+
+    setHintsRemaining(2, 8);
+    
+    const expected = 8;
+    const actual = getHintsRemaining(2);
+    
     assert.equal(actual, expected);
 });
 
