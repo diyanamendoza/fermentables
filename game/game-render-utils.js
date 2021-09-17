@@ -74,7 +74,6 @@ export function renderActiveFerms() {
         
         //add xp-text class to p tag styling and animation
         elP.classList.add('xp-text-start');
-
         fermImg.src = getImageForFerm(ferm.id);
         fermImg.classList.add('ferm-img');
         fermInput.type = 'radio';
