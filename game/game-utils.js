@@ -126,7 +126,7 @@ export function checkAction(actionName, fermID) {
                 } 
 
 
-                //add else if here that gives mistake points for failing to be in sequence.
+                // gives mistake points for failing to be in sequence.
                 else if (isNotInOrder) {
                     addToMistakePoints(fermID, 10);
                     result = false;
