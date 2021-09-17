@@ -1,11 +1,6 @@
-import { renderFooter, renderWelcome } from './render-utils.js';
+import { renderFooter, renderNav, renderWelcome } from './render-utils.js';
 
-// renderFerms(fermsTemplate);
-
+renderNav();
 renderWelcome();
-
-// renderPlayButton();
-
-
 renderFooter();
 
