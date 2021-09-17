@@ -68,9 +68,9 @@ export function renderActiveFerms() {
         const fermLabel = document.createElement('label');
         const fermImg = document.createElement('img');
         const fermInput = document.createElement('input');
-        const selectedFermIndex = getSelectedFermIndex();
         // create new p tag for animation xp
         const elP = document.createElement('p');
+        const selectedFermIndex = getSelectedFermIndex();
         
         //add xp-text class to p tag styling and animation
         elP.classList.add('xp-text-start');
