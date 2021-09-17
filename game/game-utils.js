@@ -96,28 +96,26 @@ export function checkAction(actionName, fermID) {
     const actions = ferm.actions;
     let result = true;
     // see if the action is in the list
-    const doesActionExist = actions.find(entry => entry.action === actionName);
-// find out if the action is out of sequence
+    const matchingActions = actions.find(entry => entry.action === actionName);
+    // find out if the action is out of sequence
     let isNotInOrder = false;
     for (let action of actions) {
         if (action.sequence) {
-            if (action.sequence < doesActionExist.sequence && !action.completed) {
+            if (action.sequence < matchingActions.sequence && !action.completed) {
                 isNotInOrder = true;
             }
         }
     }
-
-    if (!doesActionExist) {
+    if (!matchingActions) {
         //the action doesn't exist for this ferm, apply 10 mistake points
         addToMistakePoints(fermID, 10);
         //signal that this was an incorrect action
         result = false;
     } else {
         //the action does exist for this ferm
-        const correctActions = actions.filter(entry => entry.action === actionName);
         let anyCorrectTimes = false;
         //loop through all instances of actions that match actionName
-        for (let entry of correctActions) {
+        for (let entry of matchingActions) {
             //check if this action is on the correct day
             if (ferm.age >= entry.startDay && ferm.age < entry.endDay) {
                 //this action entry was specified for this day
@@ -128,16 +126,11 @@ export function checkAction(actionName, fermID) {
                     addToMistakePoints(fermID, 5);
                     //signal that this was an incorrect action
                     result = false;
-                } 
-
-
-                // gives mistake points for failing to be in sequence.
-                else if (isNotInOrder) {
+                } else if (isNotInOrder) {
+                    // gives mistake points for failing to be in sequence.
                     addToMistakePoints(fermID, 10);
                     result = false;
-                }
-
-                else {
+                } else {
                     //action was clicked on correct day and it hasn't
                     //been completed yet.
 
