@@ -1,6 +1,6 @@
 import { fastForwardGame, getActiveFerms, getRemainingActionsCount, getFermNameById, getActiveFermById, getSelectedFermIndex, getActiveFermIndex, setSelectedFermIndex, getHintsRemaining, setHintsRemaining } from '../local-storage-utils.js';
 import { getImageForFerm } from '../render-utils.js';
-import { checkAction, getAllActionNames, getCorrectOptionForFerm, getRandomOption, updateState } from './game-utils.js';
+import { checkAction, getAllActionNames, getCorrectOptionForFerm, getUniqueRandomOption, updateState } from './game-utils.js';
 
 // ***tested ✔
 export function renderActionButtons() {
@@ -22,6 +22,7 @@ export function renderActionButtons() {
             const result = checkAction(actionName, fermId);
             displayActionMessage(result, actionName, fermId);
             reRenderActionButtons();
+            reRenderFFButtons();
         });
         actionsDiv.append(newButton);
     }
@@ -87,10 +88,15 @@ export function renderActiveFerms() {
         const fermLabel = document.createElement('label');
         const fermImg = document.createElement('img');
         const fermInput = document.createElement('input');
+        // create new p tag for animation xp
+        const elP = document.createElement('p');
         const selectedFermIndex = getSelectedFermIndex();
+        
+        //add xp-text class to p tag styling and animation
+        elP.classList.add('xp-text-start');
 
         fermImg.src = getImageForFerm(ferm.id);
-        fermImg.className = 'ferm-img';
+        fermImg.classList.add('ferm-img');
         fermInput.type = 'radio';
         fermInput.setAttribute('value', `${ferm.id}`);
         fermInput.name = 'ferm';
@@ -104,7 +110,13 @@ export function renderActiveFerms() {
         } else {
             fermImg.classList.add('alive');
         }
-        // stretchy AF: if complete, add a complete to classlist
+
+        // If ferm is completed, run xp-gain animation
+        if (ferm.completed === true){
+            fermImg.style.display = 'none';
+            elP.textContent = `+${ferm.rewardXP}`;
+            elP.className = 'gain-xp';
+        }
 
         fermInput.addEventListener('click', () => {
             const selectedFerm = document.querySelector('input:checked');
@@ -119,7 +131,7 @@ export function renderActiveFerms() {
             reRenderHintButton();
         });
 
-        fermLabel.append(fermInput, fermImg);
+        fermLabel.append(fermInput, fermImg, elP);
         fermDiv.append(fermLabel);
     }
     
@@ -254,9 +266,11 @@ export function showHint(selectedFermId) {
         setHintsRemaining(selectedFermId, hintsRemaining - 1);
     }
     const correctAction = getCorrectOptionForFerm(selectedFermId);
+    const option2 = getUniqueRandomOption([correctAction]);
+    const option3 = getUniqueRandomOption([correctAction, option2]);
     highlightOption(correctAction);
-    highlightOption(getRandomOption());
-    highlightOption(getRandomOption());
+    highlightOption(option2);
+    highlightOption(option3);
 
     reRenderHintButton(selectedFermId);
 }

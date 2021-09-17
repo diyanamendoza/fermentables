@@ -53,15 +53,19 @@ export function updateState() {
             }
         }
         if (ferm.age >= ferm.endDay && !ferm.isDead && !ferm.completed) {
-             
             ferm.completed = true;
-            displayMessage(ferm.successMessage + ` You gained ${ferm.maxXP} xp.`);
-            addXP(ferm.maxXP);
+            displayMessage(ferm.successMessage + ` You gained ${ferm.rewardXP} xp.`);
+            addXP(ferm.rewardXP);
+            // Update active ferms after completing on line 56.
+            updateActiveFerm(ferm);
+            // Rerender active ferms to catch completed ferm and animate.
+            reRenderGamePage();
+            // remove ferm from active ferms
+            deactivateFerm(ferm.id);
+            // wait 1.25s for animation to complete before rerendering active ferms(without complete).
             setTimeout(() => {
-                deactivateFerm(ferm.id);
                 reRenderGamePage();
-            }, 2000);
-            
+            }, 1250);
         }
         //update mood
         evaluateMistakePoints(ferm.id);
@@ -208,4 +212,23 @@ export function getRandomOption() {
     allActions.push('FF7');
     const randomIndex = Math.floor(Math.random() * allActions.length);
     return allActions[randomIndex];
+}
+
+export function getUniqueRandomOption(arrayOfOtherOptions) {
+    let newOption = getRandomOption();
+    let unique = false;
+    while (!unique) {
+        let allUnique = true;
+        for (const otherOption of arrayOfOtherOptions) {
+            if (newOption === otherOption) {
+                allUnique = false;
+            }
+        }
+        if (!allUnique) {
+            newOption = getRandomOption();
+        } else {
+            unique = true;
+        }
+    }
+    return newOption;
 }
