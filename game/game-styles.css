@@ -203,7 +203,7 @@ input[type="radio"]:checked + img {
 .anim-ff-img-start{
     position: absolute;
     width: 50vw;
-    transform: translateY(-35vh);
+    transform: translateY(-50vh);
     z-index: -1;
     left: 25%;
 }
@@ -223,7 +223,7 @@ input[type="radio"]:checked + img {
 
 @keyframes drop-moon{
     0%{
-       transform: translateY(-35vh);
+       transform: translateY(-50vh);
     }
     10%{
         transform: translateY(-2vh);
@@ -241,7 +241,7 @@ input[type="radio"]:checked + img {
         transform: translateY(-1vh);
     } 
     100%{
-        transform: translateY(-35vh);
+        transform: translateY(-50vh);
     }
 
 }
