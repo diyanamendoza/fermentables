@@ -1,6 +1,6 @@
 import { fermsTemplate } from '../fermentables-template.js';
 import { displayMessage, reRenderGamePage } from './game-render-utils.js';
-import { addToMistakePoints, addXP, deactivateFerm, getActiveFermById, getActiveFerms, getFermNameById, setActiveFerms, updateAction, updateActiveFerm } from '../local-storage-utils.js';
+import { addToMistakePoints, addXP, deactivateFerm, getActionsForFermID, getActiveFermById, getActiveFerms, getFermNameById, setActiveFerms, updateAction, updateActiveFerm } from '../local-storage-utils.js';
 import { updateNavXP } from '../render-utils.js';
 
 // ***tested ✔
@@ -76,6 +76,7 @@ export function updateState() {
     updateNavXP();
 }
 
+//tested ✔
 //checkAction handles the user selecting an action for a ferm. It does the
 //following:
 //--applies 10 mistake points if the action doesn't exist for the ferm
@@ -179,4 +180,55 @@ export function getAllActionNamesForFerms(arrayOfFerms) {
     }
     actionNames.sort();
     return actionNames;
+}
+
+//Returns the correct action, 'FF1', or 'FF7'
+export function getCorrectOptionForFerm(fermId) {
+    const ferm = getActiveFermById(fermId);
+    const actions = getActionsForFermID(fermId);
+    for (const action of actions) {
+        if (ferm.age >= action.startDay && ferm.age < action.endDay) {
+            if (!action.completed) {
+                return action.action;
+            }
+        }
+    }
+    for (const action of actions) {
+        if (ferm.age + 1 >= action.startDay && ferm.age + 1 < action.endDay) {
+            return 'FF1';
+        }
+    }
+    for (const action of actions) {
+        if (ferm.age + 1 >= action.startDay && ferm.age + 1 < action.endDay) {
+            return 'FF7';
+        }
+    }
+    return 'FF7';
+}
+
+export function getRandomOption() {
+    const allActions = getAllActionNames();
+    allActions.push('FF1');
+    allActions.push('FF7');
+    const randomIndex = Math.floor(Math.random() * allActions.length);
+    return allActions[randomIndex];
+}
+
+export function getUniqueRandomOption(arrayOfOtherOptions) {
+    let newOption = getRandomOption();
+    let unique = false;
+    while (!unique) {
+        let allUnique = true;
+        for (const otherOption of arrayOfOtherOptions) {
+            if (newOption === otherOption) {
+                allUnique = false;
+            }
+        }
+        if (!allUnique) {
+            newOption = getRandomOption();
+        } else {
+            unique = true;
+        }
+    }
+    return newOption;
 }

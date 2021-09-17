@@ -88,6 +88,25 @@ body {
     color: white;
 }
 
+#hint-container {
+    margin-bottom: 15px;
+}
+
+#hint-container > button {
+    border: 1px solid black;
+    font-family: 'Anonymous Pro', monospace;
+    background-color: rgb(176, 240, 133);
+    padding: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+#hint-container > button:hover {
+    background-color: black;
+    color: white;
+}
+
+
 img {
     width: 150px;
     cursor: pointer;
@@ -197,30 +216,10 @@ input[type="radio"]:checked + img {
    }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.highlight {
+    border-color: red !important;
+    color: red;
+}
 
 @media only screen and (max-device-width: 699px)
  {
