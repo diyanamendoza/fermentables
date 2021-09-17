@@ -59,6 +59,7 @@ export function addToActiveFerms(newFerm) {
     setActiveFerms(updatedFermsArray);
 }
 
+// ***tested ✔
 export function getActiveFermIndex(fermId) {
     const ferms = getActiveFerms();
     return ferms.findIndex(ferm => ferm.id === fermId);
@@ -84,7 +85,7 @@ export function addToCompletedFerms(ferm) {
     setGameData(currentGameData);
 }
 
-
+// ***tested ✔
 export function getActionsForFermID(fermID) {
     const activeFerms = getActiveFerms();
     const { actions } = activeFerms.find(entry => entry.id === fermID);
@@ -96,12 +97,14 @@ export function getActiveFermById(fermID) {
     return getActiveFerms().find(entry => entry.id === fermID);
 } 
 
+// ***tested ✔
 export function addToMistakePoints(fermID, pointsToAdd) {
     const ferm = getActiveFermById(fermID);
     ferm.mistakePoints += pointsToAdd;
     updateActiveFerm(ferm);
 }
 
+// ***tested ✔
 export function updateActiveFerm(ferm) {
     const activeFerms = getActiveFerms();
     for (let i = 0 ; i < activeFerms.length ; i++) {
@@ -112,6 +115,7 @@ export function updateActiveFerm(ferm) {
     setActiveFerms(activeFerms);
 }
 
+// ***tested ✔
 export function updateAction(fermID, completedAction) {
     const ferm = getActiveFermById(fermID);
     const actions = ferm.actions;
@@ -131,7 +135,7 @@ export function fastForwardGame(daysToAdd) {
     setActiveFerms(ferms);
 }
 
-
+// ***tested ✔
 export function getRemainingActionsCount(fermId) {
     const ferm = getActiveFermById(fermId);
     let count = 0;
@@ -143,13 +147,28 @@ export function getRemainingActionsCount(fermId) {
     return count;
 }
 
+// ***tested ✔
 export function getFermNameById(fermId) {
     const ferm = getActiveFermById(fermId);
     return ferm.isAdult ? ferm.adult : ferm.baby;
 }
 
+// ***tested ✔
 export function setFermToAdultById(fermId) {
     const ferm = getActiveFermById(fermId);
     ferm.isAdult = true;
+    updateActiveFerm(ferm);
+}
+
+// ***tested ✔
+export function getHintsRemaining(fermId) {
+    const ferm = getActiveFermById(fermId);
+    return ferm.hintsRemaining;
+}
+
+// ***tested ✔
+export function setHintsRemaining(fermId, newHintsRemaining) {
+    const ferm = getActiveFermById(fermId);
+    ferm.hintsRemaining = newHintsRemaining;
     updateActiveFerm(ferm);
 }

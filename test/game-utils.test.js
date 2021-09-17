@@ -389,137 +389,51 @@ test('evaluateMistakePoints doesnt change mood', assert => {
         id: 1,
         mistakePoints: 0,
         mood: 'happy'
-    }];
+    },
+    {
+        id: 2,
+        mistakePoints: 9,
+        mood: 'happy'
+    },
+    {
+        id: 3,
+        mistakePoints: 11,
+        mood: 'happy'
+    },
+    {
+        id: 4,
+        mistakePoints: 21,
+        mood: 'happy',
+        isDead: false
+    }
+    ];
     //Push new ferm to active storage.
     setActiveFerms(staticFermObj);
     //Call evaluateMistakePoints
     evaluateMistakePoints(1);
     //Check the ferm in local storage to see that mood is what is expected.
     const expected = 'happy';
-
     const actual = getActiveFermById(1).mood;
-    
-    assert.equal(actual, expected);
-});
-
-test('evaluateMistakePoints changes mood to neutral', assert => {
-    localStorage.removeItem(GAMEDATA);
-
-    const staticFermObj = [{
-        id: 2,
-        mistakePoints: 9,
-        mood: 'happy'
-    }];
-
-    setActiveFerms(staticFermObj);
+    assert.equal(actual, expected, 'is happy');
 
     evaluateMistakePoints(2);
+    const expectedTwo = 'neutral';
+    const actualTwo = getActiveFermById(2).mood;
+    assert.equal(actualTwo, expectedTwo);
 
-    const expected = 'neutral';
-    const actual = getActiveFermById(2).mood;
-
-    assert.equal(actual, expected);
-});
-
-test('evaluateMistakePoints changes mood to sad', assert => {
-    
-    localStorage.removeItem(GAMEDATA);
-    
-    const staticFermObj = [{
-        id: 3,
-        mistakePoints: 11,
-        mood: 'happy'
-    }];
-    
-    setActiveFerms(staticFermObj);
-    
     evaluateMistakePoints(3);
-    
-    const expected = 'sad';
-    const actual = getActiveFermById(3).mood;
+    const expectedThree = 'sad';
+    const actualThree = getActiveFermById(3).mood;
+    assert.equal(actualThree, expectedThree);
 
-    assert.equal(actual, expected);
+    evaluateMistakePoints(4);
+    const expectedFour = 'sad';
+    const actualFour = getActiveFermById(4).mood;
+    const expectedFive = true;
+    const actualFive = getActiveFermById(4).isDead;
+    assert.equal(actualFour, expectedFour, 'Mood is sad');
+    assert.equal(actualFive, expectedFive, 'isDead is true');
 });
 
-test('evaluateMistakePoints changes mood to sad and sets isDead to true', assert => {
-   
-    localStorage.removeItem(GAMEDATA);
-    
-    const staticFermObj = [{
-        id: 3,
-        mistakePoints: 21,
-        mood: 'happy',
-        isDead: false
-    }];
-    
-    setActiveFerms(staticFermObj);
-    
-    evaluateMistakePoints(3);
- 
-    const expected1 = 'sad';
-    const actual1 = getActiveFermById(3).mood;
-
-    const expected2 = true;
-    const actual2 = getActiveFermById(3).isDead;
-
-    assert.equal(actual1, expected1, 'Mood is sad');
-    assert.equal(actual2, expected2, 'isDead is true');
-});
-
-// test('updateState if ferm is of age and isnt already completed', assert => {
-//     //  Clear storage    
-//     localStorage.removeItem(GAMEDATA);
-//     // Declare a static game data obj
-//     const staticGameData = {
-//         activeFerms: [
-//             {
-//                 age: 20,
-//                 id: 4,
-//                 mistakePoints: 20,
-//                 mood: 'happy',
-//                 isDead: false,
-//                 completed: false,
-//                 endDay: 20,
-//                 rewardXP: 20,
-//                 actions: []
-//             }
-//             // ,
-//             // {
-//             //     age: 0,
-//             //     id: 5,
-//             //     mistakePoints: 20,
-//             //     mood: 'happy',
-//             //     isDead: false,
-//             //     completed: false,
-//             //     xp: 0
-//             // }
-//         ],
-//         completedFerms: [],
-//         selectedFermIndex: 1,
-//         unlockedFerms: 1,
-//         xp: 0
-//     };
-//     // Send staticGameData to local storage
-//     setGameData(staticGameData);
-    
-//     // Call updateState
-//     updateState();
-
-//     //Check if ferm is set to complete as actual
-//     const completedActual = getActiveFerms()[0].completed;
-//     const completedExpected = true;
-
-//     // Check if XP has increased by rewardXP
-//     const xpActual = getGameData().xp;
-//     const xpExpected = 20;
-
-//     // 
-
-//     // const expected2 = true;
-//     // const actual2 = getActiveFermById(3).isDead;
-
-//     assert.equal(completedActual, completedExpected, 'Completed is true');
-//     assert.equal(xpActual, xpExpected, 'xp is 20');
-// });
 
 

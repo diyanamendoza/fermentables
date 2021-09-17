@@ -100,6 +100,25 @@ body {
     color: white;
 }
 
+#hint-container {
+    margin-bottom: 15px;
+}
+
+#hint-container > button {
+    border: 1px solid black;
+    font-family: 'Anonymous Pro', monospace;
+    background-color: rgb(176, 240, 133);
+    padding: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+#hint-container > button:hover {
+    background-color: black;
+    color: white;
+}
+
+
 img {
     width: 150px;
     cursor: pointer;
@@ -212,30 +231,77 @@ input[type="radio"]:checked + img {
    }
 }
 
+/* 🌛 FF-Animation ⭐ */
+/* For img */
+.anim-ff-img-start{
+    position: absolute;
+    width: 50vw;
+    transform: translateY(-50vh);
+    z-index: -1;
+    left: 25%;
+}
+
+/* For img */
+.anim-ff-drop-moon{
+    animation: drop-moon 1.2s linear forwards;
+    animation-delay: .40s;
+}
+
+/* For body */
+.anim-ff-color{
+    animation: fade-to-night-and-back 2s linear;
+    z-index: -2
+}
+
+
+@keyframes drop-moon{
+    0%{
+       transform: translateY(-50vh);
+    }
+    10%{
+        transform: translateY(-2vh);
+    }
+    22%{
+        transform: translateY(-3vh);
+    }
+    35%{
+        transform: translateY(-1vh);
+    }
+    55%{
+        transform: translateY(-1.5vh);
+    }
+    90%{
+        transform: translateY(-1vh);
+    } 
+    100%{
+        transform: translateY(-50vh);
+    }
+
+}
+
+
+@keyframes fade-to-night-and-back {
+    25%{
+       background-color: rgba(10, 10, 50, 0.5);
+    }
+    50%{
+       background-color: rgb(5, 5, 20);
+    }
+    75%{
+       background-color: rgba(10, 10, 50, 0.5);
+    }
+    100%{
+       background-color: white;
+    }
+}
+/* 🌛 ... ⭐ */
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.highlight {
+    border-color: red !important;
+    color: red;
+}
 
 @media only screen and (max-device-width: 699px)
  {
@@ -249,6 +315,12 @@ input[type="radio"]:checked + img {
     #ferm-gallery {
         max-height: 250px;
         overflow: scroll;
+    }
+
+    /* FF animation IMG: sets size to 70% of view width and displaces left 15%(centers) */
+    .anim-ff-img-start{
+        width: 70vw;
+        left: 15%;
     }
 
     input + img {

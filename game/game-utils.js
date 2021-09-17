@@ -1,6 +1,6 @@
 import { fermsTemplate } from '../fermentables-template.js';
 import { displayMessage, reRenderGamePage } from './game-render-utils.js';
-import { addToMistakePoints, addXP, deactivateFerm, getActiveFermById, getActiveFerms, getFermNameById, setActiveFerms, updateAction, updateActiveFerm } from '../local-storage-utils.js';
+import { addToMistakePoints, addXP, deactivateFerm, getActionsForFermID, getActiveFermById, getActiveFerms, getFermNameById, setActiveFerms, updateAction, updateActiveFerm } from '../local-storage-utils.js';
 import { updateNavXP } from '../render-utils.js';
 
 // ***tested ✔
@@ -76,6 +76,7 @@ export function updateState() {
     updateNavXP();
 }
 
+//tested ✔
 //checkAction handles the user selecting an action for a ferm. It does the
 //following:
 //--applies 10 mistake points if the action doesn't exist for the ferm
@@ -179,4 +180,81 @@ export function getAllActionNamesForFerms(arrayOfFerms) {
     }
     actionNames.sort();
     return actionNames;
+}
+
+// Can't be tested?
+export function runFFAnimation(){
+    const htmlEls = document.getElementsByTagName('html');
+    const htmlEl = htmlEls[0];
+    const bodyEls = document.getElementsByTagName('body');
+    const bodyEl = bodyEls[0];
+    
+    // To prevent rendering extra imgs: could check if html classlist already contains anim-ff-color before attempting to render another img.
+    const imgEl = document.createElement('img');
+    
+    imgEl.classList.add('anim-ff-img-start');
+    htmlEl.classList.add('anim-ff-color');
+    imgEl.classList.add('anim-ff-drop-moon');
+    
+    imgEl.src = '../assets/moon-and-stars-transparent-5.png';
+    
+    bodyEl.prepend(imgEl);
+    
+    setTimeout(() => {
+        bodyEl.removeChild(imgEl);
+        htmlEl.classList.remove('anim-ff-color');
+    }, 2500);
+}
+
+    //Returns the correct action, 'FF1', or 'FF7'
+export function getCorrectOptionForFerm(fermId) {
+    const ferm = getActiveFermById(fermId);
+    const actions = getActionsForFermID(fermId);
+    for (const action of actions) {
+        if (ferm.age >= action.startDay && ferm.age < action.endDay) {
+            if (!action.completed) {
+                return action.action;
+            }
+        }
+    }
+    for (const action of actions) {
+        if (ferm.age + 1 >= action.startDay && ferm.age + 1 < action.endDay) {
+            return 'FF1';
+        }
+    }
+    for (const action of actions) {
+        if (ferm.age + 1 >= action.startDay && ferm.age + 1 < action.endDay) {
+            return 'FF7';
+        }
+    }
+    return 'FF7';
+}
+
+// Needs to be tested
+export function getRandomOption() {
+    const allActions = getAllActionNames();
+    allActions.push('FF1');
+    allActions.push('FF7');
+    const randomIndex = Math.floor(Math.random() * allActions.length);
+    return allActions[randomIndex];
+}
+
+// Needs to be tested
+export function getUniqueRandomOption(arrayOfOtherOptions) {
+    let newOption = getRandomOption();
+    let unique = false;
+    while (!unique) {
+        let allUnique = true;
+        for (const otherOption of arrayOfOtherOptions) {
+            if (newOption === otherOption) {
+                allUnique = false;
+            }
+        }
+        if (!allUnique) {
+            newOption = getRandomOption();
+        } else {
+            unique = true;
+        }
+    }
+    return newOption;
 }
