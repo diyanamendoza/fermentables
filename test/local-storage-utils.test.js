@@ -1,7 +1,7 @@
 // IMPORT MODULES under test here:
 // import { example } from '../example.js';
 
-import { addToActiveFerms, addToCompletedFerms, addXP, deactivateFerm, fastForwardGame, GAMEDATA, getActiveFermById, getActiveFerms, getGameData, getSelectedFermIndex, setActiveFerms, setGameData, setSelectedFermIndex } from '../local-storage-utils.js';
+import { addToActiveFerms, addToCompletedFerms, addToMistakePoints, addXP, deactivateFerm, fastForwardGame, GAMEDATA, getActionsForFermID, getActiveFermById, getActiveFermIndex, getActiveFerms, getFermNameById, getGameData, getHintsRemaining, getRemainingActionsCount, getSelectedFermIndex, setActiveFerms, setFermToAdultById, setGameData, setHintsRemaining, setSelectedFermIndex, updateAction, updateActiveFerm } from '../local-storage-utils.js';
 
 const test = QUnit.test;
 
@@ -323,6 +323,216 @@ test('setSelectedFermIndex sets the selectedFermIndex property value in local st
     const actual = getSelectedFermIndex();
     const expected = 1;
 
+    assert.equal(actual, expected);
+});
+
+
+test('getActionsForFermID returns the expected set of actions from local storage', assert => {
+    // clear local storage
+    localStorage.removeItem(GAMEDATA);
+    
+    const staticGameDataObj = {
+        activeFerms: [
+            { id: 1, actions: [1, 2, 3] },
+            { id: 2, actions: [4, 5, 6] }, 
+            { id: 3, actions: [7, 8, 9] }, 
+        ]
+    };
+   
+    setGameData(staticGameDataObj);
+   
+    const actual = getActionsForFermID(2);
+    const expected = [4, 5, 6];
+
+    assert.deepEqual(actual, expected);
+});
+
+test('addToMistakePoints adds the correct amount of points to the correct ferm in local storage', assert => {
+    // clear local storage
+    localStorage.removeItem(GAMEDATA);
+    
+    const staticGameDataObj = {
+        activeFerms: [
+            { id: 1, actions: [1, 2, 3], mistakePoints: 0 },
+            { id: 2, actions: [4, 5, 6], mistakePoints: 0 }, 
+        ]
+    };
+   
+    setGameData(staticGameDataObj);
+
+    addToMistakePoints(2, 5);
+    
+    const correctActual = getActiveFermById(2).mistakePoints;
+    const correctExpected = 5;
+
+    const wrongActual = getActiveFermById(1).mistakePoints;
+    const wrongExpected = 0;
+    
+    assert.equal(correctActual, correctExpected, 'adds correct points to correct ferm');
+    assert.equal(wrongActual, wrongExpected, 'doesn\'t add points to the incorrect ferm');
+});
+
+test('updateActiveFerm updates the correct ferm in local storage', assert => {
+    // clear local storage
+    localStorage.removeItem(GAMEDATA);
+    
+    const staticGameDataObj = {
+        activeFerms: [
+            { id: 1, actions: [1, 2, 3], mistakePoints: 0 },
+            { id: 2, actions: [4, 5, 6], mistakePoints: 0 }, 
+        ]
+    };
+   
+    setGameData(staticGameDataObj);
+
+    const expected = { id: 2, actions: [9, 8, 7], mistakePoints: 8 };
+
+    updateActiveFerm(expected);
+
+    const actual = getActiveFermById(2);
+    
+    assert.deepEqual(actual, expected);
+});
+
+test('updateAction updates the correct action in local storage', assert => {
+    // clear local storage
+    localStorage.removeItem(GAMEDATA);
+    
+    const staticGameDataObj = {
+        activeFerms: [
+            { id: 1, actions: [{ id: 1 }, { id: 2 }, { id: 3 }] },
+            { id: 2, actions: [{ id: 4 }, { id: 5, updated: false }, { id: 6 }] }, 
+        ]
+    };
+   
+    setGameData(staticGameDataObj);
+
+    updateAction(2, { id: 5, updated: true });
+    
+    const expected = true;
+    const actual = getActionsForFermID(2)[1].updated;
+    
+    assert.equal(actual, expected);
+});
+
+test('getFermNameByID returns the correct ferm name from local storage', assert => {
+    // clear local storage
+    localStorage.removeItem(GAMEDATA);
+    
+    const staticGameDataObj = {
+        activeFerms: [
+            { id: 1, baby: 'test1', adult: 'test2', isAdult: false },
+            { id: 2, baby: 'test1', adult: 'test2', isAdult: true } 
+        ]
+    };
+   
+    setGameData(staticGameDataObj);
+    
+    const testOneExpected = 'test1';
+    const testOneActual = getFermNameById(1);
+    assert.equal(testOneActual, testOneExpected, 'returns baby name');
+    
+    const testTwoExpected = 'test2';
+    const testTwoActual = getFermNameById(2);
+    assert.equal(testTwoActual, testTwoExpected, 'returns adult name');
+});
+
+
+test('getRemainingActionsCount returns the correct number of actions from local storage', assert => {
+    // clear local storage
+    localStorage.removeItem(GAMEDATA);
+    
+    const staticGameDataObj = {
+        activeFerms: [
+            { id: 1, actions: [1, 2] },
+            { id: 2, actions: [4, 5, 6] }, 
+        ]
+    };
+   
+    setGameData(staticGameDataObj);
+    
+    const expected = 3;
+    const actual = getRemainingActionsCount(2);
+
+    assert.equal(actual, expected, 'returns baby name');
+});
+
+test('setFermToAdultByID updates the correct ferms isAdult property value in local storage', assert => {
+    // clear local storage
+    localStorage.removeItem(GAMEDATA);
+    
+    const staticGameDataObj = {
+        activeFerms: [
+            { id: 1, isAdult: false },
+            { id: 2, isAdult: false } 
+        ]
+    };
+   
+    setGameData(staticGameDataObj);
+
+    setFermToAdultById(2);
+    
+    const expected = true;
+    const actual = getActiveFermById(2).isAdult;
+    assert.equal(actual, expected);
+});
+
+test('getHintsRemaining returns the correct number from local storage', assert => {
+    // clear local storage
+    localStorage.removeItem(GAMEDATA);
+    
+    const staticGameDataObj = {
+        activeFerms: [
+            { id: 1, hintsRemaining: 4 },
+            { id: 2, hintsRemaining: 3 } 
+        ]
+    };
+   
+    setGameData(staticGameDataObj);
+    
+    const expected = 3;
+    const actual = getHintsRemaining(2);
+
+    assert.equal(actual, expected);
+});
+
+test('setHintsRemaining updates the correct ferms hintsRemaining property value with the correct number in local storage', assert => {
+    // clear local storage
+    localStorage.removeItem(GAMEDATA);
+    
+    const staticGameDataObj = {
+        activeFerms: [
+            { id: 1, hintsRemaining: 4 },
+            { id: 2, hintsRemaining: 3 } 
+        ]
+    };
+   
+    setGameData(staticGameDataObj);
+
+    setHintsRemaining(2, 8);
+    
+    const expected = 8;
+    const actual = getHintsRemaining(2);
+    
+    assert.equal(actual, expected);
+});
+
+test('getActiveFermIndex returns the correct index of a ferm in local storage', assert => {
+    // clear local storage
+    localStorage.removeItem(GAMEDATA);
+    
+    const staticGameDataObj = {
+        activeFerms: [
+            { id: 1, hintsRemaining: 4 },
+            { id: 2, hintsRemaining: 3 } 
+        ]
+    };
+   
+    setGameData(staticGameDataObj);
+    
+    const expected = 1;
+    const actual = getActiveFermIndex(2);
+    
     assert.equal(actual, expected);
 });
 
