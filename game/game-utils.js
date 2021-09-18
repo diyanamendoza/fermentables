@@ -97,7 +97,6 @@ export function checkAction(actionName, fermID) {
     let isNotInOrder = false;
     for (let action of actions) {
         if (action.sequence && doesActionExist) {
-            console.log(action.sequence);
             if (action.sequence < doesActionExist.sequence && !action.completed) {
                 isNotInOrder = true;
             }
