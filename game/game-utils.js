@@ -61,12 +61,14 @@ export function updateState() {
             runXPGainAnim(ferm.id, ferm.rewardXP);
             displayMessage(ferm.successMessage + ` You gained ${ferm.rewardXP} xp.`);
             addXP(ferm.rewardXP);
-            // Update active ferms after completing on line 56.
-            updateActiveFerm(ferm);
-            // Rerender active ferms to catch completed ferm and animate.
-            reRenderGamePage();
-            // remove ferm from active ferms
+            console.log('hi');
+            // Is this still needed?
             deactivateFerm(ferm.id);
+            updateActiveFerm(ferm);
+            // Shouldn't this be on line 68.5? 
+            setTimeout(() => {
+                reRenderGamePage();
+            }, 1250)
         }
         //update mood
         evaluateMistakePoints(ferm.id);
@@ -193,29 +195,6 @@ export function getAllActionNamesForFerms(arrayOfFerms) {
     }
     actionNames.sort();
     return actionNames;
-}
-
-// Can't be tested?
-export function runFFAnimation(){
-    const htmlEls = document.getElementsByTagName('html');
-    const htmlEl = htmlEls[0];
-    const bodyEls = document.getElementsByTagName('body');
-    const bodyEl = bodyEls[0];
-    
-    // To prevent rendering extra imgs: could check if html classlist already contains anim-ff-color before attempting to render another img.
-    const imgEl = document.createElement('img');
-    
-    htmlEl.classList.add('anim-ff-color');
-    imgEl.classList.add('anim-ff-drop-moon');
-    
-    imgEl.src = '../assets/moon-and-stars-transparent-5.png';
-    
-    bodyEl.prepend(imgEl);
-    
-    setTimeout(() => {
-        bodyEl.removeChild(imgEl);
-        htmlEl.classList.remove('anim-ff-color');
-    }, 2500);
 }
 
     //Returns the correct action, 'FF1', or 'FF7'

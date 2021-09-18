@@ -233,7 +233,6 @@ input[type="radio"]:checked + img {
 }
 
 /* 🌛 FF-Animation ⭐ */
-
 /* For img */
 .anim-ff-drop-moon{
     animation: drop-moon 1.2s linear forwards;

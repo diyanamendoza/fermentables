@@ -1,6 +1,7 @@
 import { fastForwardGame, getActiveFerms, getRemainingActionsCount, getFermNameById, getActiveFermById, getSelectedFermIndex, getActiveFermIndex, setSelectedFermIndex, getHintsRemaining, setHintsRemaining } from '../local-storage-utils.js';
 import { getImageForFerm } from '../render-utils.js';
-import { checkAction, getAllActionNames, getCorrectOptionForFerm, getUniqueRandomOption, updateState, runFFAnimation } from './game-utils.js';
+import { checkAction, getAllActionNames, getCorrectOptionForFerm, getUniqueRandomOption, updateState} from './game-utils.js';
+import { runFFAnim } from './game-anim-utils.js';
 
 // ***tested ✔
 export function renderActionButtons() {
@@ -50,7 +51,7 @@ export function renderFFOneDayButton() {
         fastForwardGame(1);
         updateState();
         reRenderGamePage();
-        runFFAnimation();
+        runFFAnim();
     });
     return button;
 }
@@ -65,7 +66,7 @@ export function renderFFOneWeekButton() {
         fastForwardGame(7);
         updateState();
         reRenderGamePage();
-        runFFAnimation();
+        runFFAnim();
     });
     return button;
 }
@@ -80,7 +81,7 @@ export function renderFFOneMonthButton() {
         fastForwardGame(30);
         updateState();
         reRenderGamePage();
-        runFFAnimation();
+        runFFAnim();
     });
     return button;
 }
