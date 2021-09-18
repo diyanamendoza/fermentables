@@ -9,7 +9,7 @@ import { runXPGainAnim } from '../anim-utils.js';
 //should have based on mistake points
 export function evaluateMistakePoints(fermID) {
     const ferm = getActiveFermById(fermID);
-    if (ferm) {
+    if (!ferm.isDead) {
         let mood = 'happy';
         if (ferm.mistakePoints > 0 && ferm.mistakePoints <= 10) {
             mood = 'neutral';
@@ -98,7 +98,7 @@ export function checkAction(actionName, fermID) {
     // find out if the action is out of sequence
     let isNotInOrder = false;
     for (let action of actions) {
-        if (action.sequence) {
+        if (action.sequence && doesActionExist) {
             if (action.sequence < doesActionExist.sequence && !action.completed) {
                 isNotInOrder = true;
             }
