@@ -116,6 +116,7 @@ export function renderActiveFerms() {
         elP.classList.add('xp-text-start');
         fermImg.src = getImageForFerm(ferm.id);
         fermImg.classList.add('ferm-img');
+        fermImg.setAttribute('id', ferm.id);
         fermInput.type = 'radio';
         fermInput.setAttribute('value', `${ferm.id}`);
         fermInput.name = 'ferm';
@@ -128,13 +129,6 @@ export function renderActiveFerms() {
             fermInput.disabled = 'true';
         } else {
             fermImg.classList.add('alive');
-        }
-
-        // If ferm is completed, run xp-gain animation
-        if (ferm.completed === true){
-            fermImg.style.display = 'none';
-            elP.textContent = `+${ferm.rewardXP}`;
-            elP.className = 'gain-xp';
         }
 
         fermInput.addEventListener('click', () => {

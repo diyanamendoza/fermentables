@@ -2,6 +2,7 @@ import { fermsTemplate } from '../fermentables-template.js';
 import { displayMessage, reRenderGamePage } from './game-render-utils.js';
 import { addToMistakePoints, addXP, deactivateFerm, getActionsForFermID, getActiveFermById, getActiveFerms, getFermNameById, updateAction, updateActiveFerm } from '../local-storage-utils.js';
 import { updateNavXP } from '../render-utils.js';
+import { runXPGainAnim } from '../anim-utils.js';
 
 // ***tested ✔
 //Determines what mood and aliveness the ferm
@@ -57,6 +58,7 @@ export function updateState() {
         }
         if (ferm.age >= ferm.endDay && !ferm.isDead && !ferm.completed) {
             ferm.completed = true;
+            runXPGainAnim(ferm.id, ferm.rewardXP);
             displayMessage(ferm.successMessage + ` You gained ${ferm.rewardXP} xp.`);
             addXP(ferm.rewardXP);
             // Update active ferms after completing on line 56.
