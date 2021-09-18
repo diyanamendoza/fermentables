@@ -2,7 +2,7 @@ import { fermsTemplate } from '../fermentables-template.js';
 import { displayMessage, reRenderGamePage } from './game-render-utils.js';
 import { addToMistakePoints, addXP, deactivateFerm, getActionsForFermID, getActiveFermById, getActiveFerms, getFermNameById, updateAction, updateActiveFerm } from '../local-storage-utils.js';
 import { updateNavXP } from '../render-utils.js';
-import { runXPGainAnim } from '../anim-utils.js';
+import { runXPGainAnim } from '../game-anim-utils.js';
 
 // ***tested ✔
 //Determines what mood and aliveness the ferm
