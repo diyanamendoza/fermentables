@@ -1,6 +1,6 @@
 import { fastForwardGame, getActiveFerms, getRemainingActionsCount, getFermNameById, getActiveFermById, getSelectedFermIndex, getActiveFermIndex, setSelectedFermIndex, getHintsRemaining, setHintsRemaining } from '../local-storage-utils.js';
 import { getImageForFerm } from '../render-utils.js';
-import { checkAction, getAllActionNames, getCorrectOptionForFerm, getUniqueRandomOption, updateState} from './game-utils.js';
+import { checkAction, getAllActionNames, getCorrectOptionForFerm, getUniqueRandomOption, updateState } from './game-utils.js';
 import { runFFAnim } from './game-anim-utils.js';
 
 // ***tested ✔

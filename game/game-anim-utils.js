@@ -61,3 +61,4 @@ export function runFFAnim(){
         htmlEl.classList.remove('anim-ff-color');
     }, 2500);
 }
+

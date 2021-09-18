@@ -61,14 +61,13 @@ export function updateState() {
             runXPGainAnim(ferm.id, ferm.rewardXP);
             displayMessage(ferm.successMessage + ` You gained ${ferm.rewardXP} xp.`);
             addXP(ferm.rewardXP);
-            console.log('hi');
             // Is this still needed?
             deactivateFerm(ferm.id);
             updateActiveFerm(ferm);
             // Shouldn't this be on line 68.5? 
             setTimeout(() => {
                 reRenderGamePage();
-            }, 1250)
+            }, 1250);
         }
         //update mood
         evaluateMistakePoints(ferm.id);
