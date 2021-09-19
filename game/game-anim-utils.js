@@ -17,6 +17,7 @@ export function runXPGainAnim(fermId, rewardXp){
 
     // Adds appropriate reward xp to textcontent of p element.
     elP.textContent = `+${rewardXp}`;
+
     // Hides the ferm img.
     fermEl.style.display = 'none';
 

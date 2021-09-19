@@ -209,7 +209,7 @@ export function getAllActionNamesForFerms(arrayOfFerms) {
     return actionNames;
 }
 
-    //Returns the correct action, 'FF1', or 'FF7'
+//Returns the correct action, 'FF1', or 'FF7'
 export function getCorrectOptionForFerm(fermId) {
     // get the active ferm by id
     const ferm = getActiveFermById(fermId);
@@ -219,7 +219,7 @@ export function getCorrectOptionForFerm(fermId) {
     for (const action of actions) {
         // If ferm age is greater than or equal to action start date, and ferm age is less than the actions end date, and action is not completed...
         if (ferm.age >= action.startDay && ferm.age < action.endDay && !action.completed) {
-                // Return name of action
+            // Return name of action
             return action.action;
         }
         // if there's a correct action to take on the next day...
