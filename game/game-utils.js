@@ -225,22 +225,12 @@ export function getCorrectOptionForFerm(fermId) {
                 return action.action;
             }
         }
-    }
-    // For each action...
-    for (const action of actions) {
         // if there's a correct action to take on the next day...
         if (ferm.age + 1 >= action.startDay && ferm.age + 1 < action.endDay) {
             // return fast forward one day
             return 'FF1';
         }
     }
-    // 🚩 This is identical to lines 230-236
-    for (const action of actions) {
-        if (ferm.age + 1 >= action.startDay && ferm.age + 1 < action.endDay) {
-            return 'FF7';
-        }
-    } 
-    // 🚩
     // If no other condition is met, return fast forward 7 days
     return 'FF7';
 }
