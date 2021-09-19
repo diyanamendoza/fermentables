@@ -217,13 +217,10 @@ export function getCorrectOptionForFerm(fermId) {
     const actions = getActionsForFermID(fermId);
     // for each action...
     for (const action of actions) {
-        // If ferm age is greater than or equal to action start date, and ferm age is less than the actions end date...
-        if (ferm.age >= action.startDay && ferm.age < action.endDay) {
-            // If action is not completed... (could this be on line 221?)
-            if (!action.completed) {
+        // If ferm age is greater than or equal to action start date, and ferm age is less than the actions end date, and action is not completed...
+        if (ferm.age >= action.startDay && ferm.age < action.endDay && !action.completed) {
                 // Return name of action
-                return action.action;
-            }
+            return action.action;
         }
         // if there's a correct action to take on the next day...
         if (ferm.age + 1 >= action.startDay && ferm.age + 1 < action.endDay) {
@@ -234,6 +231,7 @@ export function getCorrectOptionForFerm(fermId) {
     // If no other condition is met, return fast forward 7 days
     return 'FF7';
 }
+
 
 // Needs to be tested
 export function getRandomOption() {
