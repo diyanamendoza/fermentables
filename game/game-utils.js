@@ -33,21 +33,28 @@ export function evaluateMistakePoints(fermID) {
 //DYLAN
 export function updateState() {
     const ferms = getActiveFerms();
-    //loop through each active ferm
+    // loop through each active ferm
     for (const ferm of ferms) {
-        //find missed actions
+        // loop through each action within each ferm
         for (const action of ferm.actions) {
+            // If ferm age is greater or equal to action end day, and action is not completed, and action is not missed...
             if (ferm.age >= action.endDay && !action.completed && !action.missed) {
-                //missed action
+                // If action is required...
                 if (action.required) {
-                    //kill
+                    //If ferm is not dead...
                     if (!ferm.isDead) {
+                        // Kill ferm
                         ferm.isDead = true;
+                        // Set ferm mood to sad
                         ferm.mood = 'sad';
+                        // Retrieves name based on age of ferm
                         const fermName = getFermNameById(ferm.id);
+                        // Display message to user
                         displayMessage(`Your ${fermName} is now dead.`);
+                        // Save changes to current ferm
                         updateActiveFerm(ferm);
                     }
+                 // If action is not required...
                 } else {
                     //dock points
                     ferm.mistakePoints += action.mistakePoints;
@@ -56,15 +63,21 @@ export function updateState() {
                 action.missed = true;
             }
         }
+        // If ferm age is greater than or equal to ferm end day, and ferm is not dead, and ferm is not completed...
         if (ferm.age >= ferm.endDay && !ferm.isDead && !ferm.completed) {
+            // Completed ferm
             ferm.completed = true;
+            // Run xp animation on current ferm
             runXPGainAnim(ferm.id, ferm.rewardXP);
+            // Display messsage to user
             displayMessage(ferm.successMessage + ` You gained ${ferm.rewardXP} xp.`);
+            // Save experience to users data
             addXP(ferm.rewardXP);
-            // Is this still needed?
+            // Remove the ferm from active ferms and saves in completed ferms data
             deactivateFerm(ferm.id);
+            // Saves changes to the ferm
             updateActiveFerm(ferm);
-            // Shouldn't this be on line 68.5? 
+            // Waits 1.25 seconds to allow xp gain animation to run, then rerenders the page without the completed ferm.
             setTimeout(() => {
                 reRenderGamePage();
             }, 1250);
@@ -198,25 +211,37 @@ export function getAllActionNamesForFerms(arrayOfFerms) {
 
     //Returns the correct action, 'FF1', or 'FF7'
 export function getCorrectOptionForFerm(fermId) {
+    // get the active ferm by id
     const ferm = getActiveFermById(fermId);
+    // get the actions of ferm by id (could this be ferm.actions?)
     const actions = getActionsForFermID(fermId);
+    // for each action...
     for (const action of actions) {
+        // If ferm age is greater than or equal to action start date, and ferm age is less than the actions end date...
         if (ferm.age >= action.startDay && ferm.age < action.endDay) {
+            // If action is not completed... (could this be on line 221?)
             if (!action.completed) {
+                // Return name of action
                 return action.action;
             }
         }
     }
+    // For each action...
     for (const action of actions) {
+        // if there's a correct action to take on the next day...
         if (ferm.age + 1 >= action.startDay && ferm.age + 1 < action.endDay) {
+            // return fast forward one day
             return 'FF1';
         }
     }
+    // 🚩 This is identical to lines 230-236
     for (const action of actions) {
         if (ferm.age + 1 >= action.startDay && ferm.age + 1 < action.endDay) {
             return 'FF7';
         }
-    }
+    } 
+    // 🚩
+    // If no other condition is met, return fast forward 7 days
     return 'FF7';
 }
 
