@@ -382,7 +382,7 @@ test('getAllActionNames should not return duplicates', assert => {
 });
 
 //evaluateMistakePoints
-test('evaluateMistakePoints doesnt change mood', assert => {
+skip('evaluateMistakePoints doesnt change mood', assert => {
     //Empty storage
     localStorage.removeItem(GAMEDATA);
     //Create a ferm to be stored with mistakePoints
