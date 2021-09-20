@@ -57,10 +57,7 @@ export function renderFFOneDayButton() {
     button.textContent = 'fast forward one day';
     button.addEventListener('click', () => {
         fastForwardGame(1);
-        let shouldReRender = updateState();
-        if (shouldReRender) {
-            reRenderGamePage();
-        }
+        updateState();
         runFFAnim();
     });
     return button;
@@ -74,10 +71,7 @@ export function renderFFOneWeekButton() {
     button.textContent = 'fast forward one week';
     button.addEventListener('click', () => {
         fastForwardGame(7);
-        let shouldReRender = updateState();
-        if (shouldReRender) {
-            reRenderGamePage();
-        }
+        updateState();
         runFFAnim();
     });
     return button;
@@ -91,10 +85,7 @@ export function renderFFOneMonthButton() {
     button.textContent = 'fast forward one month';
     button.addEventListener('click', () => {
         fastForwardGame(30);
-        let shouldReRender = updateState();
-        if (shouldReRender) {
-            reRenderGamePage();
-        }
+        updateState();
         runFFAnim();
     });
     return button;

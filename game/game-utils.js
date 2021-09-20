@@ -35,7 +35,7 @@ export function evaluateMistakePoints(fermID) {
 //to true. 
 //DYLAN
 export function updateState() {
-    let shouldReRender = true;
+    // let shouldReRender = true;
     const ferms = getActiveFerms();
     // loop through each active ferm
     for (const ferm of ferms) {
@@ -48,52 +48,51 @@ export function updateState() {
                     //If ferm is not dead...
                     if (!ferm.isDead) {
                         // Kill ferm
-                        ferm.isDead = true;
+                        ferm.isDead = true; // works ✔
                         // Set ferm mood to sad
-                        ferm.mood = 'sad';
+                        ferm.mood = 'sad'; // works ✔
                         // Retrieves name based on age of ferm
-                        const fermName = getFermNameById(ferm.id);
+                        const fermName = getFermNameById(ferm.id); // works ✔
                         // Display message to user
-                        displayMessage(`Your ${fermName} is now dead.`);
-                        // Save changes to current ferm
-                        updateActiveFerm(ferm);
+                        displayMessage(`Your ${fermName} is now dead.`); // works ✔
                     }
-                 // If action is not required...
+                    // If action is not required...
                 } else {
                     //dock points
-                    ferm.mistakePoints += action.mistakePoints;
+                    ferm.mistakePoints += action.mistakePoints; // works ✔
                 }
                 //ensure user isn't affected by missing an action multiple times.
-                action.missed = true;
+                action.missed = true;  // works ✔
+                // Save changes to current ferm
+                updateActiveFerm(ferm); // works ✔
+                //update mood - this can be here instead of line 94.5 because there is no mutation of mistake points beyond this point.
+                evaluateMistakePoints(ferm.id); // works ✔
+                // rerender page to display updated ferm
+                reRenderGamePage();
             }
         }
         // If ferm age is greater than or equal to ferm end day, and ferm is not dead, and ferm is not completed...
         if (ferm.age >= ferm.endDay && !ferm.isDead && !ferm.completed) {
             // Completed ferm
-            ferm.completed = true;
+            ferm.completed = true; // works ✔
             // Run xp animation on current ferm
-            runXPGainAnim(ferm.id, ferm.rewardXP);
+            runXPGainAnim(ferm.id, ferm.rewardXP); // works ✔
             // Display messsage to user
-            displayMessage(ferm.successMessage + ` You gained ${ferm.rewardXP} xp.`);
+            displayMessage(ferm.successMessage + ` You gained ${ferm.rewardXP} xp.`);  // works ✔
             // Save experience to users data
-            addXP(ferm.rewardXP);
-            // Remove the ferm from active ferms and saves in completed ferms data
-            deactivateFerm(ferm.id);
+            addXP(ferm.rewardXP); // works ✔
             // Saves changes to the ferm
-            updateActiveFerm(ferm);
+            updateActiveFerm(ferm); // works ✔
+            // Remove the ferm from active ferms and saves in completed ferms data
+            deactivateFerm(ferm.id); // works ✔
             // Waits 1.25 seconds to allow xp gain animation to run, then rerenders the page without the completed ferm.
-            // Signal to the caller that it shouldn't call reRenderGamePage
-            shouldReRender = false;
             setTimeout(() => {
-                reRenderGamePage();
+                reRenderGamePage(); // works ✔
             }, 1250);
         }
-        //update mood
-        evaluateMistakePoints(ferm.id);
     }
     // rerender nav to show updated XP
-    updateNavXP();
-    return shouldReRender;
+    updateNavXP(); // works ✔
 }
 
 //tested ✔
@@ -214,7 +213,7 @@ export function getAllActionNamesForFerms(arrayOfFerms) {
     return actionNames;
 }
 
-    //Returns the correct action, 'FF1', or 'FF7'
+//Returns the correct action, 'FF1', or 'FF7'
 export function getCorrectOptionForFerm(fermId) {
     // get the active ferm by id
     const ferm = getActiveFermById(fermId);
@@ -224,7 +223,7 @@ export function getCorrectOptionForFerm(fermId) {
     for (const action of actions) {
         // If ferm age is greater than or equal to action start date, and ferm age is less than the actions end date, and action is not completed...
         if (ferm.age >= action.startDay && ferm.age < action.endDay && !action.completed) {
-                // Return name of action
+            // Return name of action
             return action.action;
         }
         // if there's a correct action to take on the next day...
