@@ -27,9 +27,9 @@ export function renderActionButtons() {
                 displayActionMessage(result, actionName, fermId);
                 evaluateMistakePoints(ferm.id);
                 ferm = getActiveFermById(fermId);
-                if (!ferm.isDead) {
-                    reRenderGamePage();
-                }
+                // if (!ferm.isDead) {
+                reRenderGamePage();
+                // }
             }
         });
         actionsDiv.append(newButton);
