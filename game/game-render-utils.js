@@ -1,6 +1,6 @@
 import { fastForwardGame, getActiveFerms, getRemainingActionsCount, getFermNameById, getActiveFermById, getSelectedFermIndex, getActiveFermIndex, setSelectedFermIndex, getHintsRemaining, setHintsRemaining } from '../local-storage-utils.js';
 import { getImageForFerm } from '../render-utils.js';
-import { checkAction, getAllActionNames, getCorrectOptionForFerm, getUniqueRandomOption, updateState } from './game-utils.js';
+import { checkAction, getAllActionNames, getCorrectOptionForFerm, getUniqueRandomOption, updateState, evaluateMistakePoints } from './game-utils.js';
 import { runFFAnim } from './game-anim-utils.js';
 
 // ***tested ✔
@@ -20,9 +20,14 @@ export function renderActionButtons() {
                 return;
             }
             const fermId = Number(selectedFerm.value);
-            const result = checkAction(actionName, fermId);
-            displayActionMessage(result, actionName, fermId);
-            reRenderGamePage();
+        // no action applied if ferm is already dead
+            const ferm = getActiveFermById(fermId);
+            if (!ferm.isDead) {
+                const result = checkAction(actionName, fermId);
+                displayActionMessage(result, actionName, fermId);
+                evaluateMistakePoints(ferm.id);
+                reRenderGamePage();
+            }
         });
         actionsDiv.append(newButton);
     }
