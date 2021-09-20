@@ -78,15 +78,16 @@ export function updateState() {
             // Saves changes to the ferm
             updateActiveFerm(ferm);
             // Waits 1.25 seconds to allow xp gain animation to run, then rerenders the page without the completed ferm.
-            setTimeout(() => {
-                reRenderGamePage();
-            }, 1250);
+            // setTimeout(() => {
+            //     reRenderGamePage();
+            // }, 1250);
         }
         //update mood
         evaluateMistakePoints(ferm.id);
     }
     // rerender nav to show updated XP
     updateNavXP();
+    reRenderGamePage();
 }
 
 //tested ✔

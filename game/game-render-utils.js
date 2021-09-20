@@ -50,7 +50,7 @@ export function renderFFOneDayButton() {
     button.addEventListener('click', () => {
         fastForwardGame(1);
         updateState();
-        reRenderGamePage();
+        // reRenderGamePage();
         runFFAnim();
     });
     return button;
