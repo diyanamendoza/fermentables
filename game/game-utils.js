@@ -9,7 +9,8 @@ import { runXPGainAnim } from './game-anim-utils.js';
 //should have based on mistake points
 export function evaluateMistakePoints(fermID) {
     const ferm = getActiveFermById(fermID);
-    if (!ferm.isDead) {
+    
+    if (ferm && !ferm.isDead) {
         let mood = 'happy';
         if (ferm.mistakePoints > 0 && ferm.mistakePoints <= 10) {
             mood = 'neutral';
@@ -18,6 +19,8 @@ export function evaluateMistakePoints(fermID) {
         } else if (ferm.mistakePoints > 20) {
             mood = 'sad';
             ferm.isDead = true;
+            const fermName = getFermNameById(ferm.id);
+            displayMessage(`Your ${fermName} is now dead.`);
         }
         ferm.mood = mood;
         updateActiveFerm(ferm);
@@ -172,8 +175,6 @@ export function checkAction(actionName, fermID) {
             result = false;
         }
     }
-    //update mood
-    evaluateMistakePoints(ferm.id);
     return result;
 }
 
