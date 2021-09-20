@@ -9,7 +9,8 @@ import { runXPGainAnim } from './game-anim-utils.js';
 //should have based on mistake points
 export function evaluateMistakePoints(fermID) {
     const ferm = getActiveFermById(fermID);
-    if (!ferm.isDead) {
+    
+    if (ferm && !ferm.isDead) {
         let mood = 'happy';
         if (ferm.mistakePoints > 0 && ferm.mistakePoints <= 10) {
             mood = 'neutral';
@@ -18,6 +19,8 @@ export function evaluateMistakePoints(fermID) {
         } else if (ferm.mistakePoints > 20) {
             mood = 'sad';
             ferm.isDead = true;
+            const fermName = getFermNameById(ferm.id);
+            displayMessage(`Your ${fermName} is now dead.`);
         }
         ferm.mood = mood;
         updateActiveFerm(ferm);
@@ -32,6 +35,7 @@ export function evaluateMistakePoints(fermID) {
 //to true. 
 //DYLAN
 export function updateState() {
+    // let shouldReRender = true;
     const ferms = getActiveFerms();
     // loop through each active ferm
     for (const ferm of ferms) {
@@ -44,50 +48,51 @@ export function updateState() {
                     //If ferm is not dead...
                     if (!ferm.isDead) {
                         // Kill ferm
-                        ferm.isDead = true;
+                        ferm.isDead = true; // works ✔
                         // Set ferm mood to sad
-                        ferm.mood = 'sad';
+                        ferm.mood = 'sad'; // works ✔
                         // Retrieves name based on age of ferm
-                        const fermName = getFermNameById(ferm.id);
+                        const fermName = getFermNameById(ferm.id); // works ✔
                         // Display message to user
-                        displayMessage(`Your ${fermName} is now dead.`);
-                        // Save changes to current ferm
-                        updateActiveFerm(ferm);
+                        displayMessage(`Your ${fermName} is now dead.`); // works ✔
                     }
-                 // If action is not required...
+                    // If action is not required...
                 } else {
                     //dock points
-                    ferm.mistakePoints += action.mistakePoints;
+                    ferm.mistakePoints += action.mistakePoints; // works ✔
                 }
                 //ensure user isn't affected by missing an action multiple times.
-                action.missed = true;
+                action.missed = true;  // works ✔
+                // Save changes to current ferm
+                updateActiveFerm(ferm); // works ✔
+                //update mood - this can be here instead of line 94.5 because there is no mutation of mistake points beyond this point.
+                evaluateMistakePoints(ferm.id); // works ✔
+                // rerender page to display updated ferm
+                reRenderGamePage(); // works ✔
             }
         }
         // If ferm age is greater than or equal to ferm end day, and ferm is not dead, and ferm is not completed...
         if (ferm.age >= ferm.endDay && !ferm.isDead && !ferm.completed) {
             // Completed ferm
-            ferm.completed = true;
+            ferm.completed = true; // works ✔
             // Run xp animation on current ferm
-            runXPGainAnim(ferm.id, ferm.rewardXP);
+            runXPGainAnim(ferm.id, ferm.rewardXP); // works ✔
             // Display messsage to user
-            displayMessage(ferm.successMessage + ` You gained ${ferm.rewardXP} xp.`);
+            displayMessage(ferm.successMessage + ` You gained ${ferm.rewardXP} xp.`);  // works ✔
             // Save experience to users data
-            addXP(ferm.rewardXP);
-            // Remove the ferm from active ferms and saves in completed ferms data
-            deactivateFerm(ferm.id);
+            addXP(ferm.rewardXP); // works ✔
             // Saves changes to the ferm
-            updateActiveFerm(ferm);
+            updateActiveFerm(ferm); // works ✔
+            // Remove the ferm from active ferms and saves in completed ferms data
+            deactivateFerm(ferm.id); // works ✔
             // Waits 1.25 seconds to allow xp gain animation to run, then rerenders the page without the completed ferm.
-            // setTimeout(() => {
-            //     reRenderGamePage();
-            // }, 1250);
+            setTimeout(() => {
+                reRenderGamePage(); // works ✔
+            }, 1250);
         }
-        //update mood
-        evaluateMistakePoints(ferm.id);
     }
     // rerender nav to show updated XP
-    updateNavXP();
-    reRenderGamePage();
+    updateNavXP(); // works ✔
 }
 
 //tested ✔
@@ -173,8 +178,6 @@ export function checkAction(actionName, fermID) {
             result = false;
         }
     }
-    //update mood
-    evaluateMistakePoints(ferm.id);
     return result;
 }
 

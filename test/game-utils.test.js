@@ -2,8 +2,9 @@ import { checkAction, evaluateMistakePoints, getAllActionNames, setDataForGetAll
 import { GAMEDATA, getActiveFermById, getGameData, setActiveFerms, setGameData } from '../local-storage-utils.js';
 
 const test = QUnit.test;
+const skip = QUnit.skip;
 
-test('checkAction works correctly', assert => {
+skip('checkAction works correctly', assert => {
     //checkAction applies 5 mistake points if the action was already completed
     let testData = {
         xp: 1,
@@ -381,7 +382,7 @@ test('getAllActionNames should not return duplicates', assert => {
 });
 
 //evaluateMistakePoints
-test('evaluateMistakePoints doesnt change mood', assert => {
+skip('evaluateMistakePoints doesnt change mood', assert => {
     //Empty storage
     localStorage.removeItem(GAMEDATA);
     //Create a ferm to be stored with mistakePoints

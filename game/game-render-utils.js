@@ -1,6 +1,6 @@
 import { fastForwardGame, getActiveFerms, getRemainingActionsCount, getFermNameById, getActiveFermById, getSelectedFermIndex, getActiveFermIndex, setSelectedFermIndex, getHintsRemaining, setHintsRemaining } from '../local-storage-utils.js';
 import { getImageForFerm } from '../render-utils.js';
-import { checkAction, getAllActionNames, getCorrectOptionForFerm, getUniqueRandomOption, updateState } from './game-utils.js';
+import { checkAction, getAllActionNames, getCorrectOptionForFerm, getUniqueRandomOption, updateState, evaluateMistakePoints } from './game-utils.js';
 import { runFFAnim } from './game-anim-utils.js';
 
 // ***tested ✔
@@ -20,9 +20,17 @@ export function renderActionButtons() {
                 return;
             }
             const fermId = Number(selectedFerm.value);
-            const result = checkAction(actionName, fermId);
-            displayActionMessage(result, actionName, fermId);
-            reRenderGamePage();
+        // no action applied if ferm is already dead
+            let ferm = getActiveFermById(fermId);
+            if (!ferm.isDead) {
+                const result = checkAction(actionName, fermId);
+                displayActionMessage(result, actionName, fermId);
+                evaluateMistakePoints(ferm.id);
+                ferm = getActiveFermById(fermId);
+                // if (!ferm.isDead) {
+                reRenderGamePage();
+                // }
+            }
         });
         actionsDiv.append(newButton);
     }
@@ -50,7 +58,6 @@ export function renderFFOneDayButton() {
     button.addEventListener('click', () => {
         fastForwardGame(1);
         updateState();
-        // reRenderGamePage();
         runFFAnim();
     });
     return button;
@@ -65,7 +72,6 @@ export function renderFFOneWeekButton() {
     button.addEventListener('click', () => {
         fastForwardGame(7);
         updateState();
-        reRenderGamePage();
         runFFAnim();
     });
     return button;
@@ -80,7 +86,6 @@ export function renderFFOneMonthButton() {
     button.addEventListener('click', () => {
         fastForwardGame(30);
         updateState();
-        reRenderGamePage();
         runFFAnim();
     });
     return button;
