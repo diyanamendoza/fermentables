@@ -1,6 +1,7 @@
 import { fastForwardGame, getActiveFerms, getRemainingActionsCount, getFermNameById, getActiveFermById, getSelectedFermIndex, getActiveFermIndex, setSelectedFermIndex, getHintsRemaining, setHintsRemaining } from '../local-storage-utils.js';
 import { getImageForFerm } from '../render-utils.js';
-import { checkAction, getAllActionNames, getCorrectOptionForFerm, getUniqueRandomOption, updateState, runFFAnimation } from './game-utils.js';
+import { checkAction, getAllActionNames, getCorrectOptionForFerm, getUniqueRandomOption, updateState } from './game-utils.js';
+import { runFFAnim } from './game-anim-utils.js';
 
 // ***tested ✔
 export function renderActionButtons() {
@@ -50,7 +51,7 @@ export function renderFFOneDayButton() {
         fastForwardGame(1);
         updateState();
         reRenderGamePage();
-        runFFAnimation();
+        runFFAnim();
     });
     return button;
 }
@@ -65,7 +66,7 @@ export function renderFFOneWeekButton() {
         fastForwardGame(7);
         updateState();
         reRenderGamePage();
-        runFFAnimation();
+        runFFAnim();
     });
     return button;
 }
@@ -80,7 +81,7 @@ export function renderFFOneMonthButton() {
         fastForwardGame(30);
         updateState();
         reRenderGamePage();
-        runFFAnimation();
+        runFFAnim();
     });
     return button;
 }
@@ -116,6 +117,7 @@ export function renderActiveFerms() {
         elP.classList.add('xp-text-start');
         fermImg.src = getImageForFerm(ferm.id);
         fermImg.classList.add('ferm-img');
+        fermImg.setAttribute('id', ferm.id);
         fermInput.type = 'radio';
         fermInput.setAttribute('value', `${ferm.id}`);
         fermInput.name = 'ferm';
@@ -128,13 +130,6 @@ export function renderActiveFerms() {
             fermInput.disabled = 'true';
         } else {
             fermImg.classList.add('alive');
-        }
-
-        // If ferm is completed, run xp-gain animation
-        if (ferm.completed === true){
-            fermImg.style.display = 'none';
-            elP.textContent = `+${ferm.rewardXP}`;
-            elP.className = 'gain-xp';
         }
 
         fermInput.addEventListener('click', () => {

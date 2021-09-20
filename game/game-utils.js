@@ -2,6 +2,7 @@ import { fermsTemplate } from '../fermentables-template.js';
 import { displayMessage, reRenderGamePage } from './game-render-utils.js';
 import { addToMistakePoints, addXP, deactivateFerm, getActionsForFermID, getActiveFermById, getActiveFerms, getFermNameById, updateAction, updateActiveFerm } from '../local-storage-utils.js';
 import { updateNavXP } from '../render-utils.js';
+import { runXPGainAnim } from './game-anim-utils.js';
 
 // ***tested ✔
 //Determines what mood and aliveness the ferm
@@ -32,21 +33,28 @@ export function evaluateMistakePoints(fermID) {
 //DYLAN
 export function updateState() {
     const ferms = getActiveFerms();
-    //loop through each active ferm
+    // loop through each active ferm
     for (const ferm of ferms) {
-        //find missed actions
+        // loop through each action within each ferm
         for (const action of ferm.actions) {
+            // If ferm age is greater or equal to action end day, and action is not completed, and action is not missed...
             if (ferm.age >= action.endDay && !action.completed && !action.missed) {
-                //missed action
+                // If action is required...
                 if (action.required) {
-                    //kill
+                    //If ferm is not dead...
                     if (!ferm.isDead) {
+                        // Kill ferm
                         ferm.isDead = true;
+                        // Set ferm mood to sad
                         ferm.mood = 'sad';
+                        // Retrieves name based on age of ferm
                         const fermName = getFermNameById(ferm.id);
+                        // Display message to user
                         displayMessage(`Your ${fermName} is now dead.`);
+                        // Save changes to current ferm
                         updateActiveFerm(ferm);
                     }
+                 // If action is not required...
                 } else {
                     //dock points
                     ferm.mistakePoints += action.mistakePoints;
@@ -55,16 +63,24 @@ export function updateState() {
                 action.missed = true;
             }
         }
+        // If ferm age is greater than or equal to ferm end day, and ferm is not dead, and ferm is not completed...
         if (ferm.age >= ferm.endDay && !ferm.isDead && !ferm.completed) {
+            // Completed ferm
             ferm.completed = true;
+            // Run xp animation on current ferm
+            runXPGainAnim(ferm.id, ferm.rewardXP);
+            // Display messsage to user
             displayMessage(ferm.successMessage + ` You gained ${ferm.rewardXP} xp.`);
+            // Save experience to users data
             addXP(ferm.rewardXP);
-            // Update active ferms after completing on line 56.
-            updateActiveFerm(ferm);
-            // Rerender active ferms to catch completed ferm and animate.
-            reRenderGamePage();
-            // remove ferm from active ferms
+            // Remove the ferm from active ferms and saves in completed ferms data
             deactivateFerm(ferm.id);
+            // Saves changes to the ferm
+            updateActiveFerm(ferm);
+            // Waits 1.25 seconds to allow xp gain animation to run, then rerenders the page without the completed ferm.
+            setTimeout(() => {
+                reRenderGamePage();
+            }, 1250);
         }
         //update mood
         evaluateMistakePoints(ferm.id);
@@ -193,52 +209,29 @@ export function getAllActionNamesForFerms(arrayOfFerms) {
     return actionNames;
 }
 
-// Can't be tested?
-export function runFFAnimation(){
-    const htmlEls = document.getElementsByTagName('html');
-    const htmlEl = htmlEls[0];
-    const bodyEls = document.getElementsByTagName('body');
-    const bodyEl = bodyEls[0];
-    
-    // To prevent rendering extra imgs: could check if html classlist already contains anim-ff-color before attempting to render another img.
-    const imgEl = document.createElement('img');
-    
-    htmlEl.classList.add('anim-ff-color');
-    imgEl.classList.add('anim-ff-drop-moon');
-    
-    imgEl.src = '../assets/moon-and-stars-transparent-5.png';
-    
-    bodyEl.prepend(imgEl);
-    
-    setTimeout(() => {
-        bodyEl.removeChild(imgEl);
-        htmlEl.classList.remove('anim-ff-color');
-    }, 2500);
-}
-
     //Returns the correct action, 'FF1', or 'FF7'
 export function getCorrectOptionForFerm(fermId) {
+    // get the active ferm by id
     const ferm = getActiveFermById(fermId);
+    // get the actions of ferm by id (could this be ferm.actions?)
     const actions = getActionsForFermID(fermId);
+    // for each action...
     for (const action of actions) {
-        if (ferm.age >= action.startDay && ferm.age < action.endDay) {
-            if (!action.completed) {
-                return action.action;
-            }
+        // If ferm age is greater than or equal to action start date, and ferm age is less than the actions end date, and action is not completed...
+        if (ferm.age >= action.startDay && ferm.age < action.endDay && !action.completed) {
+                // Return name of action
+            return action.action;
         }
-    }
-    for (const action of actions) {
+        // if there's a correct action to take on the next day...
         if (ferm.age + 1 >= action.startDay && ferm.age + 1 < action.endDay) {
+            // return fast forward one day
             return 'FF1';
         }
     }
-    for (const action of actions) {
-        if (ferm.age + 1 >= action.startDay && ferm.age + 1 < action.endDay) {
-            return 'FF7';
-        }
-    }
+    // If no other condition is met, return fast forward 7 days
     return 'FF7';
 }
+
 
 // Needs to be tested
 export function getRandomOption() {
