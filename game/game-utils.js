@@ -68,7 +68,7 @@ export function updateState() {
                 //update mood - this can be here instead of line 94.5 because there is no mutation of mistake points beyond this point.
                 evaluateMistakePoints(ferm.id); // works ✔
                 // rerender page to display updated ferm
-                reRenderGamePage(); // works ✔
+                reRenderGamePage();
             }
         }
         // If ferm age is greater than or equal to ferm end day, and ferm is not dead, and ferm is not completed...
