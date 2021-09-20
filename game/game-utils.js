@@ -32,6 +32,7 @@ export function evaluateMistakePoints(fermID) {
 //to true. 
 //DYLAN
 export function updateState() {
+    let shouldReRender = true;
     const ferms = getActiveFerms();
     // loop through each active ferm
     for (const ferm of ferms) {
@@ -78,6 +79,8 @@ export function updateState() {
             // Saves changes to the ferm
             updateActiveFerm(ferm);
             // Waits 1.25 seconds to allow xp gain animation to run, then rerenders the page without the completed ferm.
+            // Signal to the caller that it shouldn't call reRenderGamePage
+            shouldReRender = false;
             setTimeout(() => {
                 reRenderGamePage();
             }, 1250);
@@ -87,6 +90,7 @@ export function updateState() {
     }
     // rerender nav to show updated XP
     updateNavXP();
+    return shouldReRender;
 }
 
 //tested ✔
