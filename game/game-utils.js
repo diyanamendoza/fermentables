@@ -72,6 +72,7 @@ export function updateState() {
             ferm.completed = true;
             // Run xp animation on current ferm
             runXPGainAnim(ferm.id, ferm.rewardXP);
+            console.log('xp');
             // Display messsage to user
             displayMessage(ferm.successMessage + ` You gained ${ferm.rewardXP} xp.`);
             // Save experience to users data

@@ -21,12 +21,15 @@ export function renderActionButtons() {
             }
             const fermId = Number(selectedFerm.value);
         // no action applied if ferm is already dead
-            const ferm = getActiveFermById(fermId);
+            let ferm = getActiveFermById(fermId);
             if (!ferm.isDead) {
                 const result = checkAction(actionName, fermId);
                 displayActionMessage(result, actionName, fermId);
                 evaluateMistakePoints(ferm.id);
-                reRenderGamePage();
+                ferm = getActiveFermById(fermId);
+                if (!ferm.isDead) {
+                    reRenderGamePage();
+                }
             }
         });
         actionsDiv.append(newButton);
