@@ -21,6 +21,7 @@ export function renderFerms(fermsTemplate) {
         imageEl.src = `../assets/${ferm.images.babyHappy}`;
         imageEl.classList.add('ferm-image');
 
+        // such a cool way to handle this! nice work :-D
         if (XP < ferm.unlockXP) {
             inputEl.disabled = 'true';
             imageEl.classList.add('locked');
@@ -72,66 +73,16 @@ export function renderPlayButton() {
 }
 
 
+// not sure about this, I might have gone a bit overboard here
 export function getImageForFerm(fermID){
-    const ferm = getActiveFermById(fermID);
-    if (ferm.isAdult){
-        if (ferm.mood === 'sad'){
-            return `../assets/${ferm.images.adultSad}`;
-        }
-        if (ferm.mood === 'neutral'){
-            return `../assets/${ferm.images.adultNeutral}`;
-        }
-        return `../assets/${ferm.images.adultHappy}`;
-    }
-    if (!ferm.isAdult){
-        if (ferm.mood === 'sad'){
-            return `../assets/${ferm.images.babySad}`;
-        }
-        if (ferm.mood === 'neutral'){
-            return `../assets/${ferm.images.babyNeutral}`;
-        }
-        return `../assets/${ferm.images.babyHappy}`;
-    }
+    const { isAdult, mood, images } = getActiveFermById(fermID);
+
+    const adultOrBaby = isAdult ? 'adult' : 'baby';
+    const capitalizedMood = `${mood.charAt(0).toUpperCase()}${mood.slice(1)}`;
+
+    return `../assets/${images[`${adultOrBaby}${capitalizedMood}`]}`;
 }
 
-export function renderNav() {
-    const header = document.querySelector('header');
-    const navDiv = document.createElement('nav');
-    const homeLink = document.createElement('a');
-    const aboutLink = document.createElement('a');
-    const pantryLink = document.createElement('a');
-    const playLink = document.createElement('a');
-    const userXP = document.createElement('span');
-
-    const gameData = getGameData();
-    const XP = gameData.xp;
-
-    navDiv.className = 'menu';
-    pantryLink.textContent = 'Pantry';
-    pantryLink.href = 'https://diyanamendoza.github.io/fermentables/pantry/';
-    homeLink.textContent = 'Home';
-    homeLink.href = 'https://diyanamendoza.github.io/fermentables/index.html';
-    aboutLink.textContent = 'About';
-    aboutLink.href = 'https://diyanamendoza.github.io/fermentables/about/index.html';
-    playLink.textContent = 'Play';
-    playLink.href = 'https://diyanamendoza.github.io/fermentables/game/';
-    userXP.id = 'user-xp';
-    userXP.textContent = `You've got ${XP} XP`;
-
-    if (window.location.href.indexOf('game') > -1) {
-        navDiv.append(homeLink, aboutLink, pantryLink, userXP);
-    }
-    else if (window.location.href.indexOf('about') > -1) {
-        navDiv.append(homeLink, pantryLink, playLink);
-    }
-    else if (window.location.href.indexOf('pantry') > -1) {
-        navDiv.append(homeLink, aboutLink, playLink, userXP);
-    }
-    else {
-        navDiv.append(aboutLink, pantryLink, playLink);
-    }
-    header.prepend(navDiv);
-}
 
 export function updateNavXP() {
     const gameData = getGameData();

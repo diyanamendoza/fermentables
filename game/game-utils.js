@@ -1,3 +1,5 @@
+// wow, so this file sure does look like some game logic! It's evidence of some pretty impressive thinking and planning. I imagine this file got a bit of a reputation on the team as a place where you _tread at your own peril_. I would have liked to see this split into a few files. 
+
 import { fermsTemplate } from '../fermentables-template.js';
 import { displayMessage, reRenderGamePage } from './game-render-utils.js';
 import { addToMistakePoints, addXP, deactivateFerm, getActionsForFermID, getActiveFermById, getActiveFerms, getFermNameById, updateAction, updateActiveFerm } from '../local-storage-utils.js';
@@ -11,20 +13,27 @@ export function evaluateMistakePoints(fermID) {
     const ferm = getActiveFermById(fermID);
     
     if (ferm && !ferm.isDead) {
-        let mood = 'happy';
-        if (ferm.mistakePoints > 0 && ferm.mistakePoints <= 10) {
-            mood = 'neutral';
-        } else if (ferm.mistakePoints > 10 && ferm.mistakePoints <= 20) {
-            mood = 'sad';
-        } else if (ferm.mistakePoints > 20) {
-            mood = 'sad';
-            ferm.isDead = true;
-            const fermName = getFermNameById(ferm.id);
-            displayMessage(`Your ${fermName} is now dead.`);
-        }
+        const mood = getMood(ferm);
         ferm.mood = mood;
         updateActiveFerm(ferm);
     }
+}
+
+// as a mostly pure function, this is now mostly testable (except for the side-effect/display message piece)
+function getMood(ferm) {
+    if (ferm.mistakePoints > 0 && ferm.mistakePoints <= 10) {
+        return 'neutral';
+    } else if (ferm.mistakePoints > 10 && ferm.mistakePoints <= 20) {
+        return 'sad';
+    } else if (ferm.mistakePoints > 20) {
+        ferm.isDead = true;
+        const fermName = getFermNameById(ferm.id);
+        displayMessage(`Your ${fermName} is now dead.`);
+        return 'sad';
+    }
+
+    
+    return 'happy';
 }
 
 //This function should be called after a fast
@@ -34,6 +43,7 @@ export function evaluateMistakePoints(fermID) {
 //missed action was required, isDead will be set
 //to true. 
 //DYLAN
+// wooooooooaaaaaahh! lot's of work going on here, with some very impressive logic! It does feel a bit brittle and tough to read. Seems like this function might be moved into its own file and modularized into three or four sub-functions. This would be pretty tough code to maintain as is, even with the helpful comments.
 export function updateState() {
     let shouldReRender = true;
     const ferms = getActiveFerms();
@@ -109,6 +119,7 @@ export function updateState() {
 //--updates the mood of the ferm to reflect the new mistakePoints value
 //--returns true if it was a correct action, returns false if it wasn't
 //DYLAN
+// same here -- I wonder if this could be broken into a a few functions and moved into its own file for maintainability. As it stands, if I inherited this codebase and a client discovered a bug, I'd have to work pretty hard to debug this code
 export function checkAction(actionName, fermID) {
     // get the actions for the ferm
     const ferm = getActiveFermById(fermID);
@@ -186,10 +197,7 @@ export function checkAction(actionName, fermID) {
 let fermData;
 //this is just a wrapper to make testing easier.
 export function getAllActionNames() {
-    if (!fermData) {
-        fermData = fermsTemplate;
-    }
-    return getAllActionNamesForFerms(fermData);
+    return getAllActionNamesForFerms(fermData || fermsTemplate);
 }
 
 //hacky way to inject different data for testing
