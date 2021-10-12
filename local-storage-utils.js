@@ -3,17 +3,15 @@ export const GAMEDATA = 'GAMEDATA';
 // ***tested ✔
 export function getGameData() {
     const stringGameData = localStorage.getItem(GAMEDATA);
-    const parsedGameData = JSON.parse(stringGameData);
-    if (!stringGameData) {
-        return {
+    return !stringGameData
+        ? {
             xp: 0,
             unlockedFerms: 1,
             activeFerms: [],
             completedFerms: [],
             selectedFermIndex: 0
-        };
-    }
-    return parsedGameData;
+        }
+        : JSON.parse(stringGameData);
 }
 
 // ***tested ✔
@@ -70,6 +68,7 @@ export function deactivateFerm(fermID) {
     const fermsArray = getActiveFerms();
     const fermToRemove = fermsArray.find(ferm => ferm.id === fermID);
     const fermIndex = fermsArray.indexOf(fermToRemove);
+    // this is just such incredibly clean code! so cool
     fermsArray.splice(fermIndex, 1);
 
     setActiveFerms(fermsArray);
@@ -107,6 +106,7 @@ export function addToMistakePoints(fermID, pointsToAdd) {
 // ***tested ✔
 export function updateActiveFerm(ferm) {
     const activeFerms = getActiveFerms();
+    // why not use a for/of loop here?
     for (let i = 0 ; i < activeFerms.length ; i++) {
         if (activeFerms[i].id === ferm.id) {
             activeFerms[i] = ferm;
@@ -129,8 +129,7 @@ export function updateAction(fermID, completedAction) {
 export function fastForwardGame(daysToAdd) {
     const ferms = getActiveFerms();
     for (const ferm of ferms) {
-        if (!ferm.isDead)
-            ferm.age += daysToAdd;
+        if (!ferm.isDead) ferm.age += daysToAdd;
     }
     setActiveFerms(ferms);
 }
@@ -139,6 +138,7 @@ export function fastForwardGame(daysToAdd) {
 export function getRemainingActionsCount(fermId) {
     const ferm = getActiveFermById(fermId);
     let count = 0;
+    // again, a for/of loop would probably be easier to grok here
     for (let i = 0; i < ferm.actions.length; i++) {
         if (!ferm.actions[i].completed && !ferm.actions[i].missed) {
             count++;

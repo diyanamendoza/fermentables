@@ -38,6 +38,7 @@ export function renderActionButtons() {
 }
 
 // Can't be tested?
+// right -- it's really tough to write unit tests for this kind of impure DOM manipulation. You could use something like cypress to test it, which could be fun to look into
 export function reRenderActionButtons() {
     const actionsDiv = renderActionButtons();
     const hintButton = renderHintButton();
@@ -49,20 +50,22 @@ export function reRenderActionButtons() {
     actionsBarEl.append(hintContainer, actionsDiv);
 }
 
+// notice that this is a function that _returns a function whaaaat_
+function getFFClickHandler(time) {
+    return () => {
+        fastForwardGame(time);
+        const shouldReRender = updateState();
+        if (shouldReRender) reRenderGamePage();
+        runFFAnim();
+    };
+}
 // ***tested ✔
 export function renderFFOneDayButton() {
     const button = document.createElement('button');
     button.id = 'ff-one-day-button';
     button.className = 'ff-button';
     button.textContent = 'fast forward one day';
-    button.addEventListener('click', () => {
-        fastForwardGame(1);
-        let shouldReRender = updateState();
-        if (shouldReRender) {
-            reRenderGamePage();
-        }
-        runFFAnim();
-    });
+    button.addEventListener('click', getFFClickHandler(1));
     return button;
 }
 
@@ -72,14 +75,7 @@ export function renderFFOneWeekButton() {
     button.id = 'ff-one-week-button';
     button.className = 'ff-button';
     button.textContent = 'fast forward one week';
-    button.addEventListener('click', () => {
-        fastForwardGame(7);
-        let shouldReRender = updateState();
-        if (shouldReRender) {
-            reRenderGamePage();
-        }
-        runFFAnim();
-    });
+    button.addEventListener('click', getFFClickHandler(7));
     return button;
 }
 
@@ -89,14 +85,7 @@ export function renderFFOneMonthButton() {
     button.id = 'ff-one-month-button';
     button.className = 'ff-button';
     button.textContent = 'fast forward one month';
-    button.addEventListener('click', () => {
-        fastForwardGame(30);
-        let shouldReRender = updateState();
-        if (shouldReRender) {
-            reRenderGamePage();
-        }
-        runFFAnim();
-    });
+    button.addEventListener('click', getFFClickHandler(30));
     return button;
 }
 
@@ -298,6 +287,7 @@ export function highlightOption(optionName) {
 export function showHint(selectedFermId) {
     const hintsRemaining = getHintsRemaining(selectedFermId);
     if (hintsRemaining > 0) {
+        // really nice state setting right here :)
         setHintsRemaining(selectedFermId, hintsRemaining - 1);
     }
     const correctAction = getCorrectOptionForFerm(selectedFermId);

@@ -1,3 +1,6 @@
+// this is such a dense data model! nice work figuring all of this out
+// I wish I could say I have a better way to do this, but I think all
+// this complicated JSON is kind of the right answer
 export const fermsTemplate = [
     {
         id: 1,
